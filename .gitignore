@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+.vs/rpg_school_project/v16/.suo
+*.db
+*.tlog
+*.recipe
+*.ilk
+*.pdb
+Debug/rpg_school_project.log
+*.idb
+Debug/rpg_school_project.vcxproj.FileListAbsolute.txt
