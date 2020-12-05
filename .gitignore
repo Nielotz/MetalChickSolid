@@ -39,3 +39,8 @@
 Debug/rpg_school_project.log
 *.idb
 Debug/rpg_school_project.vcxproj.FileListAbsolute.txt
+*.ipch
+*.db-wal
+*.db-shm
+*.opendb
+Debug/rpg_school_project.Build.CppClean.log
