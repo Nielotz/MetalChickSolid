@@ -1,46 +1,8 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-.vs/rpg_school_project/v16/.suo
-*.db
-*.tlog
-*.recipe
-*.ilk
-*.pdb
-Debug/rpg_school_project.log
-*.idb
-Debug/rpg_school_project.vcxproj.FileListAbsolute.txt
-*.ipch
-*.db-wal
-*.db-shm
-*.opendb
-Debug/rpg_school_project.Build.CppClean.log
+.*
+.idea
+cmake-build-debug
+Debug
+rpg_school_project.vcxproj.filters
+rpg_school_project.vcxproj
+.idea/misc.xml
+*.xml
