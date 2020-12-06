@@ -4,32 +4,33 @@
 #include <string>
 #include <conio.h>
 
-#include "profession.cpp"
+#include "profession_base_data.cpp"
 #include "hero.cpp"
 
 using namespace std;
 
 struct Profile
 {
-    Hero hero;
-    bool create_new()
+    Hero *hero = nullptr;
+    void create_new()
     {
-        string nick;
+        string nick = "test";
         cout << "Tworzenie nowego profilu.\n"
                 "Wprowadź nick: ";
-        std::getline(std::cin, nick);
+        // std::getline(std::cin, nick);
 
         bool is_man;
-        cout << "Chose gender (m / f): ";
         bool should_while_loop_keep_looping_true_means_not_selected_gender = true;
         while (should_while_loop_keep_looping_true_means_not_selected_gender)
         {
+            cout << "Wybierz płeć (m / k): ";
             should_while_loop_keep_looping_true_means_not_selected_gender = false;
-            switch (_getch()) {
+            //switch (_getch()) {
+            switch ('m') {
                 case 'm': case 'M':
                     is_man = true;
                     break;
-                case 'f': case 'F':
+                case 'k': case 'K':
                     is_man = false;
                     break;
                 default:
@@ -38,16 +39,18 @@ struct Profile
         }
 
         ProfessionType profession_type;
-        cout << "Witaj " + nick + "!\n"
-                                  "Wybierz profesję: \n"
-                                  "    1. Łowca (Atak z dystansu(2), trucizna, unik)\n"
-                                  "    2. Wojownik (Silny atak, blok tarczą, wytrzymały)\n"
-                                  "    3. Mag (Atak z dystansu(1), leczenie ran, ataków nie da się uniknąć / zablokować):\n";
+
         bool should_while_loop_keep_looping_true_means_not_selected_profession = true;
         while (should_while_loop_keep_looping_true_means_not_selected_profession)
         {
+            cout << "Witaj " + nick + "!\n"
+                                      "Wybierz profesję: \n"
+                                      "    1. Łowca (Atak z dystansu(2), trucizna, unik)\n"
+                                      "    2. Wojownik (Silny atak, blok tarczą, wytrzymały)\n"
+                                      "    3. Mag (Atak z dystansu(1), leczenie ran, ataków nie da się uniknąć / zablokować):\n";
             should_while_loop_keep_looping_true_means_not_selected_profession = false;
-            switch (_getch()) {
+            //switch (_getch()) {
+            switch ('2') {
                 case '1':
                     profession_type = HUNTER;
                     break;
@@ -62,11 +65,10 @@ struct Profile
             }
         }
 
-        hero = Hero();
-
+        hero = new Hero(nick, is_man, profession_type, true);
     }
 
-    Profile(const string &filename)
+    explicit Profile(const string &filename)
     {
         if (!filesystem::exists(filename))
             create_new();
@@ -84,11 +86,14 @@ struct Profile
 
     bool load_from_file(const string &filename)
     {
+        // hero = new Hero();
+        return 1;
 
     }
 
     bool save_to_file()
     {
+        return 1;
 
     }
 };
