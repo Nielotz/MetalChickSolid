@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(RPG_school_project
         game.cpp
         hero.cpp
-        main.cpp profile.cpp profession_base_data.cpp entity.cpp)
+        main.cpp profile.cpp profession.cpp entity.cpp)
