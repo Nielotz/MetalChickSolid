@@ -1,28 +1,25 @@
+#pragma once
+
+#include "profile.cpp"
 
 class Game
 {
+
 public:
-	bool load_save()
-	{
-
-	}
-
-	bool save_game()
-	{
-
-	}
-
 	bool start()
 	{
-		
+		cout << "Starting game.";
+
+		return 1;
 	}
 
 	bool stop()
 	{
+        return 1;
 
 	}
 
-	Game()
+	Game(const Profile &profile)
 	{
 
 	};
