@@ -6,6 +6,8 @@ class Game
 {
 
 public:
+    Profile profile;
+
 	bool start()
 	{
 		cout << "Starting game.";
@@ -19,7 +21,8 @@ public:
 
 	}
 
-	Game(const Profile &profile)
+	explicit Game(const Profile &profile)
+	: profile(profile)
 	{
 
 	};

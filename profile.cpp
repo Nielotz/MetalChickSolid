@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
 #include <filesystem>
+#include <fstream>
 #include <string>
 #include <conio.h>
 
-#include "profession_base_data.cpp"
+#include "profession.cpp"
 #include "hero.cpp"
 
 using namespace std;
@@ -12,12 +13,15 @@ using namespace std;
 struct Profile
 {
     Hero *hero = nullptr;
+    const string path;
     void create_new()
     {
-        string nick = "test";
+        string nick;
         cout << "Tworzenie nowego profilu.\n"
                 "Wprowadź nick: ";
-        // std::getline(std::cin, nick);
+        std::getline(std::cin, nick);
+
+        string answer;
 
         bool is_man;
         bool should_while_loop_keep_looping_true_means_not_selected_gender = true;
@@ -25,17 +29,13 @@ struct Profile
         {
             cout << "Wybierz płeć (m / k): ";
             should_while_loop_keep_looping_true_means_not_selected_gender = false;
-            //switch (_getch()) {
-            switch ('m') {
-                case 'm': case 'M':
-                    is_man = true;
-                    break;
-                case 'k': case 'K':
-                    is_man = false;
-                    break;
-                default:
-                    should_while_loop_keep_looping_true_means_not_selected_gender = true;
-            }
+            cin >> answer;
+            if (answer == "m" || answer == "M" )
+                is_man = true;
+            else if (answer == "k" || answer == "K" )
+                is_man = false;
+            else
+                should_while_loop_keep_looping_true_means_not_selected_gender = true;
         }
 
         ProfessionType profession_type;
@@ -43,57 +43,94 @@ struct Profile
         bool should_while_loop_keep_looping_true_means_not_selected_profession = true;
         while (should_while_loop_keep_looping_true_means_not_selected_profession)
         {
-            cout << "Witaj " + nick + "!\n"
-                                      "Wybierz profesję: \n"
-                                      "    1. Łowca (Atak z dystansu(2), trucizna, unik)\n"
-                                      "    2. Wojownik (Silny atak, blok tarczą, wytrzymały)\n"
-                                      "    3. Mag (Atak z dystansu(1), leczenie ran, ataków nie da się uniknąć / zablokować):\n";
+            cout << "Witaj " + nick << "!\n"
+            << "Wybierz profesję: \n"
+               "    1. Łowca (Atak z dystansu(2), trucizna, unik)\n"
+               "    2. Wojownik (Silny atak, blok tarczą, wytrzymały)\n"
+               "    3. Mag (Atak z dystansu(1), leczenie ran, ataków nie da się uniknąć / zablokować):\n";
             should_while_loop_keep_looping_true_means_not_selected_profession = false;
-            //switch (_getch()) {
-            switch ('2') {
-                case '1':
+            cin >> answer;
+            if (answer == "1")
                     profession_type = HUNTER;
-                    break;
-                case '2':
+            else if (answer == "2")
                     profession_type = WARRIOR;
-                    break;
-                case '3':
-                    profession_type = MAGICIAN;
-                    break;
-                default:
-                    should_while_loop_keep_looping_true_means_not_selected_profession = true;
-            }
+            else if (answer == "3")
+                profession_type = MAGICIAN;
+            else
+                should_while_loop_keep_looping_true_means_not_selected_profession = true;
         }
 
         hero = new Hero(nick, is_man, profession_type, true);
     }
 
-    explicit Profile(const string &filename)
+    explicit Profile(const string& filename)
+    : path(filename)
     {
         if (!filesystem::exists(filename))
             create_new();
         else
-            load_from_file(filename);
+            load(filename);
 
     }
 
     ~Profile()
     {
+        save();
         delete hero;
-
     }
 
 
-    bool load_from_file(const string &filename)
+    void load(const string &filename)
     {
-        // hero = new Hero();
-        return 1;
+        if (hero == nullptr)
+            hero = new Hero();
 
+        ifstream input(filename, ios::out);
+        string keyword;
+
+        while (input >> keyword)
+        {
+            if (keyword == "nick: ")
+                 getline(input, hero->nick);
+            else if (keyword == "profession_type:")
+            {
+                uint16_t type;
+                input >> type;
+                hero->profession_type = ProfessionType(type);
+            }
+            else if (keyword == "is_man:")
+                input >> hero->is_man;
+            else if (keyword == "lvl:")
+                input >> hero->lvl;
+            else if (keyword == "exp:")
+                input >> hero->exp;
+            else if (keyword == "hp:")
+                input >> hero->hp;
+            else if (keyword == "hit:")
+                input >> hero->hit;
+            else if (keyword == "fight_distance:")
+                input >> hero->fight_distance;
+            else if (keyword == "block_chance:")
+                input >> hero->block_chance;
+            else if (keyword == "dodge_chance:")
+                input >> hero->dodge_chance;
+            else if (keyword == "critic_hit_chance:")
+                input >> hero->critic_hit_chance;
+            else
+            {
+                cout << "Niepoprawny parametr: '" << keyword << "', pomijam." << endl;
+            }
+
+        }
+        hero->print_stats_card();
     }
 
-    bool save_to_file()
+    void save() const
     {
-        return 1;
+        ofstream output(path, ios::in | ios::trunc);
 
+        hero->save(output);
+
+        output.close();
     }
 };
