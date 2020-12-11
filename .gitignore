@@ -6,3 +6,5 @@ rpg_school_project.vcxproj.filters
 rpg_school_project.vcxproj
 .idea/misc.xml
 *.xml
+.idea/modules.xml
+*.xml
