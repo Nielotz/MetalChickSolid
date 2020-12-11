@@ -122,7 +122,6 @@ struct Map
                     tiles[y][x] = found->second.console_color_modifier;
                 }
             }
-            cout << endl;
         }
 
         fclose(file);
