@@ -1,29 +1,32 @@
 #pragma once
 
 #include "profile.cpp"
+#include "graphic.cpp"
+#include "map.cpp"
 
 class Game
 {
 
 public:
-    Profile profile;
+    const Profile *profile;
+    Graphic graphic;
+    shared_ptr<Map> map;
 
-	bool start()
+    void start()
 	{
 		cout << "Starting game.";
-
-		return 1;
+        // graphic.load_map(map);
 	}
 
-	bool stop()
+	void stop()
 	{
-        return 1;
 
 	}
 
-	explicit Game(const Profile &profile)
+	explicit Game(const Profile *profile, const string &map_filename)
 	: profile(profile)
 	{
-
+        map = make_shared<Map>(map_filename);
+        //graphic = Graphic();
 	};
 };
