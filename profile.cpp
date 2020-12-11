@@ -19,8 +19,8 @@ struct Profile
         string nick;
         cout << "Tworzenie nowego profilu.\n"
                 "Wprowadź nick: ";
+        nick = "xyz";
         std::getline(std::cin, nick);
-
         string answer;
 
         bool is_man;
@@ -29,6 +29,7 @@ struct Profile
         {
             cout << "Wybierz płeć (m / k): ";
             should_while_loop_keep_looping_true_means_not_selected_gender = false;
+            answer = "m";
             cin >> answer;
             if (answer == "m" || answer == "M" )
                 is_man = true;
@@ -49,6 +50,7 @@ struct Profile
                "    2. Wojownik (Silny atak, blok tarczą, wytrzymały)\n"
                "    3. Mag (Atak z dystansu(1), leczenie ran, ataków nie da się uniknąć / zablokować):\n";
             should_while_loop_keep_looping_true_means_not_selected_profession = false;
+            answer = "3";
             cin >> answer;
             if (answer == "1")
                     profession_type = HUNTER;
@@ -90,8 +92,14 @@ struct Profile
 
         while (input >> keyword)
         {
-            if (keyword == "nick: ")
-                 getline(input, hero->nick);
+            if (keyword == "nick:")
+            {
+                char dummy_char;
+                input.read(&dummy_char, 1 );
+                getline(input, hero->nick);
+                if (dummy_char != ' ')
+                    hero->nick = ' ' + hero->nick;
+            }
             else if (keyword == "profession_type:")
             {
                 uint16_t type;

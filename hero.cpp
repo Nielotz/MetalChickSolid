@@ -81,7 +81,7 @@ public:
         << "fight_distance: " << fight_distance << "\n"
         << "block_chance: " << block_chance << "\n"
         << "dodge_chance: " << dodge_chance << "\n"
-        << "critic_hit_chance: " << critic_hit_chance << "\n";
+        << "critic_hit_chance: " << critic_hit_chance << flush;
     }
     void print_stats_card()
     {
@@ -93,13 +93,13 @@ public:
             profession_type_name = "Mag";
 
         cout << "\n"
-        << "Hero(" << nick << " " << char('m'*is_man + 'k'*(!is_man)) << " lvl: "<< lvl << " " << profession_type_name << ") stats card: \n"
+        << "Hero " << nick << " (" << char('m'*is_man + 'k'*(!is_man)) << " lvl: "<< lvl << " " << profession_type_name << ") stats: \n"
         << "   HP: " << hp << " \n"
         << "   Uderzenie: " << hit << " \n"
         << "   Odległość walki: " << fight_distance << " \n"
         << "   Szansa na blok: " << block_chance << " %\n"
         << "   Szansa na unik: " << dodge_chance << " %\n"
-        << "   Szansa na cios krytyczny: " << critic_hit_chance << " %\n\n";
+        << "   Szansa na cios krytyczny: " << critic_hit_chance << " %\n" << endl;
     }
 
     Hero() = default;
@@ -107,8 +107,6 @@ public:
 	Hero(string nick, bool is_man, const ProfessionType profession_type, bool auto_generate_stats)
 	: nick(std::move(nick)), is_man(is_man), profession_type(profession_type)
 	{
-
-
         if (auto_generate_stats)
         {
             init_stats(profession_type);
