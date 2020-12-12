@@ -1,5 +1,5 @@
 #pragma once
-
+#define _HAS_STD_BYTE 0
 #include <windows.h>
 #include <iostream>
 #include "map.cpp"
@@ -41,6 +41,12 @@ public:
 
     //}
 
+    void show_menu()
+    {
+        cout << "'q' - wyjdź z gry \n"
+                "'a' - znajdz walkę \n ";
+    }
+
     void clear_screen()
     {
         printf("\033c");
@@ -50,7 +56,7 @@ public:
     {
         for (auto chr : message)
         {
-            printf("%c", chr);
+            putchar(chr);
             Sleep(sleep_time);
         }
     }

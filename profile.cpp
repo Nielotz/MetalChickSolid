@@ -112,6 +112,8 @@ struct Profile
                 input >> hero->exp;
             else if (keyword == "hp:")
                 input >> hero->hp;
+            else if (keyword == "attack_time:")
+                input >> hero->attack_time;
             else if (keyword == "hit:")
                 input >> hero->hit;
             else if (keyword == "fight_distance:")

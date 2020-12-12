@@ -7,5 +7,5 @@ using namespace std;
 
 enum ProfessionType
 {
-    WARRIOR=0, HUNTER=1, MAGICIAN=2, ANY=3
+    WARRIOR=1, HUNTER=2, MAGICIAN=3, ANY=100
 };
