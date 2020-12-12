@@ -5,8 +5,6 @@
 #include <vector>
 #include <unordered_map>
 
-using namespace std;
-
 enum TileType { NPC=1, ENEMY=2, TERRAIN=3, ITEM=4 };
 
 struct TileData
@@ -43,11 +41,11 @@ Bright White    97  107
 */
 
 const unordered_map<int, TileData> TILE{
-        pair<int, TileData>(0, TileData(TileType::TERRAIN, true, 40)), // Black = terrain.
-        pair<int, TileData>(0xFF0000, TileData(TileType::ENEMY, false, 41)), // Red = enemy.
-        pair<int, TileData>(0x00FF00, TileData(TileType::ITEM, false, 42)), // Green = Item.
-        pair<int, TileData>(0x0000FF, TileData(TileType::NPC, false, 44)), // Blue = NPC.
-        pair<int, TileData>(0xFFFFFF, TileData(TileType::TERRAIN, false, 47)), // White = Border.
+        std::pair<int, TileData>(0, TileData(TileType::TERRAIN, true, 40)), // Black = terrain.
+        std::pair<int, TileData>(0xFF0000, TileData(TileType::ENEMY, false, 41)), // Red = enemy.
+        std::pair<int, TileData>(0x00FF00, TileData(TileType::ITEM, false, 42)), // Green = Item.
+        std::pair<int, TileData>(0x0000FF, TileData(TileType::NPC, false, 44)), // Blue = NPC.
+        std::pair<int, TileData>(0xFFFFFF, TileData(TileType::TERRAIN, false, 47)), // White = Border.
 };
 
 
@@ -55,7 +53,7 @@ struct Map
 {
     uint16_t img_size_x = 0;
     uint16_t img_size_y = 0;
-    vector<string> tiles;
+    std::vector<string> tiles;
 
     explicit Map(const string& map_filename)
     {

@@ -9,10 +9,9 @@
 
 #include "profession.cpp"
 #include "entity.cpp"
+#include "graphic.cpp"
 
 #pragma once
-
-using namespace std;
 
 
 struct Hero : Entity
@@ -65,9 +64,9 @@ private:
 
 public:
     bool is_man;
-    string nick;
+    std::string nick;
     ProfessionType profession_type;
-    string profession_type_name;
+    std::string profession_type_name;
 
     void save(ofstream &file)
     {
@@ -83,7 +82,8 @@ public:
         << "dodge_chance: " << dodge_chance << "\n"
         << "critic_hit_chance: " << critic_hit_chance << flush;
     }
-    void print_stats_card()
+
+    void print_stats_card(Graphic& graphic)
     {
         if (profession_type == WARRIOR)
             profession_type_name = "Wojownik";
@@ -92,14 +92,14 @@ public:
         else
             profession_type_name = "Mag";
 
-        cout << "\n"
-        << "Hero " << nick << " (" << char('m'*is_man + 'k'*(!is_man)) << " lvl: "<< lvl << " " << profession_type_name << ") stats: \n"
-        << "   HP: " << hp << " \n"
-        << "   Uderzenie: " << hit << " \n"
-        << "   Odległość walki: " << fight_distance << " \n"
-        << "   Szansa na blok: " << block_chance << " %\n"
-        << "   Szansa na unik: " << dodge_chance << " %\n"
-        << "   Szansa na cios krytyczny: " << critic_hit_chance << " %\n" << endl;
+        graphic.print_with_timeout_between_chars(string("\n")
+        + "Hero " + nick + " (" + char('m'*is_man + 'k'*(!is_man)) + " lvl: " + to_string(lvl) + " " + profession_type_name + ") stats: \n"
+        + string("   HP: ") + to_string(hp) + " \n"
+        + "   Uderzenie: " + to_string(hit) + " \n"
+        + "   Odległość walki: " + to_string(fight_distance) + " \n"
+        + "   Szansa na blok: " + to_string(block_chance) + " %\n"
+        + "   Szansa na unik: " + to_string(dodge_chance) + " %\n"
+        + "   Szansa na cios krytyczny: " + to_string(critic_hit_chance) + " %\n\n", 10 );
     }
 
     Hero() = default;
@@ -110,7 +110,6 @@ public:
         if (auto_generate_stats)
         {
             init_stats(profession_type);
-            print_stats_card();
         }
 	};
 

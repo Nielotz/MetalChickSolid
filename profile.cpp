@@ -8,8 +8,6 @@
 #include "profession.cpp"
 #include "hero.cpp"
 
-using namespace std;
-
 struct Profile
 {
     Hero *hero = nullptr;
@@ -130,7 +128,6 @@ struct Profile
             }
 
         }
-        hero->print_stats_card();
     }
 
     void save() const

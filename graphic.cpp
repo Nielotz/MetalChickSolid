@@ -1,5 +1,6 @@
 #pragma once
 
+#include <windows.h>
 #include <iostream>
 #include "map.cpp"
 
@@ -9,21 +10,49 @@ class Graphic
     {
 
     }
+    //vector<string> screen;
+
 public:
 
     Graphic()
     {
-
+        // TODO: Change to autofit screen. Requires: resizing console.
+        //screen.resize(100);
     }
 
-    void load_map(shared_ptr<Map> map)
-    {
+    //void load_map(shared_ptr<Map> map)
+    //{
+//
+    //}
 
+    //void draw()
+    //{
+    //    for (auto& row : screen)
+    //    {
+    //        if (row.empty())
+    //            break;
+    //        cout << row << endl;
+    //    }
+    //}
+
+    //void load_welcome_screen(Hero *hero)
+    //{
+    //    //screen[0] = "Witaj w \"Grze\" " + hero->nick + "!";
+
+    //}
+
+    void clear_screen()
+    {
+        printf("\033c");
     }
 
-    void draw()
+    void print_with_timeout_between_chars(std::string &&message, DWORD sleep_time)
     {
-
+        for (auto chr : message)
+        {
+            printf("%c", chr);
+            Sleep(sleep_time);
+        }
     }
 
 };
