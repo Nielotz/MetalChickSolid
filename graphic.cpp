@@ -44,12 +44,19 @@ public:
     void show_menu()
     {
         cout << "'q' - wyjdź z gry \n"
-                "'a' - znajdz walkę \n ";
+                "'a' - znajdz walkę \n"
+                "'p' - wypisza kartę postaci \n";
+    }
+
+    void show_hero_dead_screen()
+    {
+        cout << "Zginąłeś! \n";
     }
 
     void clear_screen()
     {
         printf("\033c");
+        cout.flush();
     }
 
     void print_with_timeout_between_chars(std::string &&message, DWORD sleep_time)
@@ -60,5 +67,4 @@ public:
             Sleep(sleep_time);
         }
     }
-
 };

@@ -4,7 +4,6 @@
 #include <string>
 #include <utility>
 #include <random>
-#include <conio.h>
 #include <fstream>
 
 #include "profession.cpp"
@@ -29,33 +28,38 @@ private:
         fight_distance *= distribution(generator) / 100.;
         block_chance *= distribution(generator) / 100.;
         dodge_chance *= distribution(generator) / 100.;
-        critic_hit_chance *= distribution(generator) / 100.;
         attack_time *= distribution(generator) / 100.;
 
 
         if (profession_type_ == WARRIOR)
         {
-            hp *= 1.25;
-            hit *= 1.25;
-            dodge_chance = 0;
+            hp_modifier = 1.25;
+            hit_modifier = 1.25;
+
             attack_time *= 1.4;
         }
         else if (profession_type_ == HUNTER)
         {
-            hp *= 1.10;
-            hit *= 0.8;
+            hp_modifier  = 1.10;
+            hit_modifier  = 0.8;
+
             block_chance = 0;
             fight_distance = 2;
             attack_time *= 0.8;
         }
         else // MAGICIAN
         {
+            hp_modifier = 0.9;
+            hit_modifier = 1.1;
+
             block_chance = 0;
             dodge_chance = 0;
             critic_hit_chance += 5;
             fight_distance = 1;
             attack_time *= 1.1;
         }
+        hp *= hp_modifier;
+        hit *= hit_modifier;
 	}
 
 public:
@@ -63,21 +67,23 @@ public:
     std::string nick;
     ProfessionType profession_type = ProfessionType::ANY;
     std::string profession_type_name;
+    float hp_modifier;
+    float hit_modifier;
 
     void save(ofstream &file)
     {
         file << "nick: " << nick << "\n"
-        << "is_man: " << is_man << "\n"
-        << "profession_type: " << profession_type << "\n"
-        << "lvl: " << lvl << "\n"
-        << "exp: " << exp << "\n"
-        << "hp: " << hp << "\n"
-        << "hit: " << hit << "\n"
-        << "fight_distance: " << fight_distance << "\n"
-        << "attack_time: " << attack_time << "\n"
-        << "block_chance: " << block_chance << "\n"
-        << "dodge_chance: " << dodge_chance << "\n"
-        << "critic_hit_chance: " << critic_hit_chance << flush;
+        << "is_man: " << to_string(is_man) << "\n"
+        << "profession_type: " << to_string(profession_type) << "\n"
+        << "lvl: " << to_string(lvl) << "\n"
+        << "exp: " << to_string(exp) << "\n"
+        << "hp: " << to_string(hp) << "\n"
+        << "hit: " << to_string(hit) << "\n"
+        << "fight_distance: " << to_string(fight_distance) << "\n"
+        << "attack_time: " << to_string(attack_time) << "\n"
+        << "block_chance: " << to_string(block_chance) << "\n"
+        << "dodge_chance: " << to_string(dodge_chance) << "\n"
+        << "critic_hit_chance: " << to_string(critic_hit_chance) << flush;
     }
 
     void print_stats_card(Graphic& graphic)
@@ -99,6 +105,19 @@ public:
         + "   Szansa na blok: " + to_string(block_chance) + " %\n"
         + "   Szansa na unik: " + to_string(dodge_chance) + " %\n"
         + "   Szansa na cios krytyczny: " + to_string(critic_hit_chance) + " %\n\n", 10 );
+    }
+
+    void increase_lvl()
+    {
+        lvl += 1;
+
+        if (profession_type == ProfessionType::MAGICIAN)
+        {
+            hp += lvl * 5 * 0.8;
+        }
+        cout << "Awansowałeś poziom!\n"
+                "Twój nowy poziom: " << lvl << endl;
+
     }
 
     Hero() = default;

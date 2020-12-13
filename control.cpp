@@ -21,4 +21,9 @@ public:
         return chr;
     }
 
+    void wait_for_user_interaction()
+    {
+        _getch();
+    }
+
 };
