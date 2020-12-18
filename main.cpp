@@ -1,19 +1,9 @@
-#pragma once
-
-#define _HAS_STD_BYTE 0
-#include <iostream>
-
-#include "profile.cpp"
-#include "game.cpp"
-
-#include <unordered_map>
+#include "headers/profile.hpp"
+#include "headers/game.hpp"
 
 int main()
 {
     system("chcp 65001");
-    Profile profile("main_profile.txt");
-    string map_filename("test_map.bmp"); // Move into profile.
-    Game game(&profile, map_filename);
+    Game game;
     game.start();
-
 }
