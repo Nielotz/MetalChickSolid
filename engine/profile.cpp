@@ -18,7 +18,7 @@ void Profile::load()
     hero = Hero();
 
     std::ifstream input(path, std::ios::out);
-    string keyword;
+    std::string keyword;
 
     while (input >> keyword)
     {

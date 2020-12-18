@@ -1,7 +1,7 @@
 #pragma once
 
 #include "entity.hpp"
-#include "graphic.hpp"
+#include <string>
 
 struct Hero : Entity
 {

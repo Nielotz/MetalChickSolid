@@ -7,7 +7,7 @@ void Map::load_maps(const char *path)
     return load_maps(temp);
 }
 
-void Map::load_maps(string &path)
+void Map::load_maps(std::string &path)
 {
 
 }

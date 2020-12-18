@@ -9,10 +9,10 @@ struct Profile
     Hero hero;
 
     /// Path to the profile.
-    string path;
+    std::string path;
 
     /// Name of the profile.
-    string name;
+    std::string name;
 
     /// Create new profile.
     void create_new();
