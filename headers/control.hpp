@@ -4,5 +4,5 @@
 class Control
 {
 public:
-    Control();
+    Control() = default;
 };

@@ -1,10 +1,7 @@
-#pragma once
-
 #include <iostream>
-#include <iostream>
-#include "item.cpp"
+#include "../../headers/item.hpp"
 
-struct Sword : Weapon
+class Sword: public Item
 {
 
 };

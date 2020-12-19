@@ -3,9 +3,11 @@
 #include <string>
 
 #include "hero.hpp"
+#include "profession.hpp"
 
-struct Profile
+class Profile
 {
+public:
     Hero hero;
 
     /// Path to the profile.

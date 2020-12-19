@@ -1,5 +1,3 @@
-#pragma once
-
 #include "../../headers/hero.hpp"
 
 void Hero::increase_lvl()

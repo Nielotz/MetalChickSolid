@@ -1,8 +1,7 @@
-#pragma once
-
 #include "../headers/graphic.hpp"
 
-Graphic::Graphic(Hero &hero)
+Graphic::Graphic(const Hero &hero):
+mHero(hero)
 {
 
 }

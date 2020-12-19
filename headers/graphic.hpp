@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../headers/map.hpp"
-#include "../headers/hero.hpp"
+#include "map.hpp"
+#include "hero.hpp"
 
 
 class Graphic
 {
-    Hero hero;
+    Hero mHero;
 public:
     // Save hero for further use.
-    Graphic(Hero &hero);
+    Graphic(const Hero &hero);
 
     // Load map to be displayed on the screen.
     void load_map(Map &map);

@@ -1,8 +1,6 @@
-#pragma once
+#include "../headers/game.hpp"
 
 #include <iostream>
-
-#include "../headers/game.hpp"
 
 
 using std::clog;
@@ -10,10 +8,14 @@ using std::cout;
 using std::endl;
 
 
-Game::Game()
+Game::Game():
+graphic(Graphic(Hero())),
+profile(Profile()),
+control(Control()),
+arena(Arena(graphic)),
+map(Map())
 {
     clog << "Initializing graphics..." << endl;
-    graphic = Graphic();
 };
 
 
@@ -53,13 +55,11 @@ void Game::start()
 
 Profile Game::choose_profile()
 {
-    std::string dummy_string = std::string("test_profile.txt");
     Profile dummy_profile;
-    dummy_profile.path = dummy_string;
+    dummy_profile.path = "test_profile.txt";
     return dummy_profile;
 }
 
 void Game::stop()
 {
-    /// Save profile;
 }

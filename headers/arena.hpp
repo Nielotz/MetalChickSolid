@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hero.hpp"
+#include "graphic.hpp"
 
 enum class FightResult { WIN, DEFEAT, DRAW };
 

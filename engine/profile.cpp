@@ -1,12 +1,9 @@
-#pragma once
+#include "../headers/profile.hpp"
+
 #include <iostream>
 #include <filesystem>
 #include <fstream>
 #include <string>
-
-#include "../headers/profession.hpp"
-#include "../headers/hero.hpp"
-#include "../headers/profile.hpp"
 
 
 /// Not done yet.
