@@ -1,2 +1,1 @@
-# RPG_school_project
- console RPG
+# Metal chick solid
