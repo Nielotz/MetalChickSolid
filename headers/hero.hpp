@@ -13,9 +13,6 @@ struct Hero : Entity
 
     Hero() = default;
 
-    /// Initialize hero stats.
-    void init_random_stats(ProfessionType &profession_type_);
-
     /// Increase lvl and update hero stats.
     void increase_lvl();
 };
