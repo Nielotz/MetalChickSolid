@@ -177,9 +177,6 @@
     <ClInclude Include="headers\tile.hpp" />
     <ClInclude Include="headers\weapon.hpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="graphic\graphics\wojownik_wtf.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
