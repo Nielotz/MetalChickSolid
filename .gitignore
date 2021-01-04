@@ -12,3 +12,47 @@ rpg_school_project.vcxproj
 *.tmp
 
 Release
+out/build/x64-Debug (domyślnie)/build.ninja
+out/build/x64-Debug (domyślnie)/cmake_install.cmake
+out/build/x64-Debug (domyślnie)/CMakeCache.txt
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CMakeCCompiler.cmake
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CMakeCXXCompiler.cmake
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CMakeDetermineCompilerABI_C.bin
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CMakeDetermineCompilerABI_CXX.bin
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CMakeRCCompiler.cmake
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CMakeSystem.cmake
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CompilerIdC/CMakeCCompilerId.c
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CompilerIdC/CMakeCCompilerId.exe
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CompilerIdC/CMakeCCompilerId.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe
+out/build/x64-Debug (domyślnie)/CMakeFiles/3.18.20081302-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/cmake.check_cache
+out/build/x64-Debug (domyślnie)/CMakeFiles/CMakeOutput.log
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/control/control.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/embed.manifest
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/engine/arena.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/engine/Entity/entity.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/engine/Entity/hero.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/engine/game.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/engine/Items/item.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/engine/Items/weapon.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/engine/profile.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/graphic/graphic.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/intermediate.manifest
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/main.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/manifest.rc
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/manifest.res
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/shared/map.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/shared/tile.cpp.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/RPG_school_project.dir/vc140.pdb
+out/build/x64-Debug (domyślnie)/CMakeFiles/rules.ninja
+out/build/x64-Debug (domyślnie)/CMakeFiles/ShowIncludes/foo.h
+out/build/x64-Debug (domyślnie)/CMakeFiles/ShowIncludes/main.c
+out/build/x64-Debug (domyślnie)/CMakeFiles/ShowIncludes/main.obj
+out/build/x64-Debug (domyślnie)/CMakeFiles/TargetDirectories.txt
+out/build/x64-Debug (domyślnie)/RPG_school_project.exe
+out/build/x64-Debug (domyślnie)/RPG_school_project.ilk
+out/build/x64-Debug (domyślnie)/RPG_school_project.pdb
+out/build/x64-Debug (domyślnie)/Testing/Temporary/LastTest.log
+out/build/x64-Debug (domyślnie)/VSInheritEnvironments.txt
