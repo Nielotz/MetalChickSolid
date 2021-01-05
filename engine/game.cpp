@@ -9,7 +9,7 @@ using std::endl;
 
 void Game::dummy_game_loop()
 {
-    std::string map_file = "textures\\maps\\start_map.tga";
+    std::string map_file = "textures\\maps\\test_map.tga";
     std::string data_file = "start_map.data";
 
     map.load_texture(map_file);
@@ -36,7 +36,7 @@ Game::Game():
     // map(Map())
 {
     clog << "Initializing graphics..." << endl;
-    dummy_game_loop();
+    //dummy_game_loop();
 };
 
 

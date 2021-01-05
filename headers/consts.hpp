@@ -5,7 +5,7 @@
 namespace CONSTS
 {
 	const sf::Vector2u SCREEN_SIZE = { sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height };
-	const sf::Vector2u GAME_WINNDOW_SIZE = { 1200, 900 };
+	const sf::Vector2u GAME_WINNDOW_SIZE = { 1000, 1000 };
 
 	// Scales everything to appear same on every screen.
 	const float SCALE = std::min(SCREEN_SIZE.x, SCREEN_SIZE.y) / 1080.;
