@@ -106,6 +106,8 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\arena.hpp" />
+    <ClInclude Include="headers\consts.hpp" />
     <ClInclude Include="headers\control.hpp" />
     <ClInclude Include="headers\direction.hpp" />
     <ClInclude Include="headers\enemy.hpp" />
