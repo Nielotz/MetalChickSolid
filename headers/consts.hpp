@@ -14,5 +14,6 @@ namespace CONSTS
 	// Tile size in game.
 	const uint16_t TILE_SIZE = uint16_t(TILE_SIZE_ON_TEXTURE_MAP * SCALE); // Pixels.
 
+	// In tiles. 
 	const sf::Vector2u PLAYER_VIEW_RANGE = {10, 9};
 };
