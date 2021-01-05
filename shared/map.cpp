@@ -1,13 +1,25 @@
-#include "../headers/map.hpp"
+#include <iostream>
 
-void Map::load_maps(const char *path)
+#include "../headers/map.hpp"
+#include "../headers/consts.hpp"
+
+void Map::load_texture(const char *path)
 {
-    std::string temp;
-    temp += path;
-    return load_maps(temp);
+    name = path;
+    load_texture(name);
 }
 
-void Map::load_maps(string &path)
+void Map::load_texture(string &path)
 {
+    name = path;
 
+    if (!texture.loadFromFile(path))
+        throw std::runtime_error("Cannot load " + path);
+
+    tiles_number = {
+        texture.getSize().x / CONSTS::TILE_SIZE_ON_TEXTURE_MAP, 
+        texture.getSize().y / CONSTS::TILE_SIZE_ON_TEXTURE_MAP };
+
+    texture.setSmooth(true);
+    sprite.setTexture(texture);
 }
