@@ -1,56 +1,64 @@
-#include "../headers/game.hpp"
-
 #include <iostream>
 
+#include "../headers/game.hpp"
 
 using std::clog;
 using std::cout;
 using std::endl;
 
 
+void Game::dummy_game_loop()
+{
+    std::string map_file = "textures\\maps\\start_map.tga";
+    std::string data_file = "start_map.data";
+
+    map.load_texture(map_file);
+    //map.load_data(data_file);
+
+    graphic.load_level(map);
+
+
+    // run the program as long as the window is open
+    while (graphic.window->isOpen())
+    {
+        control.parse_events(graphic);
+
+        graphic.update();
+        graphic.window->display();
+    }
+}
+
+
 Game::Game():
-graphic(Graphic(Hero())),
-profile(Profile()),
-control(Control()),
-arena(Arena(graphic)),
-map(Map())
+    graphic(Graphic()),
+    // profile(Profile()),
+    control(Control())
+    // map(Map())
 {
     clog << "Initializing graphics..." << endl;
+    dummy_game_loop();
 };
 
 
-
-void Game::main_loop()
-{
-    while (is_running)
-    {
-
-    }
-}
 
 void Game::start()
 {
     cout << "Starting game." << endl;
 
-    clog << "Choosing profile... " << profile.name << endl;
-    profile = choose_profile();
-    cout << "Chosen profile: " << profile.name << endl;
+    // clog << "Choosing profile... " << profile.name << endl;
+    // profile = choose_profile();
+    // cout << "Chosen profile: " << profile.name << endl;
+
+    // clog << "Loading profile..." << endl;
+    // profile.load();
+    // clog << "Loaded profile, nick: " << profile.hero.nick << endl;
 
     clog << "Loading profile..." << endl;
     profile.load();
     clog << "Loaded profile, nick: " << profile.hero.name << endl;
     //clog << "lvl: "<< profile.hero.lvl<<"\nexp: " << profile.hero.exp << "\nhp: " << profile.hero.hp << "\nhp_max: " << profile.hero.hp_max << "\nmana: " << profile.hero.mana << "\nstamina: " << profile.hero.stamina << "\nstrength: " << profile.hero.strength << "\nagility: " << profile.hero.agility << "\nintelect: " << profile.hero.intelect << "\nblock: " << profile.hero.block << "\ndefence: " << profile.hero.defence << "\nAT: " << profile.hero.attack_time << "\n";
 
-    clog << "Loading maps..." << endl;
-    map.load_maps("test_map");
-    cout << "Loaded maps." << endl;
 
-    clog << "Loading map into the graphic..." << endl;
-    graphic.load_map(map);
-    cout << "Loaded map." << endl;
-
-
-    main_loop();
     stop();
 }
 

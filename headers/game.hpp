@@ -9,19 +9,23 @@
 class Game
 {
 public:
+
+    // Main game loop. 
+    //
+    // Blocks thread.
+    void dummy_game_loop();
+
     Game();
     bool is_running = true;
 
     void start();
     void stop();
 private:
-
     Profile profile;
     Graphic graphic;
     Control control;
     Arena arena;
     Map map;
 
-    void main_loop();
     Profile choose_profile();
 };
