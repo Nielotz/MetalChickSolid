@@ -2,18 +2,19 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/VideoMode.hpp>
 
-namespace CONSTS
+struct CONSTS
 {
-	const sf::Vector2u SCREEN_SIZE = { sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height };
-	const sf::Vector2u GAME_WINNDOW_SIZE = { 1000, 1000 };
+	const static sf::Vector2u SCREEN_SIZE;
+	const static sf::Vector2u GAME_WINNDOW_SIZE;
 
 	// Scales everything to appear same on every screen.
-	const float SCALE = std::min(SCREEN_SIZE.x, SCREEN_SIZE.y) / 1080.;
+	const static float SCALE;
 
-	const uint16_t TILE_SIZE_ON_TEXTURE_MAP = 80; // Pixels.
+	const static uint16_t TILE_SIZE_ON_TEXTURE_MAP; // Pixels.
 	// Tile size in game.
-	const uint16_t TILE_SIZE = uint16_t(TILE_SIZE_ON_TEXTURE_MAP * SCALE); // Pixels.
+	const static uint16_t TILE_SIZE; // Pixels.
 
 	// In tiles. 
-	const sf::Vector2u PLAYER_VIEW_RANGE = {10, 9};
+	const static sf::Vector2u PLAYER_VIEW_RANGE;
 };
+

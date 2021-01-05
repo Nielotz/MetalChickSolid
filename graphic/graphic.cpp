@@ -41,13 +41,13 @@ void Graphic::move_hero(const Direction& direction)
 {
 	bool can = true;
 	if (direction == Direction::LEFT && can)
-		map_view.move(-CONSTS::TILE_SIZE_ON_TEXTURE_MAP, 0);
+		map_view.move(-CONSTS::TILE_SIZE, 0);
 	else if (direction == Direction::RIGHT && can)
-		map_view.move(CONSTS::TILE_SIZE_ON_TEXTURE_MAP, 0);
+		map_view.move(CONSTS::TILE_SIZE, 0);
 	else if (direction == Direction::TOP && can)
-		map_view.move(0, -CONSTS::TILE_SIZE_ON_TEXTURE_MAP);
+		map_view.move(0, -CONSTS::TILE_SIZE);
 	else if (can) // BOTTOM
-		map_view.move(0, CONSTS::TILE_SIZE_ON_TEXTURE_MAP);
+		map_view.move(0, CONSTS::TILE_SIZE);
 }
 
 void Graphic::draw_map()
