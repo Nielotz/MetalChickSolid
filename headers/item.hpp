@@ -4,7 +4,8 @@
 
 #include "profession.hpp"
 
-enum class ItemType {
+enum class ItemType
+{
     NONE = 0,
     //HELMET = 1,
     //RING = 2,

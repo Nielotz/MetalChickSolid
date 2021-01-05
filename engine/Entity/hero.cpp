@@ -1,4 +1,5 @@
 #include "../../headers/hero.hpp"
+#include <math.h>
 
 void Hero::increase_lvl()
 {
@@ -9,8 +10,7 @@ void Hero::increase_lvl()
 void Hero::update_attributes()
 {
     //aim=???
-    //(int32_t)(
-    double baza = 1.25 * lvl;
+    double baza = pow(lvl, 1.25);
     hp_max = (int32_t)(20 * baza + 5 * strength);
     if (profession_type == ProfessionType::WARRIOR) {
         strength = (int32_t)(5 * baza);
@@ -34,6 +34,6 @@ void Hero::update_attributes()
     stamina = (int32_t)(20 * lvl + 3 * agility);
     block = (int32_t)(strength / 2);
     defence = (int32_t)(agility + strength);
-    attack_time = (int32_t)(50 / agility);
+    attack_time = (int32_t)(100 / agility);
 }
 

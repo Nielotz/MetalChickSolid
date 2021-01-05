@@ -13,15 +13,17 @@
 /// Not done yet.
 void Profile::load()
 {
-    if (path.empty()) 
+    if (path.empty())
         throw std::runtime_error("Before use Profile::load profile path need to be set!");
 
     //If file exist?
     std::ifstream file_save(path.c_str());
-    if (file_save.good() == 0) {
+    if (file_save.good() == 0)
+    {
         std::cout << "Profile file doesn't exist, creating new one...\n";
         create_new();
     }
+    file_save.close();
 
     hero = Hero();
 
@@ -37,12 +39,15 @@ void Profile::load()
             getline(input, hero.name);
             if (dummy_char != ' ')
                 hero.name = ' ' + hero.name;
-        } else if (keyword == "profession_required:")
+        }
+        else if (keyword == "profession_required:")
         {
             uint16_t type;
             input >> type;
             hero.profession_type = ProfessionType(type);
-        }else if (keyword == "lvl:") {
+        }
+        else if (keyword == "lvl:")
+        {
             input >> hero.lvl;
             hero.update_attributes();
         }
