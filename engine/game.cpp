@@ -36,7 +36,7 @@ Game::Game():
     // map(Map())
 {
     clog << "Initializing graphics..." << endl;
-    //dummy_game_loop();
+    dummy_game_loop();
 };
 
 
