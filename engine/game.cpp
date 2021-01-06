@@ -31,7 +31,7 @@ void Game::dummy_game_loop()
 
 Game::Game():
     graphic(Graphic()),
-    // profile(Profile()),
+    profile(Profile()),
     control(Control())
     // map(Map())
 {
@@ -45,13 +45,10 @@ void Game::start()
 {
     cout << "Starting game." << endl;
 
-    // clog << "Choosing profile... " << profile.name << endl;
-    // profile = choose_profile();
-    // cout << "Chosen profile: " << profile.name << endl;
+    clog << "Choosing profile... " << profile.name << endl;
+    profile = choose_profile();
+    cout << "Chosen profile: " << profile.name << endl;
 
-    // clog << "Loading profile..." << endl;
-    // profile.load();
-    // clog << "Loaded profile, nick: " << profile.hero.nick << endl;
 
     clog << "Loading profile..." << endl;
     profile.load();
