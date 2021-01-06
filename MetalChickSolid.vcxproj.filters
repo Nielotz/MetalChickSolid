@@ -69,8 +69,8 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="headers\consts.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="shared\consts.cpp">
+      <Filter>Pliki źródłowe\Shared</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
