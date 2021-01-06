@@ -4,11 +4,12 @@
 
 struct CONSTS
 {
+	const static sf::Vector2u GAME_SCREEN_RATIO;
 	const static sf::Vector2u SCREEN_SIZE;
 	const static sf::Vector2u GAME_WINNDOW_SIZE;
 
 	// Scales everything to appear same on every screen.
-	const static float SCALE;
+	const static long double SCALE;
 
 	const static uint16_t TILE_SIZE_ON_TEXTURE_MAP; // Pixels.
 	// Tile size in game.
