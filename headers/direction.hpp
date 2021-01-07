@@ -1,6 +1,6 @@
 #pragma once
 
-enum Direction
+enum class Direction : uint8_t
 {
     LEFT,
     RIGHT,
