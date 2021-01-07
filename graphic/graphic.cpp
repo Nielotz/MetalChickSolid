@@ -40,7 +40,8 @@ void Graphic::update()
 
 bool Graphic::can_view_move(const Direction& direction)
 {
-	// It is not working but it is working no idea why, just accept it or rewrite.
+	// It is not working but it is working no idea why, just accept it or rewrite:
+	// center of the view + half of the view size.
 
 	// With margin for float error.
 	if (direction == Direction::LEFT 
