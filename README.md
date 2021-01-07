@@ -1,6 +1,5 @@
 # Metal chick solid
-## To run in Visual studio, set values (required values are listed below). <br>
-Images and other informations: ["Creating and configuring a SFML project"](https://www.sfml-dev.org/tutorials/2.5/start-vc.php#creating-and-configuring-a-sfml-project).<br>
+## To run in Visual studio, set values (required values are listed below). <br>Images and other informations: ["Creating and configuring a SFML project"](https://www.sfml-dev.org/tutorials/2.5/start-vc.php#creating-and-configuring-a-sfml-project).<br>
 ### Values:<br>
   (<b>ALL CONFIGURATIONS</b>) C/C++ -> General:<br>
   $(SolutionDir)\SFML-2.5.1\include;%(AdditionalIncludeDirectories)<br><br>
