@@ -19,13 +19,16 @@ class Graphic
     // Holds 
     sf::View map_view;
 
+    Map map;
+    std::shared_ptr<Hero> hero;
+
 public:
     //Hero hero;
     std::unique_ptr<sf::RenderWindow> window;
-    Map map;
+    
 
     // Save hero for further use.
-    Graphic();
+    Graphic(Hero &hero);
 
     // Load level into the graphic.
     //
@@ -33,8 +36,10 @@ public:
     // 
     void load_level(Map &map);
 
+    void load_hero_texture();
+
     // Draw the hero at the position.
-    void draw_hero(Position &hero_position);
+    void draw_hero();
 
     // Draw fireworks and update stats.
     void increase_lvl();

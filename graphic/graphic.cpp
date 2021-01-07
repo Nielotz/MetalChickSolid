@@ -6,8 +6,9 @@
 #include "../headers/consts.hpp"
 
 
-Graphic::Graphic()
+Graphic::Graphic(Hero& hero)
 {
+	this->hero = std::make_shared<Hero>(hero);
 	this->window = std::make_unique<sf::RenderWindow>(
 		sf::VideoMode(CONSTS::GAME_WINDOW_SIZE.x, CONSTS::GAME_WINDOW_SIZE.y), "Metal chick solid");
 
@@ -26,6 +27,7 @@ Graphic::Graphic()
 
 }
 
+
 void Graphic::load_level(Map& map)
 {
 	std::clog << "Loading map: " << map.name << std::endl;
@@ -36,6 +38,7 @@ void Graphic::load_level(Map& map)
 void Graphic::update()
 {
 	draw_map();
+	draw_hero();
 }
 
 bool Graphic::can_view_move(const Direction& direction)
@@ -89,10 +92,9 @@ void Graphic::draw_map()
 {
 	this->window->setView(map_view);
 	window->draw(map.sprite);
-
 }
 
-void Graphic::draw_hero(Position &hero_position)
+void Graphic::draw_hero()
 {
 
 }
