@@ -6,7 +6,7 @@ struct CONSTS
 {
 	const static sf::Vector2u GAME_SCREEN_RATIO;
 	const static sf::Vector2u SCREEN_SIZE;
-	const static sf::Vector2u GAME_WINNDOW_SIZE;
+	const static sf::Vector2u GAME_WINDOW_SIZE;
 
 	// Scales everything to appear same on every screen.
 	const static long double SCALE;

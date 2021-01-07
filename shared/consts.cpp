@@ -14,7 +14,7 @@ const long double CONSTS::SCALE = std::min<long double>(
 	/ (long double)(1920 / CONSTS::GAME_SCREEN_RATIO.x);
 
 const uint16_t CONSTS::TILE_SIZE = uint16_t(CONSTS::TILE_SIZE_ON_TEXTURE_MAP * CONSTS::SCALE);
-const sf::Vector2u CONSTS::GAME_WINNDOW_SIZE = {
+const sf::Vector2u CONSTS::GAME_WINDOW_SIZE = {
 	(unsigned int)(CONSTS::TILE_SIZE * CONSTS::GAME_SCREEN_RATIO.x), 
 	(unsigned int)(CONSTS::TILE_SIZE* CONSTS::GAME_SCREEN_RATIO.y) };
 
