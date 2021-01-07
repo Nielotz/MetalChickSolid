@@ -5,9 +5,8 @@
 #include "hero.hpp"
 #include "profession.hpp"
 
-class Profile
+struct Profile
 {
-public:
     Hero hero;
 
     /// Path to the profile.
