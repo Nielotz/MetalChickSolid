@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "../headers/game.hpp"
+#include "../headers/consts.hpp"
 
 using std::clog;
 using std::cout;
@@ -9,14 +10,13 @@ using std::endl;
 
 void Game::dummy_game_loop()
 {
-    std::string map_file = "textures\\maps\\test_map.tga";
-    std::string data_file = "start_map.data";
+    std::string map_file = PATH::MAP::TEXTURES::START;
+    //std::string data_file = "start_map.data";
 
     map.load_texture(map_file);
     //map.load_data(data_file);
 
     graphic.load_level(map);
-
 
     // run the program as long as the window is open
     while (graphic.window->isOpen())
@@ -30,10 +30,7 @@ void Game::dummy_game_loop()
 
 
 Game::Game():
-    graphic(Graphic()),
-    profile(Profile()),
-    control(Control())
-    // map(Map())
+    graphic(Graphic(profile.hero))
 {
     clog << "Initializing graphics..." << endl;
     //dummy_game_loop();
@@ -46,7 +43,7 @@ void Game::start()
     cout << "Starting game." << endl;
 
     clog << "Choosing profile... " << profile.name << endl;
-    profile = choose_profile();
+    choose_profile(profile);
     cout << "Chosen profile: " << profile.name << endl;
 
 
@@ -59,11 +56,9 @@ void Game::start()
     stop();
 }
 
-Profile Game::choose_profile()
+void Game::choose_profile(Profile &profile)
 {
-    Profile dummy_profile;
-    dummy_profile.path = "test_profile.txt";
-    return dummy_profile;
+    profile.path = "test_profile.txt";
 }
 
 void Game::stop()

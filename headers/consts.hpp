@@ -1,6 +1,33 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/VideoMode.hpp>
+#include <string>
+
+namespace PATH
+{
+	namespace HERO
+	{
+		namespace TEXTURES
+		{
+			namespace WARRIOR
+			{
+				const static std::string FRONT = "textures\\mobs\\hero\\test_hero.png";
+				const static std::string LEFT = "textures\\mobs\\hero\\test_hero.png";
+				const static std::string RIGHT = "textures\\mobs\\hero\\test_hero.png";
+				const static std::string BACK = "textures\\mobs\\hero\\test_hero.png";
+			};
+		}
+	};
+
+	namespace MAP
+	{
+		namespace TEXTURES
+		{
+			const static std::string START = "textures\\maps\\test_map.tga";
+
+		}
+	}
+};
 
 struct CONSTS
 {
@@ -18,4 +45,6 @@ struct CONSTS
 	// In tiles. 
 	const static sf::Vector2u PLAYER_VIEW_RANGE;
 };
+
+
 
