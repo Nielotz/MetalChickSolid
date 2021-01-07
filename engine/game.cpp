@@ -33,7 +33,7 @@ Game::Game():
     graphic(Graphic(profile.hero))
 {
     clog << "Initializing graphics..." << endl;
-    //dummy_game_loop();
+    dummy_game_loop();
 };
 
 
