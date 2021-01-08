@@ -25,8 +25,6 @@ void Profile::load()
     }
     file_save.close();
 
-    hero = Hero();
-
     std::ifstream input(path, std::ios::out);
     std::string keyword;
 

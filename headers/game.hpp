@@ -27,5 +27,5 @@ private:
     Arena arena;
     Map map;
 
-    Profile choose_profile();
+    void choose_profile(Profile &profile);
 };

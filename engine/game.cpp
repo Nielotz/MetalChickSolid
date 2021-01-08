@@ -28,13 +28,10 @@ void Game::dummy_game_loop()
     }
 }
 
-Game::Game():
-    graphic(Graphic()),
-    // profile(Profile()),
-    control(Control())
+Game::Game()
 {
     clog << "Initializing graphics..." << endl;
-    //dummy_game_loop();
+    dummy_game_loop();
 };
 
 
@@ -56,7 +53,7 @@ void Game::start()
     stop();
 }
 
-void Game::choose_profile(Profile& profile)
+void Game::choose_profile(Profile &profile)
 {
     profile.path = "test_profile.txt";
 }
