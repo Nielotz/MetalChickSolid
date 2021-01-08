@@ -11,7 +11,7 @@ void Control::parse_events(Graphic& graphic)
     while (graphic.window->pollEvent(event))
     {
         // "close requested" event: we close the window
-        if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+        if (event.type == sf::Event::Closed)
             graphic.window->close();
         if (event.type == sf::Event::KeyPressed)
         {

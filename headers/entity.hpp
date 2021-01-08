@@ -17,6 +17,7 @@ public:
     std::string name;
     Position position;
     ProfessionType profession_type = ProfessionType::NONE;
+
     ///Status (dead, alive)
     int8_t staus;
 
@@ -42,6 +43,7 @@ public:
     // Fires when player hits movement controlling buttons. Probably W/A/S/D.
     // Return true when moved successfully.
     // TODO: When move fired, if is is possible - change the hero position.
+    bool move(Direction& direction);
     Entity();
     Entity(Entity& entity);
 };

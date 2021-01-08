@@ -10,25 +10,19 @@
 
 class Graphic
 {
-    // Check can view move to the direction.
-    bool can_view_move(const Direction& direction);
-
     // Draw the map around hero (his render view).
     void draw_map();
     
     // Holds 
     sf::View map_view;
 
-    Map map;
-    std::shared_ptr<Hero> hero;
-
 public:
     //Hero hero;
     std::unique_ptr<sf::RenderWindow> window;
-    
+    Map map;
 
     // Save hero for further use.
-    Graphic(Hero &hero);
+    Graphic();
 
     // Load level into the graphic.
     //
@@ -39,10 +33,8 @@ public:
     // Load texture for the entity from the 
     void load_texture_for(Entity &entity, std::string path);
 
-    void load_hero_texture();
-
     // Draw the hero at the position.
-    void draw_hero();
+    void draw_hero(Position &hero_position);
 
     // Draw fireworks and update stats.
     void increase_lvl();

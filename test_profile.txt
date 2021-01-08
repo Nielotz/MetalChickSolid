@@ -1,5 +1,0 @@
-nick: Dumb
-profession_required: 1
-lvl: 1
-exp: 0
-hp: 100
