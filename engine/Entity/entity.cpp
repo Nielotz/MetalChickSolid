@@ -2,7 +2,7 @@
 
 uint64_t Entity::ID = 0;
 
-bool Entity::move(Direction &direction)
+bool Entity::move(Direction& direction)
 {
     return false;
 }
@@ -11,7 +11,7 @@ Entity::Entity()
     :id(ID++)
 { }
 
-Entity::Entity(Entity &entity) :
+Entity::Entity(Entity& entity) :
     id(entity.id),
     name(entity.name),
     position(entity.position),
@@ -22,7 +22,6 @@ Entity::Entity(Entity &entity) :
     hp_max(entity.hp_max),
     mana(entity.mana),
     stamina(entity.stamina),
-    aim(entity.aim),
     strength(entity.strength),
     agility(entity.agility),
     intelect(entity.intelect),

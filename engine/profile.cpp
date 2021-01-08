@@ -1,4 +1,5 @@
 #include "../headers/profile.hpp"
+#include "../headers/consts.hpp"
 
 #include <iostream>
 #include <filesystem>
@@ -105,7 +106,7 @@ void Profile::save()
     save_file << "lvl: " << hero.lvl << "\n";
     save_file << "exp: " << hero.exp << "\n";
     save_file << "hp: " << hero.hp << "\n";
-    //save_file << "current_map: " << "mapa" << "\n"; //To fill
+    //save_file << "current_map: " << PATH::MAP::TEXTURES::START << "\n";
     save_file << "poz_x: " << hero.position.x << "\n";
     save_file << "poz_y: " << hero.position.y << "\n";
     for (int i = 0; i < 20; i++) {
