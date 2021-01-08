@@ -6,8 +6,11 @@
 #include <cstdint>
 
 
-struct Enemy: Entity
+struct Enemy : Entity
 {
+    ///Status (dead, alive)
+    int8_t staus;
+
     Enemy();
 };
 
