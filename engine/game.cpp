@@ -28,14 +28,11 @@ void Game::dummy_game_loop()
     }
 }
 
-
-Game::Game():
-    graphic(Graphic(profile.hero))
+Game::Game()
 {
     clog << "Initializing graphics..." << endl;
     dummy_game_loop();
 };
-
 
 
 void Game::start()
@@ -50,7 +47,7 @@ void Game::start()
     clog << "Loading profile..." << endl;
     profile.load();
     clog << "Loaded profile, nick: " << profile.hero.name << endl;
-    //clog << "lvl: "<< profile.hero.lvl<<"\nexp: " << profile.hero.exp << "\nhp: " << profile.hero.hp << "\nhp_max: " << profile.hero.hp_max << "\nmana: " << profile.hero.mana << "\nstamina: " << profile.hero.stamina << "\nstrength: " << profile.hero.strength << "\nagility: " << profile.hero.agility << "\nintelect: " << profile.hero.intelect << "\nblock: " << profile.hero.block << "\ndefence: " << profile.hero.defence << "\nAT: " << profile.hero.attack_time << "\n";
+    //clog << "lvl: " << profile.hero.lvl << "\nexp: " << profile.hero.exp << "\nhp: " << profile.hero.hp << "\nhp_max: " << profile.hero.hp_max << "\nmana: " << profile.hero.mana << "\nstamina: " << profile.hero.stamina << "\nstrength: " << profile.hero.strength << "\nagility: " << profile.hero.agility << "\nintelect: " << profile.hero.intelect << "\nblock: " << profile.hero.block << "\ndefence: " << profile.hero.defence << "\nAT: " << profile.hero.attack_time << "\n";
 
 
     stop();
