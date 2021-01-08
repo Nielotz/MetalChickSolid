@@ -13,6 +13,9 @@ struct Hero : Entity
     //Inventory
     Item inventory[20];
 
+    ///Threads status in the plot
+    int8_t thread_status[10];
+
     Hero() = default;
 
     /// Increase lvl and update hero stats.

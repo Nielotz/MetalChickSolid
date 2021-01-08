@@ -27,7 +27,6 @@ public:
     int32_t hp_max = 0; // max avalible hp
     int32_t mana = 0;
     int32_t stamina = 0;
-    int32_t aim = 0;
     int32_t strength = 0;
     int32_t agility = 0;
     int32_t intelect = 0;
@@ -40,7 +39,7 @@ public:
     // Fires when player hits movement controlling buttons. Probably W/A/S/D.
     // Return true when moved successfully.
     // TODO: When move fired, if is is possible - change the hero position.
-    bool move(Direction &direction);
+    bool move(Direction& direction);
     Entity();
     Entity(Entity& entity);
 };
