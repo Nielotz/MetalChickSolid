@@ -30,7 +30,6 @@ Graphic::Graphic(Hero& hero)
 
 void Graphic::load_level(Map& map)
 {
-	std::clog << "Loading map: " << map.name << std::endl;
 	this->map = map;
 	this->map.sprite.setScale(float(CONSTS::SCALE), float(CONSTS::SCALE));
 }
