@@ -64,3 +64,4 @@ void Game::choose_profile(Profile &profile)
 void Game::stop()
 {
 }
+
