@@ -29,9 +29,6 @@ public:
     // \param map: Map that will be displayed on the screen.
     // 
     void load_level(Map &map);
-    
-    // Load texture for the entity from the 
-    void load_texture_for(Entity &entity, std::string path);
 
     // Draw the hero at the position.
     void draw_hero(Position &hero_position);

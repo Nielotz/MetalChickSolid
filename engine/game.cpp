@@ -28,6 +28,7 @@ void Game::dummy_game_loop()
     }
 }
 
+
 Game::Game():
     graphic(Graphic()),
     // profile(Profile()),
@@ -37,6 +38,7 @@ Game::Game():
     clog << "Initializing graphics..." << endl;
     //dummy_game_loop();
 };
+
 
 
 void Game::start()
