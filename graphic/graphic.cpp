@@ -45,7 +45,7 @@ void Graphic::move_view(const Direction& direction)
 	// It is not working but it is working no idea why, just accept it or rewrite:
 	// center of the view + half of the view size.
 
-	// With margin for float error.
+	// Margin for float error included.
 	if (direction == Direction::LEFT 
 		&& this->map_view.getCenter().x + this->map_view.getSize().x/2 < CONSTS::TILE_SIZE * map.tiles_number.x - 3)
 		map_view.move(float(CONSTS::TILE_SIZE), 0);
@@ -61,7 +61,6 @@ void Graphic::move_view(const Direction& direction)
 	else if (direction == Direction::BOTTOM 
 		&& this->map_view.getCenter().y - this->map_view.getSize().y / 2 > 3)
 		map_view.move(0, float(-CONSTS::TILE_SIZE));
-
 }
 
 void Graphic::move_hero(const Direction& direction)
