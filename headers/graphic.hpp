@@ -10,8 +10,8 @@
 
 class Graphic
 {
-    // Check can view move to the direction.
-    bool can_view_move(const Direction& direction);
+    // Try to keep hero in the center of the view.
+    void move_view(const Direction& direction);
 
     // Draw the map around hero (his render view).
     void draw_map();

@@ -40,48 +40,51 @@ void Graphic::update()
 	draw_hero();
 }
 
-bool Graphic::can_view_move(const Direction& direction)
+void Graphic::move_view(const Direction& direction)
 {
 	// It is not working but it is working no idea why, just accept it or rewrite:
 	// center of the view + half of the view size.
 
 	// With margin for float error.
 	if (direction == Direction::LEFT 
-		&& this->map_view.getCenter().x * 2 < CONSTS::TILE_SIZE * map.tiles_number.x + 81)
-		return true;
+		&& this->map_view.getCenter().x + this->map_view.getSize().x/2 < CONSTS::TILE_SIZE * map.tiles_number.x - 3)
+		map_view.move(float(CONSTS::TILE_SIZE), 0);
+
 	else if (direction == Direction::RIGHT 
-		&& this->map_view.getCenter().x * 2 > CONSTS::TILE_SIZE * CONSTS::PLAYER_VIEW_RANGE.x + 3)
-		return true;
+		&& this->map_view.getCenter().x - this->map_view.getSize().x / 2 > 3)
+		map_view.move(float(-CONSTS::TILE_SIZE), 0);
+
 	else if (direction == Direction::TOP 
-		&& this->map_view.getCenter().y * 2 < CONSTS::TILE_SIZE * map.tiles_number.y - 3)
-		return true;
+		&& this->map_view.getCenter().y + this->map_view.getSize().y / 2 < CONSTS::TILE_SIZE * map.tiles_number.y - 3)
+		map_view.move(0, float(CONSTS::TILE_SIZE));
+
 	else if (direction == Direction::BOTTOM 
-		&& this->map_view.getCenter().y * 2 > CONSTS::TILE_SIZE * CONSTS::PLAYER_VIEW_RANGE.y + 3)
-		return true;
-	return false;
+		&& this->map_view.getCenter().y - this->map_view.getSize().y / 2 > 3)
+		map_view.move(0, float(-CONSTS::TILE_SIZE));
+
 }
 
 void Graphic::move_hero(const Direction& direction)
 {
 	if (direction == Direction::LEFT)
 	{
-		if (can_view_move(Direction::RIGHT))
-			map_view.move(float(-CONSTS::TILE_SIZE), 0);
+		if (true)
+			move_view(Direction::RIGHT);
 	}
 	else if (direction == Direction::RIGHT)
 	{
-		if (can_view_move(Direction::LEFT))
-			map_view.move(float(CONSTS::TILE_SIZE), 0);
+		if (true)
+			move_view(Direction::LEFT);
 	}
 	else if (direction == Direction::TOP)
 	{
-		if (can_view_move(Direction::BOTTOM))
-			map_view.move(0, float(-CONSTS::TILE_SIZE));
+		if (true)
+			move_view(Direction::BOTTOM);
 	}
-	else 
+	else // BOTTOM
 	{
-		if (can_view_move(Direction::TOP)) // BOTTOM
-			map_view.move(0, float(CONSTS::TILE_SIZE));
+		if (true)
+			move_view(Direction::TOP);
 	}
 }
 
