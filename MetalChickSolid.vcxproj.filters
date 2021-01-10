@@ -72,6 +72,9 @@
     <ClCompile Include="shared\consts.cpp">
       <Filter>Pliki źródłowe\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="headers\position.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\arena.hpp">
