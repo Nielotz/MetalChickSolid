@@ -11,10 +11,10 @@ namespace PATH
 		{
 			namespace WARRIOR
 			{
-				const static std::string FRONT = "textures\\mobs\\hero\\test_hero.png";
-				const static std::string LEFT = "textures\\mobs\\hero\\test_hero.png";
-				const static std::string RIGHT = "textures\\mobs\\hero\\test_hero.png";
-				const static std::string BACK = "textures\\mobs\\hero\\test_hero.png";
+				const static std::string FRONT = "textures\\mobs\\hero\\warrior.png";
+				const static std::string LEFT = "textures\\mobs\\hero\\warrior.png";
+				const static std::string RIGHT = "textures\\mobs\\hero\\warrior.png";
+				const static std::string BACK = "textures\\mobs\\hero\\warrior.png";
 			};
 		}
 	};
