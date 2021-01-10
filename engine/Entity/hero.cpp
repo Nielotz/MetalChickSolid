@@ -9,7 +9,6 @@ void Hero::increase_lvl()
 
 void Hero::update_attributes()
 {
-    //aim=???
     double baza = pow(lvl, 1.25);
     hp_max = (int32_t)(20 * baza + 5 * strength);
     if (profession_type == ProfessionType::WARRIOR) {
