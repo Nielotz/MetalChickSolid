@@ -42,32 +42,47 @@ void Graphic::load_texture(Entity& entity, std::string& path)
 	texture.setSmooth(true);
 
 	sf::Sprite sprite(texture);
-	sprite.setPosition(tile_position_to_vector2f_position(entity.position));
 
 	entity_sprites.insert(std::pair<uint64_t, sf::Sprite>(entity.id, sprite));
 }
 
 void Graphic::load_hero_textures(Hero& entity,
-	const std::string& path_to_hero_left,
-	const std::string& path_to_hero_right,
-	const std::string& path_to_hero_top,
-	const std::string& path_to_hero_bottom)
+	const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures)
 {
-	hero_textures.resize(4);
-	hero_sprites.resize(4);
+	typedef std::pair<sf::Sprite, sf::Texture> sprite_texture_pair;
+	typedef std::vector<sprite_texture_pair> sprite_texture_vector_of_pairs;
+	hero_sprites_with_texture.clear();
 
-	uint8_t i = 0;
-	for (auto& path : { path_to_hero_left , path_to_hero_right, path_to_hero_top, path_to_hero_bottom })
+	for (const auto& direction : { Direction::LEFT, Direction::RIGHT, Direction::BOTTOM, Direction::TOP })
 	{
-		if (!hero_textures[i].loadFromFile(path))
-			throw std::runtime_error("Cannot load " + path);
+		hero_sprites_with_texture.insert({ direction, {} });
+		sprite_texture_vector_of_pairs& directional_hero_sprites_with_texture = hero_sprites_with_texture.at(direction);
 
-		hero_textures[i].setSmooth(true);
+		directional_hero_sprites_with_texture.resize(paths_to_hero_textures.at(direction).size());
 
-		hero_sprites[i].setTexture(hero_textures[i]);
-		hero_sprites[i].setPosition(tile_position_to_vector2f_position(entity.position));
-		
-		i++;
+		uint16_t texture_id = 0;
+		for (const std::string& path : paths_to_hero_textures.at(direction))
+		{
+			directional_hero_sprites_with_texture[texture_id] = sprite_texture_pair{ sf::Sprite(), sf::Texture() };
+
+			sf::Sprite& sprite = directional_hero_sprites_with_texture[texture_id].first;
+			sf::Texture& texture = directional_hero_sprites_with_texture[texture_id].second;
+
+			if (!texture.loadFromFile(path))
+				throw std::runtime_error("Cannot load " + path);
+
+			texture.setSmooth(true);
+
+			sprite.setTexture(texture);
+			float scale = float(CONSTS::TILE_SIZE) / float(texture.getSize().x);
+			sprite.setScale(sf::Vector2f{ scale, scale });
+
+			hero_sprites_with_texture.insert(
+				{ direction, sprite_texture_vector_of_pairs{ sprite_texture_pair {sprite, texture} } }
+			);
+
+			texture_id++;
+		}
 	}
 }
 
@@ -80,8 +95,11 @@ void Graphic::draw_entities()
 
 void Graphic::draw_hero()
 {
-	hero_sprites[uint8_t(hero_direction)].setPosition(tile_position_to_vector2f_position(hero->position));
-	window->draw(hero_sprites[uint8_t(hero_direction)]);
+	sf::Sprite& hero_sprite = hero_sprites_with_texture.at(hero->looking_direction)[hero->animation_frame].first;
+
+	hero_sprite.setPosition(entity_position_to_vector2f_display_position(hero->position, hero_sprite));
+
+	window->draw(hero_sprite);
 }
 
 void Graphic::update()
@@ -150,9 +168,11 @@ void Graphic::draw_map()
 	window->draw(map.sprite);
 }
 
-sf::Vector2f Graphic::tile_position_to_vector2f_position(Position& position)
+sf::Vector2f Graphic::entity_position_to_vector2f_display_position(Position& position, sf::Sprite& entity_sprite)
 {
-	return sf::Vector2f(float(position.x * CONSTS::TILE_SIZE), float(position.y * CONSTS::TILE_SIZE));
+	return sf::Vector2f(
+		float(position.x * CONSTS::TILE_SIZE), 
+		float(position.y * CONSTS::TILE_SIZE - uint16_t(entity_sprite.getGlobalBounds().height) % CONSTS::TILE_SIZE));
 }
 
 

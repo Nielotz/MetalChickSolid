@@ -1,11 +1,13 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
 #include <memory>
-#include <SFML/Graphics.hpp>
+#include <unordered_map>
+#include <vector>
+
 
 #include "map.hpp"
 #include "hero.hpp"
-#include <unordered_map>
 
 
 
@@ -19,12 +21,15 @@ class Graphic
 
 	Direction hero_direction = Direction::BOTTOM;
 
-	// sf::Sprite stores only reference to the texture.
-	std::vector<sf::Texture> hero_textures;
-	std::vector<sf::Sprite> hero_sprites;
+	// Keep textures and sprites in pairs (for each direction):
+	//		Direction::LEFT: texture1, texture2, texture3...
+	//		Direction::... texture1, texture2, texture3...
+	//
+	// Keep texture because sf::Sprite stores only reference to the texture.
+	std::unordered_map<Direction, std::vector<std::pair<sf::Sprite, sf::Texture>>> hero_sprites_with_texture;
 
-	sf::Vector2f tile_position_to_vector2f_position(Position& position);
-	
+	sf::Vector2f entity_position_to_vector2f_display_position(Position& position, sf::Sprite& entity_sprite);
+
 	sf::View map_view;
 
 	Map map;
@@ -46,12 +51,9 @@ public:
 
 	void load_texture(Entity& entity, std::string& path);
 
-	void load_hero_textures(Hero& entity, 
-		const std::string& path_to_hero_left, 
-		const std::string& path_to_hero_right,
-		const std::string& path_to_hero_top,
-		const std::string& path_to_hero_bottom
-		);
+	void load_hero_textures(Hero& entity,
+		const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
+	);
 
 	// Draw entities at theirs positions.
 	void draw_entities();

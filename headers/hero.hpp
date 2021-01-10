@@ -10,6 +10,9 @@ struct Hero : Entity
     ProfessionType profession_type = ProfessionType::NONE;
     std::string profession_type_name;
 
+    Direction looking_direction = Direction::BOTTOM;
+    uint8_t animation_frame = 0;
+
     //Inventory
     Item inventory[20];
 

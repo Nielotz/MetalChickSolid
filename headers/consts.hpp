@@ -1,7 +1,13 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/VideoMode.hpp>
+
 #include <string>
+#include <unordered_map>
+#include <vector>
+
+#include "direction.hpp"
+
 
 namespace PATH
 {
@@ -9,12 +15,47 @@ namespace PATH
 	{
 		namespace TEXTURES
 		{
-			namespace WARRIOR
-			{
-				const static std::string FRONT = "textures\\mobs\\hero\\warrior.png";
-				const static std::string LEFT = "textures\\mobs\\hero\\warrior.png";
-				const static std::string RIGHT = "textures\\mobs\\hero\\warrior.png";
-				const static std::string BACK = "textures\\mobs\\hero\\warrior.png";
+			// XD ):
+			typedef std::vector<std::string> strings_vector;
+			typedef std::unordered_map<Direction, strings_vector> strings_to_directions_map;
+			typedef std::pair<Direction, std::vector<std::string>> strings_to_direction_pair;
+
+			const static strings_to_directions_map warrior = {
+				strings_to_direction_pair {
+					Direction::LEFT, strings_vector {
+					"textures\\mobs\\hero\\warrior.png",
+					//"textures\\mobs\\hero\\left_1_3.tga",
+					//"textures\\mobs\\hero\\left_2.tga",
+					//"textures\\mobs\\hero\\left_1_3.tga",
+					//"textures\\mobs\\hero\\left_4.tga",
+					}
+				},
+			strings_to_direction_pair {
+				Direction::RIGHT, strings_vector {
+					"textures\\mobs\\hero\\right_1_3.tga",
+					"textures\\mobs\\hero\\right_2.tga",
+					"textures\\mobs\\hero\\right_1_3.tga",
+					"textures\\mobs\\hero\\right_4.tga",
+					},
+				},
+			strings_to_direction_pair {
+				Direction::BOTTOM, strings_vector{
+					"textures\\mobs\\hero\\warrior.png",
+					//"textures\\mobs\\hero\\front_1_3.tga",
+					//"textures\\mobs\\hero\\front_2.tga",
+					//"textures\\mobs\\hero\\front_1_3.tga",
+					//"textures\\mobs\\hero\\front_4.tga",
+					},
+				},
+			strings_to_direction_pair {
+				Direction::TOP, strings_vector{
+					"textures\\mobs\\hero\\warrior.png",
+					//"textures\\mobs\\hero\\back_1_3.tga",
+					//"textures\\mobs\\hero\\back_2.tga",
+					//"textures\\mobs\\hero\\back_1_3.tga",
+					//"textures\\mobs\\hero\\back_4.tga",
+					}
+				}
 			};
 		}
 	};

@@ -18,12 +18,7 @@ void Game::dummy_game_loop()
 
 	graphic.load_level(map);
 
-	graphic.load_hero_textures(profile.hero,
-		PATH::HERO::TEXTURES::WARRIOR::LEFT,
-		PATH::HERO::TEXTURES::WARRIOR::RIGHT,
-		PATH::HERO::TEXTURES::WARRIOR::FRONT,
-		PATH::HERO::TEXTURES::WARRIOR::BACK
-		);
+	graphic.load_hero_textures(profile.hero, PATH::HERO::TEXTURES::warrior);
 
 	profile.hero.position = Position(1, 1);
 
