@@ -2,10 +2,9 @@
 #include <SFML/Graphics/Color.hpp>
 
 #include "../headers/control.hpp"
-#include "../headers/game.hpp"
 
 
-void Control::parse_move_events(Graphic& graphic, Game& game)
+void Control::parse_move_events(Graphic& graphic)
 {
     // Check all the window's events that were triggered since the last iteration of the loop.
     sf::Event event;
@@ -18,19 +17,19 @@ void Control::parse_move_events(Graphic& graphic, Game& game)
         {
             if (event.key.code == sf::Keyboard::A)
             {
-                game.move_hero(Direction::LEFT);
+                graphic.move_hero(Direction::LEFT);
             }
             else if (event.key.code == sf::Keyboard::D)
             {
-                game.move_hero(Direction::RIGHT);
+                graphic.move_hero(Direction::RIGHT);
             }
             else if (event.key.code == sf::Keyboard::W)
             {
-                game.move_hero(Direction::TOP);
+                graphic.move_hero(Direction::TOP);
             }
             else if (event.key.code == sf::Keyboard::S)
             {
-                game.move_hero(Direction::BOTTOM);
+                graphic.move_hero(Direction::BOTTOM);
             }
         }
     }

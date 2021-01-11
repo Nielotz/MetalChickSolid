@@ -35,3 +35,4 @@ void Hero::update_attributes()
     defence = (int32_t)(agility + strength);
     attack_time = (int32_t)(100 / agility);
 }
+
