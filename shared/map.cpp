@@ -3,9 +3,9 @@
 #include "../headers/map.hpp"
 #include "../headers/consts.hpp"
 
-Map::Map()
+Map::Map(std::string& path_to_data_file)
 {
-
+    load_map_data(path_to_data_file);
 }
 
 void Map::load_texture(const char *path)
@@ -13,6 +13,31 @@ void Map::load_texture(const char *path)
     std::string temp;
     temp += path;
     load_texture(temp);
+}
+
+void Map::load_map_data(const char* path)
+{
+    std::string temp;
+    temp += path;
+    load_map_data(temp);
+}
+
+void Map::load_map_data(string& path)
+{
+    /*
+    data = new MapData();
+    std::string enemy_name_read_from_file = "Boberek";
+    if (enemy_name_read_from_file == "Skoczek narciarski")
+    {
+
+    }
+    else if (enemy_name_read_from_file == "Boberek")
+    {
+        Boberek boboerek;
+        data->entities.push_back(boberek);
+
+    }
+    */
 }
 
 void Map::load_texture(string &path)

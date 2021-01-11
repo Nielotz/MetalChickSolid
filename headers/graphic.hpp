@@ -13,11 +13,15 @@
 
 class Graphic
 {
-	// Try to keep hero in the center of the view.
+	// Tries to move the view to keep the hero in the center of the view.
 	void move_view(const Direction& direction);
 
 	// Draw the map around hero (his render view).
 	void draw_map();
+
+	// Update the view, to keep (when possible) hero at the center of the screen.
+	// Relies on CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER.
+	void update_view();
 
 	Direction hero_direction = Direction::BOTTOM;
 
@@ -28,12 +32,13 @@ class Graphic
 	// Keep texture because sf::Sprite stores only reference to the texture.
 	std::unordered_map<Direction, std::vector<std::pair<sf::Sprite, sf::Texture>>> hero_sprites_with_texture;
 
-	sf::Vector2f entity_position_to_vector2f_display_position(Position& position, sf::Sprite& entity_sprite);
+	// Convert position (tiles) to sf::Vector2f position (pixels).
+	sf::Vector2f position_to_display_position(Position& position, sf::Sprite& entity_sprite);
 
 	sf::View map_view;
 
 	Map map;
-	std::shared_ptr<Hero> hero;
+	Hero* hero;
 	std::unordered_map<uint64_t, sf::Sprite> entity_sprites;
 
 public:

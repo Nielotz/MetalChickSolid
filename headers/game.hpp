@@ -13,7 +13,7 @@ public:
     // Main game loop. 
     //
     // Blocks thread.
-    void dummy_game_loop();
+    void game_loop();
 
     Game();
     bool is_running = true;

@@ -8,7 +8,7 @@ using std::cout;
 using std::endl;
 
 
-void Game::dummy_game_loop()
+void Game::game_loop()
 {
 	std::string map_file = PATH::MAP::TEXTURES::START;
 	//std::string data_file = "start_map.data";
@@ -16,16 +16,17 @@ void Game::dummy_game_loop()
 	map.load_texture(map_file);
 	//map.load_data(data_file);
 
+	profile.hero.position = Position(0, 1);
+
 	graphic.load_level(map);
 
 	graphic.load_hero_textures(profile.hero, PATH::HERO::TEXTURES::warrior);
 
-	profile.hero.position = Position(1, 1);
 
 	// run the program as long as the window is open
 	while (graphic.window->isOpen())
 	{
-		control.parse_events(graphic);
+		control.parse_move_events(graphic);
 
 		graphic.update();
 		graphic.window->display();
@@ -37,7 +38,7 @@ Game::Game() :
 	graphic(Graphic(profile.hero))
 {
 	clog << "Initializing graphics..." << endl;
-	dummy_game_loop();
+	game_loop();
 };
 
 

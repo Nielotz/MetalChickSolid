@@ -4,7 +4,7 @@
 #include "../headers/control.hpp"
 
 
-void Control::parse_events(Graphic& graphic)
+void Control::parse_move_events(Graphic& graphic)
 {
     // Check all the window's events that were triggered since the last iteration of the loop.
     sf::Event event;

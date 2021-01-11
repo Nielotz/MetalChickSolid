@@ -8,7 +8,7 @@
 
 Graphic::Graphic(Hero& hero)
 {
-	this->hero = std::make_shared<Hero>(hero);
+	this->hero = &hero;
 	this->window = std::make_unique<sf::RenderWindow>(
 		sf::VideoMode(CONSTS::GAME_WINDOW_SIZE.x, CONSTS::GAME_WINDOW_SIZE.y), "Metal chick solid");
 
@@ -31,6 +31,9 @@ void Graphic::load_level(Map& map)
 {
 	this->map = map;
 	this->map.sprite.setScale(float(CONSTS::SCALE), float(CONSTS::SCALE));
+
+	Position position(0, 0);
+	this->map.sprite.setPosition( position_to_display_position(position, map.sprite) ); // To be read from map_data.
 }
 
 void Graphic::load_texture(Entity& entity, std::string& path)
@@ -97,7 +100,7 @@ void Graphic::draw_hero()
 {
 	sf::Sprite& hero_sprite = hero_sprites_with_texture.at(hero->looking_direction)[hero->animation_frame].first;
 
-	hero_sprite.setPosition(entity_position_to_vector2f_display_position(hero->position, hero_sprite));
+	hero_sprite.setPosition(position_to_display_position(hero->position, hero_sprite));
 
 	window->draw(hero_sprite);
 }
@@ -106,15 +109,13 @@ void Graphic::update()
 {
 	draw_map();
 	//draw_entities();
+	update_view();
 	draw_hero();
 }
 
 void Graphic::move_view(const Direction& direction)
 {
-	// It is not working but it is working no idea why, just accept it or rewrite:
-	// center of the view + half of the view size.
-
-	// Margin for float error included.
+	// Margin for float imprecision included.
 	if (direction == Direction::LEFT
 		&& this->map_view.getCenter().x + this->map_view.getSize().x / 2 < CONSTS::TILE_SIZE * map.tiles_number.x - 3)
 		map_view.move(float(CONSTS::TILE_SIZE), 0);
@@ -137,28 +138,22 @@ void Graphic::move_hero(const Direction& direction)
 	if (direction == Direction::LEFT)
 	{
 		hero->position.x--;
-		if (true)
-			move_view(Direction::RIGHT);
+
 	}
 	else if (direction == Direction::RIGHT)
 	{
 		hero->position.x++;
 
-		if (true)
-			move_view(Direction::LEFT);
 	}
 	else if (direction == Direction::TOP)
 	{
 		hero->position.y--;
-		if (true)
-			move_view(Direction::BOTTOM);
+
 	}
 	else // BOTTOM
 	{
 		hero->position.y++;
 
-		if (true)
-			move_view(Direction::TOP);
 	}
 }
 
@@ -168,10 +163,67 @@ void Graphic::draw_map()
 	window->draw(map.sprite);
 }
 
-sf::Vector2f Graphic::entity_position_to_vector2f_display_position(Position& position, sf::Sprite& entity_sprite)
+void Graphic::update_view()
+{
+	Direction move_direction = Direction::LEFT;
+	//Direction move_direction = Direction::RIGHT;
+	//Direction move_direction = Direction::TOP;
+	//Direction move_direction = Direction::BOTTOM;
+
+	// Margin for float imprecision included.
+	float distance_to_left_wall = -1;
+	float distance_to_right_wall = -1;
+	float distance_to_top_wall = -1;
+	float distance_to_bottom_wall = -1;
+
+	distance_to_left_wall = (hero->position.x * CONSTS::TILE_SIZE + 3 - (this->map_view.getCenter().x - this->map_view.getSize().x / 2))
+		/ CONSTS::TILE_SIZE;
+
+	distance_to_right_wall = (-(hero->position.x * CONSTS::TILE_SIZE - 3 - (this->map_view.getCenter().x + this->map_view.getSize().x / 2))
+		/ CONSTS::TILE_SIZE)
+		- 1; // Recompense for hero size.
+
+	distance_to_top_wall = (hero->position.y * CONSTS::TILE_SIZE + 3 - (this->map_view.getCenter().y - this->map_view.getSize().y / 2))
+		/ CONSTS::TILE_SIZE;
+
+	distance_to_bottom_wall = (-(hero->position.y * CONSTS::TILE_SIZE - 3 - (this->map_view.getCenter().y + this->map_view.getSize().y / 2))
+		/ CONSTS::TILE_SIZE)
+		- 1; // Recompense for hero size.
+
+	if (distance_to_left_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+	{
+		move_view(Direction::RIGHT);
+		std::cout << "LEFT" << std::endl;
+	}
+	else if (distance_to_right_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+	{
+		move_view(Direction::LEFT);
+		std::cout << "RIGHT" << std::endl;
+
+	}
+	else if (distance_to_top_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+	{
+		move_view(Direction::BOTTOM);
+		std::cout << "TOP" << std::endl;
+
+	}
+	else if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+	{
+		move_view(Direction::TOP);
+		std::cout << "BOTTOM" << std::endl;
+
+	}
+
+
+	std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
+	std::cout << hero->position.x << " " << hero->position.y << std::endl;
+
+}
+
+sf::Vector2f Graphic::position_to_display_position(Position& position, sf::Sprite& entity_sprite)
 {
 	return sf::Vector2f(
-		float(position.x * CONSTS::TILE_SIZE), 
+		float(position.x * CONSTS::TILE_SIZE),
 		float(position.y * CONSTS::TILE_SIZE - uint16_t(entity_sprite.getGlobalBounds().height) % CONSTS::TILE_SIZE));
 }
 

@@ -64,7 +64,7 @@ namespace PATH
 	{
 		namespace TEXTURES
 		{
-			const static std::string START = "textures\\maps\\test_map.tga";
+			const static std::string START = "textures\\maps\\start_map.tga";
 
 		}
 	}
@@ -85,6 +85,9 @@ struct CONSTS
 
 	// In tiles. 
 	const static sf::Vector2u PLAYER_VIEW_RANGE;
+
+	// Applies only when view can move (when hero is far from the borders).
+	const static uint8_t MIN_PLAYER_DISTANCE_TO_BORDER;
 };
 
 
