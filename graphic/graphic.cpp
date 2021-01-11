@@ -171,11 +171,6 @@ void Graphic::draw_map()
 
 void Graphic::update_view()
 {
-	Direction move_direction = Direction::LEFT;
-	//Direction move_direction = Direction::RIGHT;
-	//Direction move_direction = Direction::TOP;
-	//Direction move_direction = Direction::BOTTOM;
-
 	// Margin for float imprecision included.
 	float distance_to_left_wall = -1;
 	float distance_to_right_wall = -1;
@@ -190,8 +185,7 @@ void Graphic::update_view()
 	distance_to_right_wall = 
 		(-(hero->position.x * CONSTS::TILE_SIZE - 3 
 			- (this->map_view.getCenter().x + this->map_view.getSize().x / 2))
-		/ CONSTS::TILE_SIZE)
-		- 1; // Recompense for hero size.
+		/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
 
 	distance_to_top_wall = 
 		(hero->position.y * CONSTS::TILE_SIZE + 3 
@@ -201,16 +195,15 @@ void Graphic::update_view()
 	distance_to_bottom_wall = 
 		(-(hero->position.y * CONSTS::TILE_SIZE - 3 
 			- (this->map_view.getCenter().y + this->map_view.getSize().y / 2))
-		/ CONSTS::TILE_SIZE)
-		- 1; // Recompense for hero size.
+		/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
 
 	if (distance_to_left_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
 		move_view(Direction::RIGHT);
-	else if (distance_to_right_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+	if (distance_to_right_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
 		move_view(Direction::LEFT);
-	else if (distance_to_top_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+	if (distance_to_top_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
 		move_view(Direction::BOTTOM);
-	else if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+	if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
 		move_view(Direction::TOP);
 
     // std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
