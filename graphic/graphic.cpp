@@ -205,10 +205,8 @@ void Graphic::update_view()
 	else if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
 		move_view(Direction::TOP);
 
-
-	std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
-	std::cout << hero->position.x << " " << hero->position.y << std::endl;
-
+	// std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
+	// std::cout << hero->position.x << " " << hero->position.y << std::endl;
 }
 
 sf::Vector2f Graphic::position_to_display_position(Position& position, sf::Sprite& entity_sprite)
