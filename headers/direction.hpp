@@ -2,8 +2,9 @@
 
 enum class Direction : uint8_t
 {
-    LEFT,
-    RIGHT,
-    TOP,
-    BOTTOM
+    // Do not change values!
+    LEFT = 0,
+    RIGHT = 1,
+    TOP = 2,
+    BOTTOM = 3
 };

@@ -9,7 +9,7 @@ public:
     //
     // Supported events:
     // Close
-    void parse_events(Graphic& graphic);
+    void parse_move_events(Graphic& graphic);
     Control() = default;
 
 };
