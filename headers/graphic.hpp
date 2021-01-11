@@ -60,6 +60,8 @@ public:
 		const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
 	);
 
+	void set_hero_position(Position& position);
+
 	// Draw entities at theirs positions.
 	void draw_entities();
 

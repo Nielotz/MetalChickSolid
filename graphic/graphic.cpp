@@ -89,6 +89,12 @@ void Graphic::load_hero_textures(Hero& entity,
 	}
 }
 
+void Graphic::set_hero_position(Position& position)
+{
+	sf::Sprite& hero_sprite = hero_sprites_with_texture.at(hero->looking_direction)[hero->animation_frame].first;
+	hero_sprite.setPosition(position_to_display_position(hero->position, hero_sprite));
+}
+
 void Graphic::draw_entities()
 {
 	for (auto& texture : entity_sprites)
@@ -99,9 +105,6 @@ void Graphic::draw_entities()
 void Graphic::draw_hero()
 {
 	sf::Sprite& hero_sprite = hero_sprites_with_texture.at(hero->looking_direction)[hero->animation_frame].first;
-
-	hero_sprite.setPosition(position_to_display_position(hero->position, hero_sprite));
-
 	window->draw(hero_sprite);
 }
 
@@ -109,7 +112,6 @@ void Graphic::update()
 {
 	draw_map();
 	//draw_entities();
-	update_view();
 	draw_hero();
 }
 
@@ -135,26 +137,30 @@ void Graphic::move_view(const Direction& direction)
 
 void Graphic::move_hero(const Direction& direction)
 {
+	sf::Sprite& hero_sprite = hero_sprites_with_texture.at(hero->looking_direction)[hero->animation_frame].first;
+
 	if (direction == Direction::LEFT)
 	{
-		hero->position.x--;
+		hero_sprite.move(float(-CONSTS::TILE_SIZE), 0);
 
 	}
 	else if (direction == Direction::RIGHT)
 	{
-		hero->position.x++;
+		hero_sprite.move(float(CONSTS::TILE_SIZE), 0);
 
 	}
 	else if (direction == Direction::TOP)
 	{
-		hero->position.y--;
+		hero_sprite.move(0, float(-CONSTS::TILE_SIZE));
 
 	}
 	else // BOTTOM
 	{
-		hero->position.y++;
+		hero_sprite.move(0, float(CONSTS::TILE_SIZE));
 
 	}
+
+	update_view();
 }
 
 void Graphic::draw_map()
@@ -191,33 +197,16 @@ void Graphic::update_view()
 		- 1; // Recompense for hero size.
 
 	if (distance_to_left_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-	{
 		move_view(Direction::RIGHT);
-		std::cout << "LEFT" << std::endl;
-	}
 	else if (distance_to_right_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-	{
 		move_view(Direction::LEFT);
-		std::cout << "RIGHT" << std::endl;
-
-	}
 	else if (distance_to_top_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-	{
 		move_view(Direction::BOTTOM);
-		std::cout << "TOP" << std::endl;
-
-	}
 	else if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-	{
 		move_view(Direction::TOP);
-		std::cout << "BOTTOM" << std::endl;
 
-	}
-
-
-	std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
-	std::cout << hero->position.x << " " << hero->position.y << std::endl;
-
+	// std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
+	// std::cout << hero->position.x << " " << hero->position.y << std::endl;
 }
 
 sf::Vector2f Graphic::position_to_display_position(Position& position, sf::Sprite& entity_sprite)
