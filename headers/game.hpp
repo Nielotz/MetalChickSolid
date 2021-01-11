@@ -20,6 +20,7 @@ public:
 
     void start();
     void stop();
+    void move_hero(const Direction& direction);
 private:
     Profile profile;
     Graphic graphic;
@@ -27,5 +28,5 @@ private:
     Arena arena;
     Map map;
 
-    void choose_profile(Profile &profile);
+    void choose_profile(Profile& profile);
 };
