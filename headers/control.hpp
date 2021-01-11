@@ -1,6 +1,9 @@
 #pragma once
 #include "graphic.hpp"
 
+class Game;
+
+
 // Handles input events.
 class Control
 {
@@ -9,7 +12,7 @@ public:
     //
     // Supported events:
     // Close
-    void parse_move_events(Graphic& graphic);
+    void parse_move_events(Graphic& graphic, Game& game);
     Control() = default;
 
 };
