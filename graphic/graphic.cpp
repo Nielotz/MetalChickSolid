@@ -182,17 +182,25 @@ void Graphic::update_view()
 	float distance_to_top_wall = -1;
 	float distance_to_bottom_wall = -1;
 
-	distance_to_left_wall = (hero->position.x * CONSTS::TILE_SIZE + 3 - (this->map_view.getCenter().x - this->map_view.getSize().x / 2))
+	distance_to_left_wall = 
+		(hero->position.x * CONSTS::TILE_SIZE + 3 
+			- (this->map_view.getCenter().x - this->map_view.getSize().x / 2))
 		/ CONSTS::TILE_SIZE;
 
-	distance_to_right_wall = (-(hero->position.x * CONSTS::TILE_SIZE - 3 - (this->map_view.getCenter().x + this->map_view.getSize().x / 2))
+	distance_to_right_wall = 
+		(-(hero->position.x * CONSTS::TILE_SIZE - 3 
+			- (this->map_view.getCenter().x + this->map_view.getSize().x / 2))
 		/ CONSTS::TILE_SIZE)
 		- 1; // Recompense for hero size.
 
-	distance_to_top_wall = (hero->position.y * CONSTS::TILE_SIZE + 3 - (this->map_view.getCenter().y - this->map_view.getSize().y / 2))
+	distance_to_top_wall = 
+		(hero->position.y * CONSTS::TILE_SIZE + 3 
+			- (this->map_view.getCenter().y - this->map_view.getSize().y / 2))
 		/ CONSTS::TILE_SIZE;
 
-	distance_to_bottom_wall = (-(hero->position.y * CONSTS::TILE_SIZE - 3 - (this->map_view.getCenter().y + this->map_view.getSize().y / 2))
+	distance_to_bottom_wall = 
+		(-(hero->position.y * CONSTS::TILE_SIZE - 3 
+			- (this->map_view.getCenter().y + this->map_view.getSize().y / 2))
 		/ CONSTS::TILE_SIZE)
 		- 1; // Recompense for hero size.
 
