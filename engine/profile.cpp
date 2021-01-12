@@ -87,7 +87,7 @@ void Profile::create_new()
     std::ofstream new_file(path);
     std::cout << "Creating dumb profile...\n";
     //Here will start graphic hero creator
-    new_file << "nick: Dumb\nprofession: 1\nlvl: 1\nexp: 0\nhp: 100\npoz_x: 0\npoz_y: 0\n";
+    new_file << "nick: Dumb\nprofession: 1\nlvl: 1\nexp: 0\nhp: 100\npoz_x: 4\npoz_y: 10\n";
     for (int i = 0; i < 20; i++) {
         new_file << "eq_item: " << i << " 0\n";
     }
