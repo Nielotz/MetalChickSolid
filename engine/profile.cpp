@@ -120,4 +120,5 @@ void Profile::save()
         save_file << "enemy_status: " << i << " " <<  << "\n";
     }*/
     save_file.close();
+    std::cout << "Saved.\n";
 }
