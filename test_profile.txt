@@ -3,8 +3,8 @@ profession: 1
 lvl: 1
 exp: 0
 hp: 100
-poz_x: 0
-poz_y: 0
+poz_x: 4
+poz_y: 10
 eq_item: 0 0
 eq_item: 1 0
 eq_item: 2 0

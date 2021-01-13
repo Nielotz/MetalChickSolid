@@ -18,8 +18,8 @@ class Graphic
 	// Moves only by 1 tile.
 	void move_view(const Direction& direction);
 
-	// Draw the map around hero (his render view).
-	void draw_map();
+    // Draw the map around hero (his render view).
+    void draw_map();
 
 	// Update the view, to keep (when possible) hero at the center of the screen.
 	// Relies on CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER.
@@ -31,15 +31,17 @@ class Graphic
 	//
 	// Keep texture because sf::Sprite stores only reference to the texture.
 	std::unordered_map<Direction, std::vector<std::pair<sf::Sprite, sf::Texture>>> hero_sprites_with_texture;
+	// Keep texture because sf::Sprite stores only reference to the texture.
+	std::unordered_map<Direction, std::vector<std::pair<sf::Sprite, sf::Texture>>> hero_sprites_with_texture;
 
-	// Convert position (tiles) to sf::Vector2f position (pixels).
-	sf::Vector2f position_to_display_position(Position& position, sf::Sprite& entity_sprite);
+    // Convert position (tiles) to sf::Vector2f position (pixels).
+    sf::Vector2f position_to_display_position(Position& position, sf::Sprite& entity_sprite);
 
-	sf::View map_view;
+    sf::View map_view;
 
-	Map map;
-	Hero* hero;
-	std::unordered_map<uint64_t, sf::Sprite> entity_sprites;
+    Map map;
+    Hero* hero;
+    std::unordered_map<uint64_t, sf::Sprite> entity_sprites;
 
 	Direction hero_looking_direction = Direction::BOTTOM;
 	
@@ -69,41 +71,45 @@ class Graphic
 
 	void update_hero_position_on_map();
 
-public:
-
 	bool is_hero_moving = false;
 
 	// Hero hero;
 	std::unique_ptr<sf::RenderWindow> window;
+	// Hero hero;
+	std::unique_ptr<sf::RenderWindow> window;
 
-	// Save hero for further use.
-	Graphic(Hero& hero);
+    // Save hero for further use.
+    Graphic(Hero& hero);
 
-	// Load level into the graphic.
-	//
-	// \param map: Map that will be displayed on the screen.
-	// 
-	void load_level(Map& map);
+    // Update the view, to keep (when possible) hero at the center of the screen.
+    // Relies on CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER.
+    void update_view();
 
-	void load_texture(Entity& entity, std::string& path);
+    // Load level into the graphic.
+    //
+    // \param map: Map that will be displayed on the screen.
+    // 
+    void load_level(Map& map);
 
-	void load_hero_textures(Hero& entity,
-		const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
-	);
+    void load_texture(Entity& entity, std::string& path);
 
-	void set_hero_position(Position& position);
+    void load_hero_textures(Hero& entity,
+        const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
+    );
 
-	// Draw entities at theirs positions.
-	void draw_entities();
+    void set_hero_position(Position& position);
 
-	// Draw hero at its position.
-	void draw_hero();
+    // Draw entities at theirs positions.
+    void draw_entities();
 
-	// Draw fireworks and update stats.
-	void increase_lvl();
+    // Draw hero at its position.
+    void draw_hero();
 
-	// Updates screen.
-	void update();
+    // Draw fireworks and update stats.
+    void increase_lvl();
 
-	void move_hero(const Direction& direction);
+    // Updates screen.
+    void update();
+
+    void move_hero(const Direction& direction);
 };
