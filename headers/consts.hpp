@@ -39,9 +39,9 @@ namespace PATH
 				},
 			strings_to_direction_pair {
 				Direction::BOTTOM, strings_vector{
-					//"textures\\mobs\\hero\\front_1_3.tga",
+					"textures\\mobs\\hero\\front_1_3.tga",
 					"textures\\mobs\\hero\\front_2.tga",
-					//"textures\\mobs\\hero\\front_1_3.tga",
+					"textures\\mobs\\hero\\front_1_3.tga",
 					"textures\\mobs\\hero\\front_4.tga",
 					},
 				},
@@ -61,7 +61,7 @@ namespace PATH
 	{
 		namespace TEXTURES
 		{
-			const static std::string START = "textures\\maps\\test_map.tga";
+			const static std::string START = "textures\\maps\\start_map.tga";
 
 		}
 	}
