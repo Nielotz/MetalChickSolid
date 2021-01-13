@@ -157,6 +157,7 @@
     <ClCompile Include="engine\Items\weapon.cpp" />
     <ClCompile Include="engine\profile.cpp" />
     <ClCompile Include="graphic\graphic.cpp" />
+    <ClCompile Include="graphic\ui.cpp" />
     <ClCompile Include="headers\position.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shared\consts.cpp" />

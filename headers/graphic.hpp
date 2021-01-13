@@ -6,20 +6,24 @@
 #include <vector>
 #include <chrono>
 
-
 #include "map.hpp"
 #include "hero.hpp"
-
-
+#include "ui.hpp"
 
 class Graphic
 {
+    void set_views();
+    void set_main_view();
+    void set_side_view();
+
 	// Tries to move the view to keep the hero in the center of the view.
 	// Moves only by 1 tile.
 	void move_view(const Direction& direction);
 
     // Draw the map around hero (his render view).
     void draw_map();
+
+    void draw_side_panel();
 
 	// Keep textures and sprites in pairs (for each direction):
 	//		Direction::LEFT: texture1, texture2, texture3...
@@ -28,10 +32,17 @@ class Graphic
 	// Keep texture because sf::Sprite stores only reference to the texture.
 	std::unordered_map<Direction, std::vector<std::pair<sf::Sprite, sf::Texture>>> hero_sprites_with_texture;
 
+    // User Interface class.
+    UI ui;
+
+    // UI that is now displayed;
+    UI_TYPE display_ui_type = UI_TYPE::WALK;
+
     // Convert position (tiles) to sf::Vector2f position (pixels).
     sf::Vector2f position_to_display_position(Position& position, sf::Sprite& entity_sprite);
 
-    sf::View map_view;
+    sf::View main_view;
+    sf::View side_panel_view;
 
     Map map;
     Hero* hero;
@@ -52,8 +63,8 @@ class Graphic
 	// Time between every step of hero move.
 	const double MOVE_STEP_FRAME_TIME;
 
-	// Unit: FPS.
-	const uint8_t MOVE_ANIMATION_PER_SECOND = 6;
+	// Unit: no idea, less than 6 = no move.
+	const uint8_t MOVE_ANIMATION_PER_SECOND = 10;
 
 	const double MOVE_ANIMATION_FRAME_TIME = 1. / MOVE_ANIMATION_PER_SECOND;
 
@@ -93,6 +104,9 @@ public:
         const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
     );
 
+    // Take texture from CONSTS::
+    void load_ui();
+
     void set_hero_position(Position& position);
 
     // Draw entities at theirs positions.
@@ -100,6 +114,8 @@ public:
 
     // Draw hero at its position.
     void draw_hero();
+
+    void draw_ui();
 
     // Draw fireworks and update stats.
     void increase_lvl();

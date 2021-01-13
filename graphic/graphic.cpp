@@ -47,25 +47,23 @@ void Graphic::update_hero_step()
 Graphic::Graphic(Hero& hero)
 	:MOVE_STEP_FRAME_TIME(1. / (MOVE_STEPS * hero.move_speed))
 {
+	// Reset times.
 	time_point_of_last_change_animation_frame = time_point_of_last_move_hero
 		= std::chrono::steady_clock::now();
 
 	this->hero = &hero;
-	this->window = std::make_unique<sf::RenderWindow>(
-		sf::VideoMode(CONSTS::GAME_WINDOW_SIZE.x, CONSTS::GAME_WINDOW_SIZE.y), "Metal chick solid");
 
-	map_view.setSize(sf::Vector2f(
-		float(CONSTS::PLAYER_VIEW_RANGE.x * CONSTS::TILE_SIZE),
-		float(CONSTS::PLAYER_VIEW_RANGE.y * CONSTS::TILE_SIZE)
-	));
+	window = std::make_unique<sf::RenderWindow>(
+		sf::VideoMode(CONSTS::GAME_WINDOW_SIZE.x, CONSTS::GAME_WINDOW_SIZE.y),
+		"Metal chick solid",
+		sf::Style::Close
+		);
 
-	map_view.setCenter(sf::Vector2f(
-		float(CONSTS::PLAYER_VIEW_RANGE.x * ((CONSTS::TILE_SIZE + 1) / 2)),
-		float(CONSTS::PLAYER_VIEW_RANGE.y * ((CONSTS::TILE_SIZE + 1) / 2))
-	));
+	window->setFramerateLimit(60);
 
-	// setViewport scales view!
-	this->map_view.setViewport(sf::FloatRect(0.f, 0.f, 10.f / 16.f, 1.f));
+	set_views();
+
+	load_ui();
 }
 
 void Graphic::load_level(Map& map)
@@ -132,6 +130,12 @@ void Graphic::load_hero_textures(Hero& entity,
 	}
 }
 
+void Graphic::load_ui()
+{
+	const std::string& path = PATH::UI::TEXTURES::WALK_UI_RIGHT_PANEL;
+	ui.load_textures(path);
+}
+
 void Graphic::set_hero_position(Position& position)
 {
 	hero_looking_direction = Direction::BOTTOM;
@@ -141,7 +145,6 @@ void Graphic::set_hero_position(Position& position)
 }
 
 void Graphic::draw_entities()
-
 {
 	for (auto& texture : entity_sprites)
 		if (true)
@@ -162,33 +165,122 @@ void Graphic::draw_hero()
 	window->draw(hero_sprite);
 }
 
+void Graphic::draw_ui()
+{
+	ui.draw(*(window.get()), display_ui_type);
+}
+
 void Graphic::update()
 {
 	update_hero();
 
+	window->clear(sf::Color::Red);
+
+	window->setView(side_panel_view);
+	draw_ui();
+
+	window->setView(main_view);
 	draw_map();
-	//draw_entities();
+	// draw_entities();
 	draw_hero();
+}
+
+void Graphic::set_views()
+{
+	set_main_view();
+	set_side_view();
+}
+
+void Graphic::set_main_view()
+{
+	// In px.
+	float view_size_x = float(CONSTS::PLAYER_VIEW_RANGE.x * CONSTS::TILE_SIZE);
+	float view_size_y = float(CONSTS::PLAYER_VIEW_RANGE.y * CONSTS::TILE_SIZE);
+
+	float view_position_x = float((CONSTS::PLAYER_VIEW_RANGE.x) * CONSTS::TILE_SIZE) / 2.f;
+	float view_position_y = float((CONSTS::PLAYER_VIEW_RANGE.y) * CONSTS::TILE_SIZE) / 2.f;
+
+	main_view.setSize(view_size_x, view_size_y);
+	main_view.setCenter(view_position_x, view_position_y);
+
+	// setViewport scales view!
+	main_view.setViewport(sf::FloatRect(0.f, 0.f, 20.f / 26.f, 1.f));
+}
+
+void Graphic::set_side_view()
+{
+
+	// In px.
+	float view_size_x = float(6 * CONSTS::TILE_SIZE);
+	float view_size_y = float(CONSTS::GAME_SCREEN_RATIO.y * double(CONSTS::TILE_SIZE));
+
+	float view_position_x = float(6 * (CONSTS::TILE_SIZE)) / 2.f;
+	float view_position_y = float((CONSTS::GAME_SCREEN_RATIO.y * double(CONSTS::TILE_SIZE)) / 2.);
+
+	side_panel_view.setSize(view_size_x, view_size_y);
+	side_panel_view.setCenter(view_position_x, view_position_y);
+
+	// setViewport scales view!
+	side_panel_view.setViewport(sf::FloatRect(float(20. / 26.), 0.f, float(6. / 26.), 1.f));
 }
 
 void Graphic::move_view(const Direction& direction)
 {
+	sf::Vector2f mv_center = main_view.getCenter();
+	sf::Vector2f mv_half_size = { main_view.getSize().x / 2.f, main_view.getSize().y / 2.f };
+
 	// Margin for float imprecision included.
 	if (direction == Direction::LEFT
-		&& this->map_view.getCenter().x + this->map_view.getSize().x / 2 < CONSTS::TILE_SIZE * map.tiles_number.x - 3)
-		map_view.move(float(CONSTS::TILE_SIZE), 0);
+		&& mv_center.x + mv_half_size.x < map.sprite.getGlobalBounds().width)
+		main_view.move(float(CONSTS::TILE_SIZE), 0);
 
 	if (direction == Direction::RIGHT
-		&& this->map_view.getCenter().x - this->map_view.getSize().x / 2 > 3)
-		map_view.move(float(-CONSTS::TILE_SIZE), 0);
+		&& mv_center.x - mv_half_size.x > 3)
+		main_view.move(float(-CONSTS::TILE_SIZE), 0);
 
 	if (direction == Direction::TOP
-		&& this->map_view.getCenter().y + this->map_view.getSize().y / 2 < CONSTS::TILE_SIZE * map.tiles_number.y - 3)
-		map_view.move(0, float(CONSTS::TILE_SIZE));
+		&& mv_center.y + mv_half_size.y < CONSTS::TILE_SIZE * map.tiles_number.y - 3)
+		main_view.move(0, float(CONSTS::TILE_SIZE));
 
 	if (direction == Direction::BOTTOM
-		&& this->map_view.getCenter().y - this->map_view.getSize().y / 2 > 3)
-		map_view.move(0, float(-CONSTS::TILE_SIZE));
+		&& mv_center.y - mv_half_size.y > 3)
+		main_view.move(0, float(-CONSTS::TILE_SIZE));
+	std::cout << mv_center.y - mv_half_size.y << std::endl;
+}
+
+void Graphic::update_view()
+{
+	// Margin for float imprecision included.
+	uint16_t distance_to_left_wall = -1;
+	uint16_t distance_to_right_wall = -1;
+	uint16_t distance_to_top_wall = -1;
+	uint16_t distance_to_bottom_wall = -1;
+
+	uint16_t tile_size = CONSTS::TILE_SIZE;
+
+	sf::Vector2f mv_size = main_view.getSize();
+	sf::Vector2f mv_center = main_view.getCenter();
+	Position& hero_pos = hero->position;
+
+	sf::Vector2f hero_pos_px = { float(hero_pos.x * tile_size) , float(hero_pos.y * tile_size) };
+	sf::Vector2f mv_pos_px = { float(mv_center.x - mv_size.x / 2.f) , float(mv_center.y - mv_size.y / 2.f) };
+
+	distance_to_left_wall = uint16_t((hero_pos_px.x - mv_pos_px.x) / tile_size);
+	distance_to_right_wall = uint16_t((mv_size.x - (hero_pos_px.x - mv_pos_px.x)) / tile_size);
+	distance_to_top_wall = uint16_t((hero_pos_px.y - (mv_center.y - mv_size.y / 2.f)) / tile_size);
+	distance_to_bottom_wall = uint16_t((-(hero_pos_px.y - (mv_center.y + mv_size.y / 2.f)) / tile_size));
+
+	if (distance_to_left_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+		move_view(Direction::RIGHT);
+	if (distance_to_right_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+		move_view(Direction::LEFT);
+	if (distance_to_top_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+		move_view(Direction::BOTTOM);
+	if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
+		move_view(Direction::TOP);
+
+	std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
+	// std::cout << hero->position.x << " " << hero->position.y << std::endl;
 }
 
 // Update the hero position on the map.
@@ -213,7 +305,7 @@ void Graphic::update_hero_texture_position()
 		new_pos.y += distance_traveled;
 
 	hero_sprite.setPosition(new_pos);
-	
+
 	// std::cout << "NEW HERO POS: " << new_pos.x << " " << new_pos.y << " " << std::endl;
 }
 
@@ -251,49 +343,7 @@ void Graphic::move_hero(const Direction& direction)
 
 void Graphic::draw_map()
 {
-	this->window->setView(map_view);
 	window->draw(map.sprite);
-}
-
-void Graphic::update_view()
-{
-	// Margin for float imprecision included.
-	float distance_to_left_wall = -1;
-	float distance_to_right_wall = -1;
-	float distance_to_top_wall = -1;
-	float distance_to_bottom_wall = -1;
-
-	distance_to_left_wall =
-		(hero->position.x * CONSTS::TILE_SIZE + 3
-			- (this->map_view.getCenter().x - this->map_view.getSize().x / 2))
-		/ CONSTS::TILE_SIZE;
-
-	distance_to_right_wall =
-		(-(hero->position.x * CONSTS::TILE_SIZE - 3
-			- (this->map_view.getCenter().x + this->map_view.getSize().x / 2))
-			/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
-
-	distance_to_top_wall =
-		(hero->position.y * CONSTS::TILE_SIZE + 3
-			- (this->map_view.getCenter().y - this->map_view.getSize().y / 2))
-		/ CONSTS::TILE_SIZE;
-
-	distance_to_bottom_wall =
-		(-(hero->position.y * CONSTS::TILE_SIZE - 3
-			- (this->map_view.getCenter().y + this->map_view.getSize().y / 2))
-			/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
-
-	if (distance_to_left_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-		move_view(Direction::RIGHT);
-	if (distance_to_right_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-		move_view(Direction::LEFT);
-	if (distance_to_top_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-		move_view(Direction::BOTTOM);
-	if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
-		move_view(Direction::TOP);
-
-	// std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
-	// std::cout << hero->position.x << " " << hero->position.y << std::endl;
 }
 
 void Graphic::update_hero()
@@ -302,7 +352,7 @@ void Graphic::update_hero()
 	{
 		update_hero_animation_frame();
 		update_hero_step();
-		
+
 		update_view();
 	}
 }
