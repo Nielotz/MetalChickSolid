@@ -141,7 +141,6 @@ void Graphic::set_hero_position(Position& position)
 }
 
 void Graphic::draw_entities()
-
 {
 	for (auto& texture : entity_sprites)
 		if (true)
