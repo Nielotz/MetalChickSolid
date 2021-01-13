@@ -10,12 +10,6 @@
 // Base for all entities.
 struct Entity : Unique
 {
-private:
-    static uint64_t ID;
-
-public:
-    const uint64_t id;
-
     std::string name;
     Position position;
     ProfessionType profession_type = ProfessionType::NONE;

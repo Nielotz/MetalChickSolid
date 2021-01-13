@@ -1,14 +1,11 @@
 #include "../../headers/entity.hpp"
 
-uint64_t Entity::ID = 0;
-
 bool Entity::move(Direction& direction)
 {
     return false;
 }
 
 Entity::Entity(Entity& entity) :
-    id(entity.id),
     name(entity.name),
     position(entity.position),
     profession_type(entity.profession_type),

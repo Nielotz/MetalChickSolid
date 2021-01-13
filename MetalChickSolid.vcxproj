@@ -161,6 +161,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shared\consts.cpp" />
     <ClCompile Include="shared\map.cpp" />
+    <ClCompile Include="shared\unique.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\arena.hpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="headers\profile.hpp" />
     <ClInclude Include="headers\rng.hpp" />
     <ClInclude Include="headers\status.hpp" />
+    <ClInclude Include="headers\unique.hpp" />
     <ClInclude Include="headers\weapon.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
