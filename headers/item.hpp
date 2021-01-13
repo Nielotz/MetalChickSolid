@@ -78,7 +78,7 @@ struct FancyArmor : Alter_stats
     uint32_t defence = 3;
 };
 
-struct MagicSword : Alter_stats
+struct FancySword : Alter_stats
 {
     std::string name = "Not set";
     ProfessionType profession_required = ProfessionType::WARRIOR;
