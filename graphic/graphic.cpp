@@ -31,7 +31,7 @@ void Graphic::update_hero_position_on_map()
 		}
 		else
 		{
-			distance_left_to_move -= distance_left_to_move / (MOVE_STEPS - move_step++);
+			distance_left_to_move -= float(distance_left_to_move / (MOVE_STEPS - move_step++));
 			move_hero_step(hero_looking_direction, distance_left_to_move);
 		}
 		time_point_of_last_move_hero = std::chrono::steady_clock::now();
