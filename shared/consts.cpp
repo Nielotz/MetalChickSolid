@@ -2,7 +2,7 @@
 
 const sf::Vector2u CONSTS::GAME_SCREEN_RATIO = { 16, 9 };
 const uint16_t CONSTS::TILE_SIZE_ON_TEXTURE_MAP = 80;
-const sf::Vector2u CONSTS::PLAYER_VIEW_RANGE = { 20, 18 };
+const sf::Vector2u CONSTS::PLAYER_VIEW_RANGE = { 10, 9 };
 const uint8_t CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER = 3;
 
 

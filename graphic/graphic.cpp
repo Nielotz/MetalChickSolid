@@ -14,6 +14,7 @@ void Graphic::update_hero_animation_frame()
 	{
 		time_point_of_last_change_animation_frame = std::chrono::steady_clock::now();
 		next_hero_animation_frame();
+		update_hero_texture_position();
 	}
 }
 
@@ -26,16 +27,16 @@ void Graphic::update_hero_step()
 		if (MOVE_STEPS == move_step)
 		{
 			if (distance_left_to_move > 0.0000001)
-				update_hero_position(hero_looking_direction, distance_left_to_move);
+				update_hero_texture_position();
 			is_hero_moving = false;
 			hero_animation_frame = 0;
 		}
 		else
 		{
 			distance_left_to_move -= float(distance_left_to_move) / float((MOVE_STEPS - move_step++));
-			std::cout << "UPDATED ANIMATION MOVE STEP TO: " << int(move_step) << std::endl;
+			// std::cout << "UPDATED ANIMATION MOVE STEP TO: " << int(move_step) << std::endl;
 
-			update_hero_position(hero_looking_direction, distance_left_to_move);
+			update_hero_texture_position();
 		}
 
 
@@ -156,6 +157,7 @@ void Graphic::draw_hero()
 	sprite_texture_vector_of_pairs& animation_frames = hero_sprites_with_texture.at(hero_looking_direction);
 
 	sf::Sprite& hero_sprite = animation_frames[hero_animation_frame].first;
+	update_hero_texture_position();
 
 	window->draw(hero_sprite);
 }
@@ -189,8 +191,9 @@ void Graphic::move_view(const Direction& direction)
 		map_view.move(0, float(-CONSTS::TILE_SIZE));
 }
 
-// Update view.
-void Graphic::update_hero_position(Direction& direction, float distance)
+// Update the hero position on the map.
+// Updates view.
+void Graphic::update_hero_texture_position()
 {
 	sf::Sprite& hero_sprite = hero_sprites_with_texture.at(hero_looking_direction)[hero_animation_frame].first;
 
@@ -200,19 +203,18 @@ void Graphic::update_hero_position(Direction& direction, float distance)
 
 	float distance_traveled = -distance_left_to_move;
 
-	if (direction == Direction::LEFT)
+	if (hero_looking_direction == Direction::LEFT)
 		new_pos.x -= distance_traveled;
-	else if (direction == Direction::RIGHT)
+	else if (hero_looking_direction == Direction::RIGHT)
 		new_pos.x += distance_traveled;
-	else if (direction == Direction::TOP)
+	else if (hero_looking_direction == Direction::TOP)
 		new_pos.y -= distance_traveled;
 	else // BOTTOM
 		new_pos.y += distance_traveled;
 
-	std::cout << "NEW POS: " << new_pos.x << " " << new_pos.y << " " << std::endl;
-
 	hero_sprite.setPosition(new_pos);
-	update_view();
+	
+	// std::cout << "NEW HERO POS: " << new_pos.x << " " << new_pos.y << " " << std::endl;
 }
 
 void Graphic::next_hero_animation_frame()
@@ -226,9 +228,9 @@ void Graphic::next_hero_animation_frame()
 	if (animation_frames.size() <= ++hero_animation_frame)
 		hero_animation_frame = 0;
 
-	update_hero_position(hero_looking_direction, distance_left_to_move);
+	update_hero_texture_position();
 
-	std::cout << "UPDATED ANIMATION FRAME TO: " << int(hero_animation_frame) << std::endl;
+	// std::cout << "UPDATED ANIMATION FRAME TO: " << int(hero_animation_frame) << std::endl;
 
 }
 
@@ -298,8 +300,10 @@ void Graphic::update_hero()
 {
 	if (is_hero_moving)
 	{
-		update_hero_animation_frame(); // Lagges
+		update_hero_animation_frame();
 		update_hero_step();
+		
+		update_view();
 	}
 }
 

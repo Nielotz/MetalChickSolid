@@ -46,7 +46,7 @@ class Graphic
 	uint8_t move_step;
 	float distance_left_to_move;
 
-	// Amount of small steps for man, but big ants.
+	// Amount of small steps for man, but big for ants.
 	const double MOVE_STEPS = 20;
 
 	// Time between every step of hero move.
@@ -57,7 +57,7 @@ class Graphic
 
 	const double MOVE_ANIMATION_FRAME_TIME = 1. / MOVE_ANIMATION_PER_SECOND;
 
-	void update_hero_position(Direction& direction, float distance);
+	void update_hero_texture_position();
 
 	void next_hero_animation_frame();
 
