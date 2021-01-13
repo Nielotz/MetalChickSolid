@@ -41,5 +41,24 @@ void Control::parse_move_events(Graphic& graphic, Game& game)
                 game.move_hero(Direction::BOTTOM);
             }
         }
+        else
+        {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            {
+                game.move_hero(Direction::LEFT);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                game.move_hero(Direction::RIGHT);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            {
+                game.move_hero(Direction::TOP);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                game.move_hero(Direction::BOTTOM);
+            }
+        }
     }
 }
