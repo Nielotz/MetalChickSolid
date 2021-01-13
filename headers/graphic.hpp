@@ -23,6 +23,8 @@ class Graphic
     // Draw the map around hero (his render view).
     void draw_map();
 
+    void draw_side_panel();
+
 	// Keep textures and sprites in pairs (for each direction):
 	//		Direction::LEFT: texture1, texture2, texture3...
 	//		Direction::... texture1, texture2, texture3...
@@ -40,7 +42,7 @@ class Graphic
     sf::Vector2f position_to_display_position(Position& position, sf::Sprite& entity_sprite);
 
     sf::View main_view;
-    sf::View right_panel_view;
+    sf::View side_panel_view;
 
     Map map;
     Hero* hero;

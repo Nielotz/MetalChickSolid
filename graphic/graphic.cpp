@@ -64,8 +64,6 @@ Graphic::Graphic(Hero& hero)
 	set_views();
 
 	load_ui();
-
-	ui.walk_UI.set_position(main_view.getCenter().x + main_view.getSize().x / 2, 0);
 }
 
 void Graphic::load_level(Map& map)
@@ -178,7 +176,10 @@ void Graphic::update()
 
 	window->clear(sf::Color::Red);
 
+	window->setView(side_panel_view);
 	draw_ui();
+
+	window->setView(main_view);
 	draw_map();
 	// draw_entities();
 	draw_hero();
@@ -209,6 +210,18 @@ void Graphic::set_main_view()
 void Graphic::set_side_view()
 {
 
+	// In px.
+	float view_size_x = float(6 * CONSTS::TILE_SIZE);
+	float view_size_y = float(CONSTS::GAME_SCREEN_RATIO.y * double(CONSTS::TILE_SIZE));
+
+	float view_position_x = float(6 * (CONSTS::TILE_SIZE)) / 2.f;
+	float view_position_y = float((CONSTS::GAME_SCREEN_RATIO.y * double(CONSTS::TILE_SIZE)) / 2.);
+
+	side_panel_view.setSize(view_size_x, view_size_y);
+	side_panel_view.setCenter(view_position_x, view_position_y);
+
+	// setViewport scales view!
+	side_panel_view.setViewport(sf::FloatRect(float(20. / 26.), 0.f, float(6. / 26.), 1.f));
 }
 
 void Graphic::move_view(const Direction& direction)
@@ -270,7 +283,6 @@ void Graphic::update_view()
 	// std::cout << hero->position.x << " " << hero->position.y << std::endl;
 }
 
-
 // Update the hero position on the map.
 // Updates view.
 void Graphic::update_hero_texture_position()
@@ -331,7 +343,6 @@ void Graphic::move_hero(const Direction& direction)
 
 void Graphic::draw_map()
 {
-	window->setView(main_view);
 	window->draw(map.sprite);
 }
 

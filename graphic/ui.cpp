@@ -35,7 +35,7 @@ void WalkUI::load_right_panel_texture(const std::string& path)
 
 	sprite.setTexture(texture);
 
-	float scale = float(CONSTS::TILE_SIZE * 3 ) / float(texture.getSize().x);
+	float scale = float(double(CONSTS::TILE_SIZE * 6. ) / double(texture.getSize().x));
 
 	sprite.setScale(sf::Vector2f{ scale, scale });
 }
