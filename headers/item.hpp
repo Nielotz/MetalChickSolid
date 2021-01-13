@@ -29,4 +29,6 @@ struct Item
     ItemType item_type = ItemType::NONE;
     ProfessionType profession_required = ProfessionType::NONE;
     uint32_t lvl_required = 0;
+
+
 };
