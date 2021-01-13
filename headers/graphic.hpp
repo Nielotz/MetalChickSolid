@@ -21,16 +21,10 @@ class Graphic
     // Draw the map around hero (his render view).
     void draw_map();
 
-	// Update the view, to keep (when possible) hero at the center of the screen.
-	// Relies on CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER.
-	void update_view();
-
 	// Keep textures and sprites in pairs (for each direction):
 	//		Direction::LEFT: texture1, texture2, texture3...
 	//		Direction::... texture1, texture2, texture3...
 	//
-	// Keep texture because sf::Sprite stores only reference to the texture.
-	std::unordered_map<Direction, std::vector<std::pair<sf::Sprite, sf::Texture>>> hero_sprites_with_texture;
 	// Keep texture because sf::Sprite stores only reference to the texture.
 	std::unordered_map<Direction, std::vector<std::pair<sf::Sprite, sf::Texture>>> hero_sprites_with_texture;
 
@@ -71,10 +65,9 @@ class Graphic
 
 	void update_hero_position_on_map();
 
+public:
 	bool is_hero_moving = false;
 
-	// Hero hero;
-	std::unique_ptr<sf::RenderWindow> window;
 	// Hero hero;
 	std::unique_ptr<sf::RenderWindow> window;
 

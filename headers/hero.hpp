@@ -8,7 +8,7 @@
 struct Hero : Entity
 {
     // In tiles per second.
-    float move_speed = 3.;
+    float move_speed = 5.;
 
     ProfessionType profession_type = ProfessionType::NONE;
     std::string profession_type_name;
