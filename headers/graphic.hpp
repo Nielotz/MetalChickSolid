@@ -6,7 +6,6 @@
 #include <vector>
 #include <chrono>
 
-
 #include "map.hpp"
 #include "hero.hpp"
 
@@ -52,8 +51,8 @@ class Graphic
 	// Time between every step of hero move.
 	const double MOVE_STEP_FRAME_TIME;
 
-	// Unit: FPS.
-	const uint8_t MOVE_ANIMATION_PER_SECOND = 6;
+	// Unit: no idea, less than 6 = no move.
+	const uint8_t MOVE_ANIMATION_PER_SECOND = 10;
 
 	const double MOVE_ANIMATION_FRAME_TIME = 1. / MOVE_ANIMATION_PER_SECOND;
 
