@@ -75,6 +75,9 @@
     <ClCompile Include="shared\unique.cpp">
       <Filter>Pliki źródłowe\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="graphic\ui.cpp">
+      <Filter>Pliki źródłowe\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\arena.hpp">
