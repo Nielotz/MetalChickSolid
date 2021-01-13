@@ -7,10 +7,18 @@
 
 void Control::parse_move_events(Graphic& graphic, Game& game)
 {
+    auto& now = std::chrono::steady_clock::now;
+
+    std::chrono::steady_clock::time_point start = now();
+    std::chrono::duration<double> duration;
     // Check all the window's events that were triggered since the last iteration of the loop.
     sf::Event event;
     while (graphic.window->pollEvent(event))
     {
+        duration = now() - start;
+        if (duration.count() > 0.1)
+            break;
+
         // "close requested" event: we close the window
         if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
             graphic.window->close();

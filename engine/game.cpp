@@ -72,6 +72,8 @@ void Game::stop()
 
 void Game::move_hero(const Direction& direction)
 {
+    if (graphic.is_hero_moving)
+        return;
 
     if (direction == Direction::LEFT)
     {
