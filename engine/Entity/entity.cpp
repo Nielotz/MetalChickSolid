@@ -7,10 +7,6 @@ bool Entity::move(Direction& direction)
     return false;
 }
 
-Entity::Entity()
-    :id(ID++)
-{ }
-
 Entity::Entity(Entity& entity) :
     id(entity.id),
     name(entity.name),

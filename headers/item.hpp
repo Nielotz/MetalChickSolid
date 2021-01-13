@@ -3,6 +3,7 @@
 #include <string>
 
 #include "profession.hpp"
+#include "unique.hpp"
 
 enum class ItemType
 {
@@ -11,7 +12,7 @@ enum class ItemType
     ALTER_STATS = 2 
 };
 
-struct Item
+struct Item : Unique
 {
     std::string name = "Not set";
     ItemType item_type = ItemType::NONE;

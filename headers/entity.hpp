@@ -3,10 +3,12 @@
 #include "position.hpp"
 #include "profession.hpp"
 #include "direction.hpp"
+#include "unique.hpp"
+
 #include <string>
 
 // Base for all entities.
-struct Entity
+struct Entity : Unique
 {
 private:
     static uint64_t ID;
@@ -40,6 +42,6 @@ public:
     // Return true when moved successfully.
     // TODO: When move fired, if is is possible - change the hero position.
     bool move(Direction& direction);
-    Entity();
+    Entity() = default;
     Entity(Entity& entity);
 };
