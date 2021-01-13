@@ -7,11 +7,11 @@
 
 struct Hero : Entity
 {
+    // In tiles per second.
+    float move_speed = 5.;
+
     ProfessionType profession_type = ProfessionType::NONE;
     std::string profession_type_name;
-
-    Direction looking_direction = Direction::BOTTOM;
-    uint8_t animation_frame = 0;
 
     //Inventory
     Item inventory[20];

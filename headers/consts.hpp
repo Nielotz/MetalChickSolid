@@ -23,11 +23,10 @@ namespace PATH
 			const static strings_to_directions_map warrior = {
 				strings_to_direction_pair {
 					Direction::LEFT, strings_vector {
-					"textures\\mobs\\hero\\warrior.png",
-					//"textures\\mobs\\hero\\left_1_3.tga",
-					//"textures\\mobs\\hero\\left_2.tga",
-					//"textures\\mobs\\hero\\left_1_3.tga",
-					//"textures\\mobs\\hero\\left_4.tga",
+					"textures\\mobs\\hero\\left_1_3.tga",
+					"textures\\mobs\\hero\\left_2.tga",
+					"textures\\mobs\\hero\\left_1_3.tga",
+					"textures\\mobs\\hero\\left_4.tga",
 					}
 				},
 			strings_to_direction_pair {
@@ -40,20 +39,18 @@ namespace PATH
 				},
 			strings_to_direction_pair {
 				Direction::BOTTOM, strings_vector{
-					"textures\\mobs\\hero\\warrior.png",
-					//"textures\\mobs\\hero\\front_1_3.tga",
-					//"textures\\mobs\\hero\\front_2.tga",
-					//"textures\\mobs\\hero\\front_1_3.tga",
-					//"textures\\mobs\\hero\\front_4.tga",
+					"textures\\mobs\\hero\\front_1_3.tga",
+					"textures\\mobs\\hero\\front_2.tga",
+					"textures\\mobs\\hero\\front_1_3.tga",
+					"textures\\mobs\\hero\\front_4.tga",
 					},
 				},
 			strings_to_direction_pair {
 				Direction::TOP, strings_vector{
-					"textures\\mobs\\hero\\warrior.png",
-					//"textures\\mobs\\hero\\back_1_3.tga",
-					//"textures\\mobs\\hero\\back_2.tga",
-					//"textures\\mobs\\hero\\back_1_3.tga",
-					//"textures\\mobs\\hero\\back_4.tga",
+					"textures\\mobs\\hero\\back_1_3.tga",
+					"textures\\mobs\\hero\\back_2.tga",
+					"textures\\mobs\\hero\\back_1_3.tga",
+					"textures\\mobs\\hero\\back_4.tga",
 					}
 				}
 			};

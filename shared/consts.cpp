@@ -7,7 +7,7 @@ const uint8_t CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER = 3;
 
 
 const sf::Vector2u CONSTS::SCREEN_SIZE = {
-	sf::VideoMode::getDesktopMode().width+600, sf::VideoMode::getDesktopMode().height + 600 };
+	sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height };
 
 const long double CONSTS::SCALE = std::min<long double>(
 	(long double)(CONSTS::SCREEN_SIZE.x / GAME_SCREEN_RATIO.x), 
