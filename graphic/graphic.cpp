@@ -17,7 +17,7 @@ void Graphic::update_hero_animation_frame()
 	}
 }
 
-void Graphic::update_hero_position_on_map()
+void Graphic::update_hero_step()
 {
 	std::chrono::duration<double> time_diff = std::chrono::steady_clock::now() - time_point_of_last_move_hero;
 
@@ -25,15 +25,20 @@ void Graphic::update_hero_position_on_map()
 	{
 		if (MOVE_STEPS == move_step)
 		{
+			if (distance_left_to_move > 0.0000001)
+				update_hero_position(hero_looking_direction, distance_left_to_move);
 			is_hero_moving = false;
-			move_hero_step(hero_looking_direction, distance_left_to_move);
 			hero_animation_frame = 0;
 		}
 		else
 		{
-			distance_left_to_move -= float(distance_left_to_move / (MOVE_STEPS - move_step++));
-			move_hero_step(hero_looking_direction, distance_left_to_move);
+			distance_left_to_move -= float(distance_left_to_move) / float((MOVE_STEPS - move_step++));
+			std::cout << "UPDATED ANIMATION MOVE STEP TO: " << int(move_step) << std::endl;
+
+			update_hero_position(hero_looking_direction, distance_left_to_move);
 		}
+
+
 		time_point_of_last_move_hero = std::chrono::steady_clock::now();
 	}
 }
@@ -147,23 +152,18 @@ void Graphic::draw_hero()
 	typedef std::pair<sf::Sprite, sf::Texture> sprite_texture_pair;
 	typedef std::vector<sprite_texture_pair> sprite_texture_vector_of_pairs;
 
-	if (is_hero_moving)
-	{
-		//update_hero_animation_frame(); // Lagges
-		update_hero_position_on_map();
-	}
-
 	// Directional textures.
 	sprite_texture_vector_of_pairs& animation_frames = hero_sprites_with_texture.at(hero_looking_direction);
 
 	sf::Sprite& hero_sprite = animation_frames[hero_animation_frame].first;
-
 
 	window->draw(hero_sprite);
 }
 
 void Graphic::update()
 {
+	update_hero();
+
 	draw_map();
 	//draw_entities();
 	draw_hero();
@@ -190,7 +190,7 @@ void Graphic::move_view(const Direction& direction)
 }
 
 // Update view.
-void Graphic::move_hero_step(Direction& direction, float distance)
+void Graphic::update_hero_position(Direction& direction, float distance)
 {
 	sf::Sprite& hero_sprite = hero_sprites_with_texture.at(hero_looking_direction)[hero_animation_frame].first;
 
@@ -209,7 +209,7 @@ void Graphic::move_hero_step(Direction& direction, float distance)
 	else // BOTTOM
 		new_pos.y += distance_traveled;
 
-	// std::cout << "NEW: " << hero_pos.x << " " << hero_pos.y << " " << distance_traveled << " " << new_pos.y << std::endl;
+	std::cout << "NEW POS: " << new_pos.x << " " << new_pos.y << " " << std::endl;
 
 	hero_sprite.setPosition(new_pos);
 	update_view();
@@ -225,6 +225,11 @@ void Graphic::next_hero_animation_frame()
 
 	if (animation_frames.size() <= ++hero_animation_frame)
 		hero_animation_frame = 0;
+
+	update_hero_position(hero_looking_direction, distance_left_to_move);
+
+	std::cout << "UPDATED ANIMATION FRAME TO: " << int(hero_animation_frame) << std::endl;
+
 }
 
 void Graphic::move_hero(const Direction& direction)
@@ -250,31 +255,31 @@ void Graphic::draw_map()
 
 void Graphic::update_view()
 {
-    // Margin for float imprecision included.
-    float distance_to_left_wall = -1;
-    float distance_to_right_wall = -1;
-    float distance_to_top_wall = -1;
-    float distance_to_bottom_wall = -1;
+	// Margin for float imprecision included.
+	float distance_to_left_wall = -1;
+	float distance_to_right_wall = -1;
+	float distance_to_top_wall = -1;
+	float distance_to_bottom_wall = -1;
 
-	distance_to_left_wall = 
-		(hero->position.x * CONSTS::TILE_SIZE + 3 
+	distance_to_left_wall =
+		(hero->position.x * CONSTS::TILE_SIZE + 3
 			- (this->map_view.getCenter().x - this->map_view.getSize().x / 2))
 		/ CONSTS::TILE_SIZE;
 
-	distance_to_right_wall = 
-		(-(hero->position.x * CONSTS::TILE_SIZE - 3 
+	distance_to_right_wall =
+		(-(hero->position.x * CONSTS::TILE_SIZE - 3
 			- (this->map_view.getCenter().x + this->map_view.getSize().x / 2))
-		/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
+			/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
 
-	distance_to_top_wall = 
-		(hero->position.y * CONSTS::TILE_SIZE + 3 
+	distance_to_top_wall =
+		(hero->position.y * CONSTS::TILE_SIZE + 3
 			- (this->map_view.getCenter().y - this->map_view.getSize().y / 2))
 		/ CONSTS::TILE_SIZE;
 
-	distance_to_bottom_wall = 
-		(-(hero->position.y * CONSTS::TILE_SIZE - 3 
+	distance_to_bottom_wall =
+		(-(hero->position.y * CONSTS::TILE_SIZE - 3
 			- (this->map_view.getCenter().y + this->map_view.getSize().y / 2))
-		/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
+			/ CONSTS::TILE_SIZE) - 1; // Recompense for hero size.
 
 	if (distance_to_left_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
 		move_view(Direction::RIGHT);
@@ -287,6 +292,15 @@ void Graphic::update_view()
 
 	// std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
 	// std::cout << hero->position.x << " " << hero->position.y << std::endl;
+}
+
+void Graphic::update_hero()
+{
+	if (is_hero_moving)
+	{
+		update_hero_animation_frame(); // Lagges
+		update_hero_step();
+	}
 }
 
 sf::Vector2f Graphic::position_to_display_position(Position& position, sf::Sprite& entity_sprite)

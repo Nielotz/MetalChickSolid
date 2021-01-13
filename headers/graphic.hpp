@@ -57,13 +57,13 @@ class Graphic
 
 	const double MOVE_ANIMATION_FRAME_TIME = 1. / MOVE_ANIMATION_PER_SECOND;
 
-	void move_hero_step(Direction& direction, float distance);
+	void update_hero_position(Direction& direction, float distance);
 
 	void next_hero_animation_frame();
 
 	void update_hero_animation_frame();
 
-	void update_hero_position_on_map();
+	void update_hero_step();
 
 public:
 	bool is_hero_moving = false;
@@ -77,6 +77,9 @@ public:
     // Update the view, to keep (when possible) hero at the center of the screen.
     // Relies on CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER.
     void update_view();
+
+    // Update hero position, and animation frame.
+    void update_hero();
 
     // Load level into the graphic.
     //
