@@ -7,28 +7,23 @@
 enum class ItemType
 {
     NONE = 0,
-    //HELMET = 1,
-    //RING = 2,
-    //NECKLACE = 3,
-    //GLOVES = 4,
-    WEAPON = 5,
-    ARMOR = 6,
-
-    // Support.
-    SHIELD = 10,
-    //ARROWS = 11,
-    //ORB = 12,
-
-    // Consumables.
-    //CONSUMABLE = 20
+    CONSUMABLE = 1, 
+    ALTER_STATS = 2 
 };
 
 struct Item
 {
     std::string name = "Not set";
     ItemType item_type = ItemType::NONE;
-    ProfessionType profession_required = ProfessionType::NONE;
+    ProfessionType profession_required = ProfessionType::WARRIOR;
     uint32_t lvl_required = 0;
+    uint32_t hp = 0;
 
+};
 
+struct MagicSword : Item
+{
+    std::string name = "Not set";
+    ItemType item_type = ItemType::NONE;
+    ProfessionType profession_required = ProfessionType::WARRIOR;
 };
