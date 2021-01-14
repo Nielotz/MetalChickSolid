@@ -24,7 +24,11 @@ struct Enemy : Entity
     int32_t defence = 0;
     int32_t attack_time = 0;
     std::vector<std::pair<uint8_t, Item>> loot;
-    Enemy(); //???
+
+
+    // Have to be shhh.
+    Enemy();
+    Enemy(const Enemy&);
 };
 
 struct Deer : Enemy
@@ -43,6 +47,7 @@ struct Deer : Enemy
 
 struct Bear : Enemy
 {
+    std::string name = "Bear";
     uint32_t hp_max = 10;
     uint32_t stamina = 3;
     uint32_t critical = 2;
