@@ -54,7 +54,7 @@ void Control::parse_exit_events(sf::Event& event, Graphic& graphic, Game& game)
 	else if (event.type == sf::Event::MouseButtonPressed)
 		if (event.mouseButton.button == sf::Mouse::Right)
 		{
-
+			// TODO: exxit button
 		}
 }
 

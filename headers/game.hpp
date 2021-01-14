@@ -5,6 +5,7 @@
 #include "control.hpp"
 #include "map.hpp"
 #include "arena.hpp"
+#include "enemy.hpp"
 
 class Game
 {
@@ -29,6 +30,8 @@ private:
     Control control;
     Arena arena;
     Map map;
+
+    std::vector<Enemy> enemies;
 
     char mapakolizji1[18][21] = {
     "###########   ######",

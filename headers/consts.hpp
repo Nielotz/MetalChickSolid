@@ -57,11 +57,22 @@ namespace PATH
 		}
 	};
 
+	namespace ENTITY_TEXTURES
+	{
+		namespace BEAR
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\bear_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\bear_map.tga";
+
+		}
+	}
+
 	namespace MAP
 	{
 		namespace TEXTURES
 		{
 			const static std::string START = "textures\\maps\\start_map.tga";
+			const static std::string TEST = "textures\\maps\\test_map.tga";
 
 		}
 	}

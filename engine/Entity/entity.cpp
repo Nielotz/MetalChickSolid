@@ -5,7 +5,7 @@ bool Entity::move(Direction& direction)
     return false;
 }
 
-Entity::Entity(Entity& entity) :
+Entity::Entity(const Entity& entity) :
     name(entity.name),
     position(entity.position),
     profession_type(entity.profession_type),

@@ -6,12 +6,13 @@
 #include "unique.hpp"
 
 #include <string>
+#include <string>
 
 // Base for all entities.
 struct Entity : Unique
 {
     std::string name;
-    Position position;
+    Position position = { 0, 0 };
     ProfessionType profession_type = ProfessionType::NONE;
 
     // Level related.
@@ -37,5 +38,5 @@ struct Entity : Unique
     // TODO: When move fired, if is is possible - change the hero position.
     bool move(Direction& direction);
     Entity() = default;
-    Entity(Entity& entity);
+    Entity(const Entity& entity);
 };

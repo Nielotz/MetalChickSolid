@@ -8,9 +8,7 @@
 
 struct Enemy : Entity
 {
-    ///Status (dead, alive)
-    int8_t staus;
-
-    Enemy();
+	Enemy();
+	Enemy(const Enemy&);
 };
 

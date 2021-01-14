@@ -44,7 +44,9 @@ class Graphic
 
     Map map;
     Hero* hero;
-    std::unordered_map<uint64_t, sf::Sprite> entity_sprites;
+
+    // id: <sprite, texture>
+    std::unordered_map<uint64_t, std::pair<sf::Sprite, sf::Texture>> entity_sprites_with_texture;
 
 	std::chrono::steady_clock::time_point time_point_of_last_change_animation_frame;
 	std::chrono::steady_clock::time_point time_point_of_last_move_hero;
@@ -96,7 +98,7 @@ public:
     // 
     void load_level(Map& map);
 
-    void load_texture(Entity& entity, std::string& path);
+    void load_entity_texture(Entity& entity, std::string& path);
 
     void load_hero_textures(Hero& entity,
         const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
@@ -106,6 +108,11 @@ public:
     void load_ui();
 
     void set_hero_position(Position& position);
+
+    void set_entity_position(Entity& entity, Position& position);
+
+    // Height in tiles, width automaticly adjusts.
+    void set_entity_size(Entity& entity, uint8_t height);
 
     // Draw entities at theirs positions.
     void draw_entities();

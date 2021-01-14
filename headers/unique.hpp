@@ -9,5 +9,5 @@ private:
 public:
 	const uint64_t id;
 	Unique();
-	Unique(Unique& unique);
+	Unique(const Unique& unique);
 };

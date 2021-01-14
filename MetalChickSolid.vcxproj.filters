@@ -78,6 +78,9 @@
     <ClCompile Include="graphic\ui.cpp">
       <Filter>Pliki źródłowe\Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="headers\enemy.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\arena.hpp">

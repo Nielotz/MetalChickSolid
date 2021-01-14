@@ -39,7 +39,6 @@ void Graphic::update_hero_step()
 			update_hero_texture_position();
 		}
 
-
 		time_point_of_last_move_hero = std::chrono::steady_clock::now();
 	}
 }
@@ -74,17 +73,19 @@ void Graphic::load_level(Map& map)
 	this->map.sprite.setPosition(0, 0); // To be read from map_data.
 }
 
-void Graphic::load_texture(Entity& entity, std::string& path)
+void Graphic::load_entity_texture(Entity& entity, std::string& path)
 {
-	sf::Texture texture;
+	entity_sprites_with_texture.insert({ entity.id, { sf::Sprite(), sf::Texture()} });
+
+	sf::Sprite& sprite = entity_sprites_with_texture.at(entity.id).first;
+	sf::Texture& texture = entity_sprites_with_texture.at(entity.id).second;
+
 	if (!texture.loadFromFile(path))
 		throw std::runtime_error("Cannot load " + path);
 
 	texture.setSmooth(true);
 
-	sf::Sprite sprite(texture);
-
-	entity_sprites.insert(std::pair<uint64_t, sf::Sprite>(entity.id, sprite));
+	sprite.setTexture(texture);
 }
 
 void Graphic::load_hero_textures(Hero& entity,
@@ -146,9 +147,9 @@ void Graphic::set_hero_position(Position& position)
 
 void Graphic::draw_entities()
 {
-	for (auto& texture : entity_sprites)
+	for (std::pair<const uint64_t, std::pair<sf::Sprite, sf::Texture>>& pair_id_data : entity_sprites_with_texture)
 		if (true)
-			window->draw(entity_sprites[1]);
+			window->draw(pair_id_data.second.first);
 }
 
 void Graphic::draw_hero()
@@ -163,6 +164,23 @@ void Graphic::draw_hero()
 	update_hero_texture_position();
 
 	window->draw(hero_sprite);
+}
+
+void Graphic::set_entity_position(Entity& entity, Position& position)
+{
+	sf::Sprite& entity_sprite = entity_sprites_with_texture.at(entity.id).first;
+
+	entity_sprite.setPosition(position_to_display_position(position, entity_sprite));
+}
+
+void Graphic::set_entity_size(Entity& entity, uint8_t height)
+{
+	sf::Texture& entity_texture = entity_sprites_with_texture.at(entity.id).second;
+	sf::Sprite& entity_sprite = entity_sprites_with_texture.at(entity.id).first;
+
+	float scale = float(CONSTS::TILE_SIZE * height) / float(entity_texture.getSize().y);
+
+	entity_sprite.setScale(sf::Vector2f{ scale, scale });
 }
 
 void Graphic::draw_ui()
@@ -181,7 +199,7 @@ void Graphic::update()
 
 	window->setView(main_view);
 	draw_map();
-	// draw_entities();
+	draw_entities();
 	draw_hero();
 }
 

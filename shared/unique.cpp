@@ -7,7 +7,7 @@ Unique::Unique()
 {
 }
 
-Unique::Unique(Unique& unique)
+Unique::Unique(const Unique& unique)
 	:id(ID++)
 {
 }
