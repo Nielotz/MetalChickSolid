@@ -10,10 +10,18 @@ using std::endl;
 
 void Game::game_loop()
 {
-    std::string map_file = PATH::MAP::TEXTURES::START;
+    std::string map_file;
+    if (profile.hero.map == 0)
+        map_file = PATH::MAP::TEXTURES::TEST;
+    else if (profile.hero.map == 1)
+        map_file = PATH::MAP::TEXTURES::START;
+    else if (profile.hero.map == 2)
+        map_file = PATH::MAP::TEXTURES::FOREST;
+
     //std::string data_file = "start_map.data";
 
     map.load_texture(map_file);
+    map.load_map_collisions(map_file);
 
     //map.load_data(data_file);
 
@@ -83,40 +91,52 @@ void Game::move_hero(const Direction& direction)
 {
     if (graphic.is_hero_moving)
         return;
-
-
-    if (direction == Direction::LEFT)
+    if (can_hero_move(direction))
     {
-        if (mapakolizji1[(int32_t)(profile.hero.position.y)][(int32_t)(profile.hero.position.x - 1)] == ' ')
+        if (direction == Direction::LEFT)
         {
             graphic.move_hero(Direction::LEFT);
             profile.hero.position.x--;
         }
-    }
-    else if (direction == Direction::RIGHT)
-    {
-        if (mapakolizji1[(int32_t)(profile.hero.position.y)][(int32_t)(profile.hero.position.x + 1)] == ' ')
+        else if (direction == Direction::RIGHT)
         {
             graphic.move_hero(Direction::RIGHT);
             profile.hero.position.x++;
         }
-
-    }
-    else if (direction == Direction::TOP)
-    {
-        if (mapakolizji1[(int32_t)(profile.hero.position.y - 1)][(int32_t)(profile.hero.position.x)] == ' ')
+        else if (direction == Direction::TOP)
         {
             graphic.move_hero(Direction::TOP);
             profile.hero.position.y--;
         }
-    }
-    else // BOTTOM
-    {
-        if (mapakolizji1[(int32_t)(profile.hero.position.y + 1)][(int32_t)(profile.hero.position.x)] == ' ')
+        else // BOTTOM
         {
             graphic.move_hero(Direction::BOTTOM);
             profile.hero.position.y++;
         }
     }
+}
 
+bool Game::can_hero_move(Direction direction)
+{
+    int32_t cords[2] = { 0,0 }; //y,x
+    if (direction == Direction::LEFT)
+    {
+        cords[1] = -1;
+    }
+    else if (direction == Direction::RIGHT)
+    {
+        cords[1] = 1;
+    }
+    else if (direction == Direction::TOP)
+    {
+        cords[0] = -1;
+    }
+    else // BOTTOM
+    {
+        cords[0] = 1;
+    }
+    if (map.collisions[(int32_t)(profile.hero.position.y + cords[0])][(int32_t)(profile.hero.position.x + cords[1])] == ' ')
+        return true;
+    else
+        return false;
 }

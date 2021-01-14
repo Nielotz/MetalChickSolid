@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "../headers/map.hpp"
 #include "../headers/consts.hpp"
@@ -8,7 +9,7 @@ Map::Map(std::string& path_to_data_file)
     load_map_data(path_to_data_file);
 }
 
-void Map::load_texture(const char *path)
+void Map::load_texture(const char* path)
 {
     std::string temp;
     temp += path;
@@ -40,13 +41,41 @@ void Map::load_map_data(string& path)
     */
 }
 
-void Map::load_texture(string &path)
+void Map::load_map_collisions(string& path)
+{
+    std::string true_path = path;
+    std::ifstream testing_file(path.c_str());
+    if (testing_file.good() == 0)
+        true_path = PATH::MAP::TEXTURES::TEST;
+    testing_file.close();
+
+    if (true_path == PATH::MAP::TEXTURES::TEST)
+        true_path = "textures\\maps\\test_map.txt";
+    else if (true_path == PATH::MAP::TEXTURES::START)
+        true_path = "textures\\maps\\start_map.txt";
+    else if (true_path == PATH::MAP::TEXTURES::FOREST)
+        true_path = "textures\\maps\\forest_map.txt";
+    std::ifstream infile(true_path);
+    std::string line;
+    int32_t line_number = 0;
+    while (std::getline(infile, line)) {
+        std::vector<char> row;
+
+        for (char& c : line) {
+            row.push_back(c);
+        }
+        collisions.push_back(row);
+    }
+
+}
+
+void Map::load_texture(string& path)
 {
     if (!texture.loadFromFile(path))
         throw std::runtime_error("Cannot load " + path);
 
     tiles_number = {
-        texture.getSize().x / CONSTS::TILE_SIZE_ON_TEXTURE_MAP, 
+        texture.getSize().x / CONSTS::TILE_SIZE_ON_TEXTURE_MAP,
         texture.getSize().y / CONSTS::TILE_SIZE_ON_TEXTURE_MAP };
 
     texture.setSmooth(true);
