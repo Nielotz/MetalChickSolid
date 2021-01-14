@@ -34,13 +34,12 @@ void Game::game_loop()
     // run the program as long as the window is open
     while (graphic.window->isOpen())
     {
-        control.parse_move_events(graphic, *this);
+        control.parse_walk_events(graphic, *this);
 
         graphic.update();
         graphic.window->display();
     }
     profile.save();
-    stop();
 }
 
 
@@ -51,7 +50,6 @@ Game::Game() :
     clog << "Initializing graphics..." << endl;
     game_loop();
 };
-
 
 
 void Game::start()
@@ -75,15 +73,15 @@ void Game::choose_profile(Profile& profile)
     profile.path = "test_profile.txt";
 }
 
-void Game::stop()
+void Game::exit()
 {
+    graphic.window->close();
 }
 
 void Game::move_hero(const Direction& direction)
 {
     if (graphic.is_hero_moving)
         return;
-
 
     if (direction == Direction::LEFT)
     {

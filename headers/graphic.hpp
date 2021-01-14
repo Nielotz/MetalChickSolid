@@ -23,8 +23,6 @@ class Graphic
     // Draw the map around hero (his render view).
     void draw_map();
 
-    void draw_side_panel();
-
 	// Keep textures and sprites in pairs (for each direction):
 	//		Direction::LEFT: texture1, texture2, texture3...
 	//		Direction::... texture1, texture2, texture3...
@@ -48,8 +46,6 @@ class Graphic
     Hero* hero;
     std::unordered_map<uint64_t, sf::Sprite> entity_sprites;
 
-	Direction hero_looking_direction = Direction::BOTTOM;
-	
 	std::chrono::steady_clock::time_point time_point_of_last_change_animation_frame;
 	std::chrono::steady_clock::time_point time_point_of_last_move_hero;
 
@@ -77,8 +73,10 @@ class Graphic
 	void update_hero_step();
 
 public:
-	bool is_hero_moving = false;
+    Direction hero_looking_direction = Direction::BOTTOM;
 
+	bool is_hero_moving = false;
+    
 	// Hero hero;
 	std::unique_ptr<sf::RenderWindow> window;
 
