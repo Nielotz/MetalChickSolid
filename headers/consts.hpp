@@ -61,7 +61,9 @@ namespace PATH
 	{
 		namespace TEXTURES
 		{
+			const static std::string TEST = "textures\\maps\\test_map.tga";
 			const static std::string START = "textures\\maps\\start_map.tga";
+			const static std::string FOREST = "textures\\maps\\forest_map.tga";
 
 		}
 	}
