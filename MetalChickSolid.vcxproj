@@ -181,6 +181,7 @@
     <ClInclude Include="headers\profile.hpp" />
     <ClInclude Include="headers\rng.hpp" />
     <ClInclude Include="headers\status.hpp" />
+    <ClInclude Include="headers\ui.hpp" />
     <ClInclude Include="headers\unique.hpp" />
     <ClInclude Include="headers\weapon.hpp" />
   </ItemGroup>
