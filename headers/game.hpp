@@ -20,6 +20,8 @@ public:
 
     void start();
     void stop();
+    void exit();
+
     void move_hero(const Direction& direction);
 private:
     Profile profile;
@@ -50,4 +52,5 @@ private:
     };
 
     void choose_profile(Profile& profile);
+
 };

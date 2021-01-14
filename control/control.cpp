@@ -5,7 +5,60 @@
 #include "../headers/game.hpp"
 
 
-void Control::parse_move_events(Graphic& graphic, Game& game)
+bool Control::parse_move_events(sf::Event& event, Graphic& graphic, Game& game)
+{
+	bool parsed = true;
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (event.key.code == sf::Keyboard::A)
+		{
+			game.move_hero(Direction::LEFT);
+		}
+		else if (event.key.code == sf::Keyboard::D)
+		{
+			game.move_hero(Direction::RIGHT);
+		}
+		else if (event.key.code == sf::Keyboard::W)
+		{
+			game.move_hero(Direction::TOP);
+		}
+		else if (event.key.code == sf::Keyboard::S)
+		{
+			game.move_hero(Direction::BOTTOM);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		game.move_hero(Direction::LEFT);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		game.move_hero(Direction::RIGHT);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		game.move_hero(Direction::TOP);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		game.move_hero(Direction::BOTTOM);
+	}
+	else parsed = false;
+	return parsed;
+}
+
+void Control::parse_exit_events(sf::Event& event, Graphic& graphic, Game& game)
+{
+	if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+		game.exit();
+	else if (event.type == sf::Event::MouseButtonPressed)
+		if (event.mouseButton.button == sf::Mouse::Right)
+		{
+
+		}
+}
+
+void Control::parse_walk_events(Graphic& graphic, Game& game)
 {
 	auto& now = std::chrono::steady_clock::now;
 
@@ -19,44 +72,10 @@ void Control::parse_move_events(Graphic& graphic, Game& game)
 		if (duration.count() > 0.1)
 			break;
 
-		// "close requested" event: we close the window
-		if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-			graphic.window->close();
-		if (event.type == sf::Event::KeyPressed)
-		{
-			if (event.key.code == sf::Keyboard::A)
-			{
-				game.move_hero(Direction::LEFT);
-			}
-			else if (event.key.code == sf::Keyboard::D)
-			{
-				game.move_hero(Direction::RIGHT);
-			}
-			else if (event.key.code == sf::Keyboard::W)
-			{
-				game.move_hero(Direction::TOP);
-			}
-			else if (event.key.code == sf::Keyboard::S)
-			{
-				game.move_hero(Direction::BOTTOM);
-			}
-		}
+		// B || !2B.
+		parse_exit_events(event, graphic, game);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		{
-			game.move_hero(Direction::LEFT);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			game.move_hero(Direction::RIGHT);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		{
-			game.move_hero(Direction::TOP);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			game.move_hero(Direction::BOTTOM);
-		}
+		if (parse_move_events(event, graphic, game))
+			;
 	}
 }
