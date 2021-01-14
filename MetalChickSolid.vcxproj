@@ -154,7 +154,6 @@
     <ClCompile Include="engine\Entity\hero.cpp" />
     <ClCompile Include="engine\game.cpp" />
     <ClCompile Include="engine\Items\item.cpp" />
-    <ClCompile Include="engine\Items\weapon.cpp" />
     <ClCompile Include="engine\profile.cpp" />
     <ClCompile Include="graphic\graphic.cpp" />
     <ClCompile Include="graphic\ui.cpp" />

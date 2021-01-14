@@ -77,5 +77,9 @@ void Control::parse_walk_events(Graphic& graphic, Game& game)
 
 		if (parse_move_events(event, graphic, game))
 			;
+		else
+		
+			;
+
 	}
 }

@@ -54,6 +54,7 @@ private:
     "####################"
     };
 
+    bool can_hero_move(const Direction& direction);
     void choose_profile(Profile& profile);
 
 };

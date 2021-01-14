@@ -54,9 +54,6 @@
     <ClCompile Include="engine\Items\item.cpp">
       <Filter>Pliki źródłowe\Engine\Items</Filter>
     </ClCompile>
-    <ClCompile Include="engine\Items\weapon.cpp">
-      <Filter>Pliki źródłowe\Engine\Items</Filter>
-    </ClCompile>
     <ClCompile Include="graphic\graphic.cpp">
       <Filter>Pliki źródłowe\Graphic</Filter>
     </ClCompile>

@@ -32,16 +32,20 @@ void Game::game_loop()
 	// enemy.name should be set in enemy class
 	enemies.push_back(enemy);
 
+	enemy.position = Position(profile.hero.position.x, profile.hero.position.y + 2); 
 	std::string texture_path;
 	if (enemy.name == "")
 		texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
+    else if (enemy.name == "xd")
+        texture_path = "xd";
 	graphic.load_entity_texture(enemy, texture_path);
 
-	enemy.position = Position(profile.hero.position.x, profile.hero.position.y + 2); 
 	graphic.set_entity_position(enemy, enemy.position);
 
 	graphic.set_entity_size(enemy, 2);
 ///////////////////////////////////////////////////
+
+
 
 	//profile.hero.position = Position(0, 1);
 
@@ -132,7 +136,7 @@ void Game::move_hero(const Direction& direction)
     }
 }
 
-bool Game::can_hero_move(Direction direction)
+bool Game::can_hero_move(const Direction& direction)
 {
     int32_t cords[2] = { 0,0 }; //y,x
     if (direction == Direction::LEFT)
