@@ -19,6 +19,9 @@ struct Hero : Entity
     ///Threads status in the plot
     int8_t thread_status[10];
 
+    ///On which map is player?
+    uint16_t map = 0;
+
     Hero() = default;
 
     /// Increase lvl and update hero stats.

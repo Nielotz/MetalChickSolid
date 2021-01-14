@@ -11,14 +11,14 @@
 
 namespace PATH
 {
-	namespace HERO
-	{
-		namespace TEXTURES
-		{
-			// XD ):
-			typedef std::vector<std::string> strings_vector;
-			typedef std::unordered_map<Direction, strings_vector> strings_to_directions_map;
-			typedef std::pair<Direction, std::vector<std::string>> strings_to_direction_pair;
+    namespace HERO
+    {
+        namespace TEXTURES
+        {
+            // XD ):
+            typedef std::vector<std::string> strings_vector;
+            typedef std::unordered_map<Direction, strings_vector> strings_to_directions_map;
+            typedef std::pair<Direction, std::vector<std::string>> strings_to_direction_pair;
 
 			const static strings_to_directions_map warrior = {
 				strings_to_direction_pair {
@@ -71,8 +71,9 @@ namespace PATH
 	{
 		namespace TEXTURES
 		{
-			const static std::string START = "textures\\maps\\start_map.tga";
 			const static std::string TEST = "textures\\maps\\test_map.tga";
+			const static std::string START = "textures\\maps\\start_map.tga";
+			const static std::string FOREST = "textures\\maps\\forest_map.tga";
 
 		}
 	}
@@ -94,18 +95,18 @@ struct CONSTS
 	const static sf::Vector2u SCREEN_SIZE;
 	const static sf::Vector2u GAME_WINDOW_SIZE;
 
-	// Scales everything to appear same on every screen.
-	const static long double SCALE;
+    // Scales everything to appear same on every screen.
+    const static long double SCALE;
 
-	const static uint16_t TILE_SIZE_ON_TEXTURE_MAP; // Pixels.
-	// Tile size in game.
-	const static uint16_t TILE_SIZE; // Pixels.
+    const static uint16_t TILE_SIZE_ON_TEXTURE_MAP; // Pixels.
+    // Tile size in game.
+    const static uint16_t TILE_SIZE; // Pixels.
 
-	// In tiles. 
-	const static sf::Vector2u PLAYER_VIEW_RANGE;
+    // In tiles. 
+    const static sf::Vector2u PLAYER_VIEW_RANGE;
 
-	// Applies only when view can move (when hero is far from the borders).
-	const static uint8_t MIN_PLAYER_DISTANCE_TO_BORDER;
+    // Applies only when view can move (when hero is far from the borders).
+    const static uint8_t MIN_PLAYER_DISTANCE_TO_BORDER;
 };
 
 

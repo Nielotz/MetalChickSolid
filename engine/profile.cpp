@@ -1,5 +1,4 @@
 #include "../headers/profile.hpp"
-#include "../headers/consts.hpp"
 
 #include <iostream>
 #include <filesystem>
@@ -54,6 +53,8 @@ void Profile::load()
             input >> hero.exp;
         else if (keyword == "hp:")
             input >> hero.hp;
+        else if (keyword == "current_map:")
+            input >> hero.map;
         else if (keyword == "poz_x:")
             input >> hero.position.x;
         else if (keyword == "poz_y:")
@@ -87,7 +88,7 @@ void Profile::create_new()
     std::ofstream new_file(path);
     std::cout << "Creating dumb profile...\n";
     //Here will start graphic hero creator
-    new_file << "nick: Dumb\nprofession: 1\nlvl: 1\nexp: 0\nhp: 100\npoz_x: 4\npoz_y: 10\n";
+    new_file << "nick: Dumb\nprofession: 1\nlvl: 1\nexp: 0\nhp: 100\ncurrent_map: 1\npoz_x: 4\npoz_y: 10\n";
     for (int i = 0; i < 20; i++) {
         new_file << "eq_item: " << i << " 0\n";
     }
@@ -106,7 +107,7 @@ void Profile::save()
     save_file << "lvl: " << hero.lvl << "\n";
     save_file << "exp: " << hero.exp << "\n";
     save_file << "hp: " << hero.hp << "\n";
-    //save_file << "current_map: " << PATH::MAP::TEXTURES::START << "\n";
+    save_file << "current_map: " << hero.map << "\n";
     save_file << "poz_x: " << hero.position.x << "\n";
     save_file << "poz_y: " << hero.position.y << "\n";
     for (int i = 0; i < 20; i++) {
