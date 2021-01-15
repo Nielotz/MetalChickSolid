@@ -34,6 +34,7 @@ struct Enemy : Entity
 
 struct Deer : Enemy
 {
+    std::string name = "Deer";
     uint32_t hp_max = 5;
     uint32_t stamina = 3;
     uint32_t agility = 2;
@@ -44,7 +45,6 @@ struct Deer : Enemy
       chance_item{50, Meat()},
       chance_item{20, FancyMeat()}
     };
-    std::string Deer;
 };
 
 struct Bear : Enemy
@@ -61,11 +61,11 @@ struct Bear : Enemy
       chance_item{70, Meat()},
       chance_item{40, FancyMeat()}
     };
-    std::string Bear;
 };
 
 struct Goblin : Enemy
 {
+    std::string name = "Goblin";
     uint32_t hp_max = 15;
     uint32_t stamina = 2;
     uint32_t critical = 1;
@@ -78,11 +78,11 @@ struct Goblin : Enemy
       chance_item{20, BasicArmor()},
       chance_item{40, FancyArmor()}
     };
-    std::string Goblin;
 };
 
 struct Troll : Enemy
 {
+    std::string name = "Troll";
     uint32_t hp_max = 20;
     uint32_t stamina = 2;
     uint32_t critical = 2;
@@ -95,11 +95,11 @@ struct Troll : Enemy
       chance_item{20, BasicSword()},
       chance_item{40, FancySword()}
     };
-    std::string Troll;
 };
 
 struct Fox : Enemy
 {
+    std::string name = "Fox";
     uint32_t hp_max = 25;
     uint32_t stamina = 3;
     uint32_t strength = 1;
@@ -111,11 +111,11 @@ struct Fox : Enemy
       chance_item{20, BasicShield()},
       chance_item{40, FancyShield()}
     };
-    std::string Fox;
 };
 
 struct Dragon : Enemy
 {
+    std::string name = "Dragon";
     uint32_t hp_max = 35;
     uint32_t stamina = 3;
     uint32_t critical = 3;
@@ -125,5 +125,4 @@ struct Dragon : Enemy
     int32_t defence = 5;
     int32_t critical_power = 2;
     int32_t block = 2;
-    std::string Dragon;
 };
