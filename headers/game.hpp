@@ -23,6 +23,7 @@ public:
     void start();
     void stop();
     void exit();
+    void start_tutorial();
 
     void move_hero(const Direction& direction);
 private:

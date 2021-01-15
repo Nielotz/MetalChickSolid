@@ -4,7 +4,7 @@ lvl: 1
 exp: 0
 hp: 100
 current_map: 1
-poz_x: 13
+poz_x: 12
 poz_y: 6
 eq_item: 0 0
 eq_item: 1 0

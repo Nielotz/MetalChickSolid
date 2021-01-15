@@ -63,6 +63,10 @@ Graphic::Graphic(Hero& hero)
 	set_views();
 
 	load_ui();
+
+	std::string tut_path = PATH::TUTORIAL::TEXTURES::TUT;
+
+	tutorial.load_tutorial_texture(tut_path);
 }
 
 void Graphic::load_level(Map& map)
@@ -194,10 +198,10 @@ void Graphic::draw_ui()
 	ui.draw(*(window.get()), display_ui_type);
 }
 
-/*void Graphic::draw_tutorial()
+void Graphic::draw_tutorial()
 {
-
-}*/
+	tutorial.draw(*(window.get()));
+}
 
 void Graphic::update()
 {

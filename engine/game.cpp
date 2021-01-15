@@ -107,6 +107,17 @@ void Game::exit()
 	graphic.window->close();
 }
 
+void Game::start_tutorial()
+{
+    while (graphic.window->isOpen())
+    {
+        control.parse_walk_events(graphic, *this);
+
+        graphic.draw_tutorial();
+        graphic.window->display();
+    }
+}
+
 void Game::move_hero(const Direction& direction)
 {
     if (graphic.is_hero_moving)
