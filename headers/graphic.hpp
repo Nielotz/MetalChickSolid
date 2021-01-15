@@ -129,4 +129,6 @@ public:
     void update();
 
     void move_hero(const Direction& direction);
+
+    void load_tut_texture(const std::string& path);
 };

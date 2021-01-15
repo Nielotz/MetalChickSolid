@@ -24,6 +24,7 @@ struct Enemy : Entity
     int32_t defence = 0;
     int32_t attack_time = 0;
     std::vector<std::pair<uint8_t, Item>> loot;
+    std::string name;
 
 
     // Have to be shhh.
@@ -43,6 +44,7 @@ struct Deer : Enemy
       chance_item{50, Meat()},
       chance_item{20, FancyMeat()}
     };
+    std::string Deer;
 };
 
 struct Bear : Enemy
@@ -59,6 +61,7 @@ struct Bear : Enemy
       chance_item{70, Meat()},
       chance_item{40, FancyMeat()}
     };
+    std::string Bear;
 };
 
 struct Goblin : Enemy
@@ -75,6 +78,7 @@ struct Goblin : Enemy
       chance_item{20, BasicArmor()},
       chance_item{40, FancyArmor()}
     };
+    std::string Goblin;
 };
 
 struct Troll : Enemy
@@ -91,6 +95,7 @@ struct Troll : Enemy
       chance_item{20, BasicSword()},
       chance_item{40, FancySword()}
     };
+    std::string Troll;
 };
 
 struct Fox : Enemy
@@ -106,6 +111,7 @@ struct Fox : Enemy
       chance_item{20, BasicShield()},
       chance_item{40, FancyShield()}
     };
+    std::string Fox;
 };
 
 struct Dragon : Enemy
@@ -119,4 +125,5 @@ struct Dragon : Enemy
     int32_t defence = 5;
     int32_t critical_power = 2;
     int32_t block = 2;
+    std::string Dragon;
 };

@@ -88,6 +88,11 @@ void Graphic::load_entity_texture(Entity& entity, std::string& path)
 	sprite.setTexture(texture);
 }
 
+void Graphic::load_tut_texture(const std::string& path)
+{
+	//na razie siê poddajê ale jeszcze do tego wrócê
+}
+
 void Graphic::load_hero_textures(Hero& entity,
 	const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures)
 {
