@@ -22,6 +22,7 @@ public:
     void start();
     void stop();
     void exit();
+    void load_map();
 
     void move_hero(const Direction& direction);
 private:
@@ -32,27 +33,6 @@ private:
     Map map;
 
     std::vector<Enemy> enemies;
-
-    char mapakolizji1[18][21] = {
-    "###########   ######",
-    "#########      #####",
-    "######         #####",
-    "####           #####",
-    "#####           ####",
-    "#####             ##",
-    "#####             ##",
-    "#####     #     ####",
-    "#####     #     ####",
-    "#####     #     ####",
-    "###       #       ##",
-    "###                #",
-    "##                  ",
-    "####                ",
-    "####      #     ####",
-    "#######   ##########",
-    "####################",
-    "####################"
-    };
 
     bool can_hero_move(const Direction& direction);
     void choose_profile(Profile& profile);
