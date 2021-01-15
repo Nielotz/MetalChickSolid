@@ -46,7 +46,6 @@ bool Control::parse_move_events(sf::Event& event, Graphic& graphic, Game& game)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 	{
 		game.start_tutorial();
-		graphic.draw_tutorial();
 	}
 	else parsed = false;
 	return parsed;
