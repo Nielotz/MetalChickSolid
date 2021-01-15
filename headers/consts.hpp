@@ -86,6 +86,14 @@ namespace PATH
 
 		}
 	}
+
+	namespace tutorial
+	{
+		namespace TEXTURES
+		{
+			const static std::string TUT = "textures\\maps\\tut.tga";
+		}
+	}
 };
 
 struct CONSTS
