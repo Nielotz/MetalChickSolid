@@ -156,6 +156,7 @@
     <ClCompile Include="engine\Items\item.cpp" />
     <ClCompile Include="engine\profile.cpp" />
     <ClCompile Include="graphic\graphic.cpp" />
+    <ClCompile Include="graphic\tuts.cpp" />
     <ClCompile Include="graphic\ui.cpp" />
     <ClCompile Include="headers\enemy.cpp" />
     <ClCompile Include="headers\position.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="headers\profile.hpp" />
     <ClInclude Include="headers\rng.hpp" />
     <ClInclude Include="headers\status.hpp" />
+    <ClInclude Include="headers\tuts.hpp" />
     <ClInclude Include="headers\ui.hpp" />
     <ClInclude Include="headers\unique.hpp" />
     <ClInclude Include="headers\weapon.hpp" />

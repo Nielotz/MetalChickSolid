@@ -9,12 +9,15 @@
 #include "map.hpp"
 #include "hero.hpp"
 #include "ui.hpp"
+#include "tuts.hpp"
 
 class Graphic
 {
     void set_views();
     void set_main_view();
     void set_side_view();
+    TutorialGraphic tutorial;
+
 
 	// Tries to move the view to keep the hero in the center of the view.
 	// Moves only by 1 tile.
@@ -107,6 +110,8 @@ public:
     // Take texture from CONSTS::
     void load_ui();
 
+    void load_tutorial();
+
     void set_hero_position(Position& position);
 
     void set_entity_position(Entity& entity, Position& position);
@@ -121,6 +126,8 @@ public:
     void draw_hero();
 
     void draw_ui();
+
+    void draw_tutorial();
 
     // Draw fireworks and update stats.
     void increase_lvl();

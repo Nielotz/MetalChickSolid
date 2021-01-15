@@ -6,6 +6,7 @@
 #include "map.hpp"
 #include "arena.hpp"
 #include "enemy.hpp"
+#include "tuts.hpp"
 
 class Game
 {

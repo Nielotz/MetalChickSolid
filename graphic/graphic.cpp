@@ -88,11 +88,6 @@ void Graphic::load_entity_texture(Entity& entity, std::string& path)
 	sprite.setTexture(texture);
 }
 
-void Graphic::load_tut_texture(const std::string& path)
-{
-	//na razie siê poddajê ale jeszcze do tego wrócê
-}
-
 void Graphic::load_hero_textures(Hero& entity,
 	const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures)
 {
@@ -140,6 +135,12 @@ void Graphic::load_ui()
 {
 	const std::string& path = PATH::UI::TEXTURES::WALK_UI_RIGHT_PANEL;
 	ui.load_textures(path);
+}
+
+void Graphic::load_tutorial()
+{
+	const std::string& path = PATH::TUTORIAL::TEXTURES::TUT;
+	tutorial.load_tutorial_texture(path);
 }
 
 void Graphic::set_hero_position(Position& position)
@@ -192,6 +193,11 @@ void Graphic::draw_ui()
 {
 	ui.draw(*(window.get()), display_ui_type);
 }
+
+/*void Graphic::draw_tutorial()
+{
+
+}*/
 
 void Graphic::update()
 {
