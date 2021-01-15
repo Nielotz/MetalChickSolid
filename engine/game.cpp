@@ -88,22 +88,17 @@ void Game::load_map()
     else if (profile.hero.map == 2)
         map_file = PATH::MAP::TEXTURES::FOREST;
 
-
     map.load_texture(map_file);
     map.load_map_collisions(map_file);
-
 
     graphic.load_level(map);
 
     graphic.load_hero_textures(profile.hero, PATH::HERO::TEXTURES::warrior);
 
     graphic.set_hero_position(profile.hero.position);
-    graphic.update_view();
-    graphic.update_view();
-    graphic.update_view();
-    graphic.update_view();
-    graphic.update_view();
-    graphic.update_view();
+    //Set player to center of screen
+    for (int i = 0; i < 10; i++)
+        graphic.update_view();
 }
 
 void Game::move_hero(const Direction& direction)
@@ -154,8 +149,14 @@ bool Game::can_hero_move(const Direction& direction)
     {
         cords[0] = 1;
     }
-    if (map.collisions[(int32_t)(profile.hero.position.y + cords[0])][(int32_t)(profile.hero.position.x + cords[1])] == ' ')
-        return true;
-    else
-        return false;
+    cords[0] += (int32_t)profile.hero.position.y;
+    cords[1] += (int32_t)profile.hero.position.x;
+    if ((cords[0] != -1 && cords[0] != 19) && (cords[1] != -1 && cords[1] != 22)) {
+        if (map.collisions[cords[0]][cords[1]] == ' ')
+            return true;
+        else
+            return false;
+    }
+    else return false;
+
 }
