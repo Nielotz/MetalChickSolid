@@ -2,10 +2,10 @@ nick: Dumb
 profession: 1
 lvl: 1
 exp: 0
-hp: 100
+hp: 20
 current_map: 1
-poz_x: 15
-poz_y: 4
+poz_x: 5
+poz_y: 9
 eq_item: 0 0
 eq_item: 1 0
 eq_item: 2 0
