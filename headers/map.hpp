@@ -30,7 +30,7 @@ struct Map
     sf::Sprite sprite;
     sf::Vector2u tiles_number;
 
-    std::vector<std::vector<char> > collisions;
+    std::vector<std::string> collisions;
 
     Map(std::string& path_to_data_file);
     Map() = default;

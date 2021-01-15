@@ -57,14 +57,8 @@ void Map::load_map_collisions(string& path)
         true_path = "textures\\maps\\forest_map.txt";
     std::ifstream infile(true_path);
     std::string line;
-    int32_t line_number = 0;
     while (std::getline(infile, line)) {
-        std::vector<char> row;
-
-        for (char& c : line) {
-            row.push_back(c);
-        }
-        collisions.push_back(row);
+        collisions.push_back(line);
     }
 
 }
