@@ -53,6 +53,25 @@ Enemy* Graphic::check_click_intersect_enemy(sf::Vector2i& mouse_click_pos)
 	return nullptr;
 }
 
+ARENA_BUTTON Graphic::check_arena_button_clicked(sf::Vector2i& mouse_click_pos)
+{
+	//std::cout << mouse_click_pos.x << " " << mouse_click_pos.y << " " << ATTACK_BUTTON.left << " " << ATTACK_BUTTON.top << std::endl;
+	if (ATTACK_BUTTON.contains(mouse_click_pos))
+		return ARENA_BUTTON::ATTACK;
+	else if (MAGIC_BUTTON.contains(mouse_click_pos))
+		return ARENA_BUTTON::MAGIC;
+	else if (QUICK_HEAL_BUTTON.contains(mouse_click_pos))
+		return ARENA_BUTTON::QUICK_HEAL;
+	else if (DEFENCE_BUTTON.contains(mouse_click_pos))
+		return ARENA_BUTTON::DEFENCE;
+	else if (RUN_AWAY_BUTTON.contains(mouse_click_pos))
+		return ARENA_BUTTON::RUN_AWAY;
+	else if (SAVE_FIGHT_BUTTON.contains(mouse_click_pos))
+		return ARENA_BUTTON::SAVE_FIGHT;
+
+	return ARENA_BUTTON::NONE;
+}
+
 Graphic::Graphic(Hero& hero)
 	:MOVE_STEP_FRAME_TIME(1. / (MOVE_STEPS * hero.move_speed))
 {

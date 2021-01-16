@@ -14,11 +14,10 @@ void Game::game_loop()
 	load_map();
 
 	// TEMPLATE OF ADDNING AN ENEMY.
-	Bear enemy; // Change to any enemy class, when Magda adds them.
-	// enemy.name should be set in enemy class
+	Bear enemy; // Create enemy.
 	enemies.push_back(enemy);
 
-	enemy.position = Position(profile.hero.position.x, profile.hero.position.y + 2);
+	enemy.position = Position(profile.hero.position.x, profile.hero.position.y + 2); // Set enem
 	std::string texture_path;
 	if (enemy.name == "Bear")
 		texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
@@ -171,14 +170,24 @@ void Game::move_hero(const Direction& direction)
 
 void Game::perform_fight(Enemy& enemy)
 {
-	graphic.display_arena(enemy);
+	auto hero_pos = profile.hero.position;
+	auto enemy_pos = enemy.position;
+	if (abs(hero_pos.x - enemy_pos.x) < 3 || abs(hero_pos.y - enemy_pos.y) < 3)
+	{
+		graphic.display_arena(enemy);
 
-	graphic.update();
-	graphic.window->display();
+		graphic.update();
+		graphic.window->display();
 
-	arena.fight(profile.hero, enemy);
+		arena.fight(profile.hero, enemy);
+		while (!control.check_mouse_left_button_clicked(graphic))
+		{
+			graphic.update();
+			graphic.window->display();
+		}
 
-	graphic.display_map();
+		graphic.display_map();
+	}
 }
 
 bool Game::can_hero_move(const Direction& direction)

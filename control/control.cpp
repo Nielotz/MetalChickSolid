@@ -64,6 +64,21 @@ Enemy* Control::check_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, G
 	return clicked_enemy;
 }
 
+ARENA_BUTTON Control::check_arena_button_clicked(Graphic& graphic)
+{
+	sf::Event event;
+	graphic.window->pollEvent(event);
+
+	if (event.type == sf::Event::MouseButtonPressed)
+		if (event.mouseButton.button == sf::Mouse::Left)
+		{
+			auto mouse_click_pos = sf::Mouse::getPosition(*graphic.window.get());
+
+			return graphic.check_arena_button_clicked(mouse_click_pos);;
+		}
+	return ARENA_BUTTON::NONE;
+}
+
 void Control::parse_exit_events(sf::Event& event, Graphic& graphic, Game& game)
 {
 	if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
@@ -100,4 +115,11 @@ void Control::parse_walk_events(Graphic& graphic, Game& game)
 			game.perform_fight(*enemy);
 
 	}
+}
+
+bool Control::check_mouse_left_button_clicked(Graphic& graphic)
+{
+	sf::Event event;
+	graphic.window->pollEvent(event);
+	return event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left;
 }
