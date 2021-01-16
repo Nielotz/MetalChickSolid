@@ -75,11 +75,11 @@
     <ClCompile Include="graphic\ui.cpp">
       <Filter>Pliki źródłowe\Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="headers\enemy.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="graphic\tuts.cpp">
       <Filter>Pliki źródłowe\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Entity\enemy.cpp">
+      <Filter>Pliki źródłowe\Engine\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

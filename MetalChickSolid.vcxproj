@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="control\control.cpp" />
     <ClCompile Include="engine\arena.cpp" />
+    <ClCompile Include="engine\Entity\enemy.cpp" />
     <ClCompile Include="engine\Entity\entity.cpp" />
     <ClCompile Include="engine\Entity\hero.cpp" />
     <ClCompile Include="engine\game.cpp" />
@@ -158,7 +159,6 @@
     <ClCompile Include="graphic\graphic.cpp" />
     <ClCompile Include="graphic\tuts.cpp" />
     <ClCompile Include="graphic\ui.cpp" />
-    <ClCompile Include="headers\enemy.cpp" />
     <ClCompile Include="headers\position.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shared\consts.cpp" />

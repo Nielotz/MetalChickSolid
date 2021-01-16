@@ -49,18 +49,7 @@ struct Deer : Enemy
 
 struct Bear : Enemy
 {
-    std::string name = "Bear";
-    uint32_t hp_max = 10;
-    uint32_t stamina = 3;
-    uint32_t critical = 2;
-    uint32_t strength = 1;
-    uint32_t attack_time = 1;
-    int32_t defence = 2;
-    typedef std::pair<uint8_t, Item> chance_item;
-    std::vector<chance_item> loot = {
-      chance_item{70, Meat()},
-      chance_item{40, FancyMeat()}
-    };
+    Bear();
 };
 
 struct Goblin : Enemy

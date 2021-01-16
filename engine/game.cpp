@@ -56,7 +56,7 @@ void Game::game_loop()
 	graphic.set_enemy_size(enemy, 2);
 	///////////////////////////////////////////////////
 	
-	//start_fight(enemy);
+	//perform_fight(enemy);
 
 	while (graphic.window->isOpen())
 	{
@@ -169,7 +169,7 @@ void Game::move_hero(const Direction& direction)
 	}
 }
 
-void Game::start_fight(Enemy& enemy)
+void Game::perform_fight(Enemy& enemy)
 {
 	graphic.display_arena(enemy);
 
@@ -177,6 +177,8 @@ void Game::start_fight(Enemy& enemy)
 	graphic.window->display();
 
 	arena.fight(profile.hero, enemy);
+
+	graphic.display_map();
 }
 
 bool Game::can_hero_move(const Direction& direction)

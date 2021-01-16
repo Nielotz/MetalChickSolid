@@ -27,7 +27,7 @@ public:
     void load_map();
 
     void move_hero(const Direction& direction);
-    void start_fight(Enemy& enemy);
+    void perform_fight(Enemy& enemy);
 
 private:
     Profile profile;

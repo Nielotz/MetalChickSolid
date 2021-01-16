@@ -97,7 +97,7 @@ void Control::parse_walk_events(Graphic& graphic, Game& game)
 
 		Enemy* enemy = check_mouse_on_enemy_click(event, graphic, game);
 		if (enemy != nullptr)
-			game.start_fight(*enemy);
+			game.perform_fight(*enemy);
 
 	}
 }
