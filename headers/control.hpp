@@ -15,8 +15,6 @@ class Control
     // Return reference to attacked entity.
     Enemy* check_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, Game& game);
 
-    ARENA_BUTTON check_arena_button_clicked(Graphic& graphic);
-
     // May close application!
     void parse_exit_events(sf::Event& event, Graphic& graphic, Game& game);
 
@@ -28,6 +26,8 @@ public:
     void parse_walk_events(Graphic& graphic, Game& game);
 
     bool check_mouse_left_button_clicked(Graphic& graphic);
+
+    ARENA_BUTTON check_arena_button_clicked(Graphic& graphic);
 
     Control() = default;
 
