@@ -246,7 +246,6 @@ void Graphic::draw_tutorial()
 	tutorial.draw(*(window.get()));
 }
 
-void Graphic::update()
 void Graphic::draw_arena_background()
 {
 	window->setView(main_view);
