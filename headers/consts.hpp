@@ -78,11 +78,21 @@ namespace PATH
 		}
 	}
 
-	namespace UI
+	namespace ARENA
+	{
+		namespace TEXTURES
+		{
+			const static std::string FORREST = "textures\\arena\\forrest.tga";
+
+		}
+	}
+
+	namespace PANEL
 	{
 		namespace TEXTURES
 		{
 			const static std::string WALK_UI_RIGHT_PANEL = "textures\\ui\\UI_map.tga";
+			const static std::string ARENA_UI_RIGHT_PANEL = "textures\\ui\\UI_arena.tga";
 
 		}
 	}
@@ -107,6 +117,7 @@ struct CONSTS
     const static long double SCALE;
 
     const static uint16_t TILE_SIZE_ON_TEXTURE_MAP; // Pixels.
+
     // Tile size in game.
     const static uint16_t TILE_SIZE; // Pixels.
 

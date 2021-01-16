@@ -6,13 +6,13 @@ enum class UI_TYPE
 	FIGHT = 1
 };
 
-class WalkUI
+class UIBase
 {
-	std::unordered_map<UI_TYPE, std::pair<sf::Sprite, sf::Texture>> ui_sprite_with_texture;
+protected:
+	std::pair<sf::Sprite, sf::Texture> ui_sprite_with_texture;
 
 public:
-	WalkUI();
-
+	UI_TYPE ui_type;
 	void load_right_panel_texture(const std::string& path);
 
 	// Position on left top corner in pixels.
@@ -21,15 +21,22 @@ public:
 	void draw(sf::RenderWindow& window);
 };
 
+class ArenaUI : public UIBase
+{};
+
+class WalkUI : public UIBase
+{};
+
 class UI
 {
 public:
 	UI() = default;
 
 	WalkUI walk_UI;
+	ArenaUI arena_UI;
 
-	// Load UI textures.
-	void load_textures(const std::string& path);
+	// Load PANEL textures.
+	void load_panels_textures(const std::string& walk, const std::string& arena);
 
 	void draw(sf::RenderWindow& window, UI_TYPE& UI_type);
 };

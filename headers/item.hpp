@@ -29,7 +29,6 @@ struct Item : Unique
     int32_t block = 0;
     int32_t defence = 0;
     int32_t attack_time = 0;
-    std::string name;
 };
 
 struct Consumable : Item

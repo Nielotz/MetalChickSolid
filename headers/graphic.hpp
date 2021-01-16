@@ -9,9 +9,19 @@
 #include "map.hpp"
 #include "hero.hpp"
 #include "ui.hpp"
+#include "enemy.hpp"
+
+
+enum class DISPLAY_SCREEN_TYPE : uint8_t
+{
+    ARENA = 0,
+    WALK = 1
+};
 
 class Graphic
-{
+{ 
+    DISPLAY_SCREEN_TYPE display_screen_type = DISPLAY_SCREEN_TYPE::WALK;
+
     void set_views();
     void set_main_view();
     void set_side_view();
@@ -22,6 +32,14 @@ class Graphic
 
     // Draw the map around hero (his render view).
     void draw_map();
+
+    // Draw ui.
+    void draw_UI();
+
+    // Move into Arena class.
+
+    void draw_arena_background();
+    std::pair<sf::Sprite, sf::Texture> arena_sprite_texture_pair;
 
 	// Keep textures and sprites in pairs (for each direction):
 	//		Direction::LEFT: texture1, texture2, texture3...
@@ -47,6 +65,12 @@ class Graphic
 
     // id: <sprite, texture>
     std::unordered_map<uint64_t, std::pair<sf::Sprite, sf::Texture>> entity_sprites_with_texture;
+
+    // Move into arena class.
+    std::unordered_map<uint64_t, std::pair<sf::Sprite, sf::Texture>> arena_entity_sprites_with_texture;
+
+    // Move into arena class.
+    std::vector<Enemy*> entities_on_arena;
 
 	std::chrono::steady_clock::time_point time_point_of_last_change_animation_frame;
 	std::chrono::steady_clock::time_point time_point_of_last_move_hero;
@@ -74,6 +98,13 @@ class Graphic
 
 	void update_hero_step();
 
+    void update_walk_screen();
+
+    void update_arena_screen();
+
+    // Move into seperate fight arena class.
+    void draw_entities_on_fight_arena();
+
 public:
     Direction hero_looking_direction = Direction::BOTTOM;
 
@@ -90,7 +121,13 @@ public:
     void update_view();
 
     // Update hero position, and animation frame.
-    void update_hero();
+    void update_hero_on_map();
+
+    void load_arena_background(std::string& path);
+
+    void display_arena(Enemy& enemy);
+
+    void display_map();
 
     // Load level into the graphic.
     //
@@ -99,28 +136,33 @@ public:
     void load_level(Map& map);
 
     void load_entity_texture(Entity& entity, std::string& path);
+    
+    // Move into arena class.
+    void load_arena_entity_texture(Entity& entity, std::string& path);
 
     void load_hero_textures(Hero& entity,
         const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
     );
 
     // Take texture from CONSTS::
-    void load_ui();
+    void load_UIs();
 
     void set_hero_position(Position& position);
 
     void set_entity_position(Entity& entity, Position& position);
 
+    void set_arena_entity_position(Entity& entity, Position& position);
+
     // Height in tiles, width automaticly adjusts.
     void set_entity_size(Entity& entity, uint8_t height);
+
+    void set_arena_entity_size(Entity& entity, uint8_t height);
 
     // Draw entities at theirs positions.
     void draw_entities();
 
     // Draw hero at its position.
     void draw_hero();
-
-    void draw_ui();
 
     // Draw fireworks and update stats.
     void increase_lvl();
