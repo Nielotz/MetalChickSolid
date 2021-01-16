@@ -102,6 +102,11 @@ void Graphic::load_enemy_texture(Enemy& enemy, std::string& path)
 	sprite.setTexture(texture);
 }
 
+void Graphic::remove_enemy_from_map(Enemy& enemy)
+{
+	map_enemy_sprites_with_texture.erase(&enemy);
+}
+
 void Graphic::load_tut_texture(const std::string& path)
 {
 	//na razie siê poddajê ale jeszcze do tego wrócê

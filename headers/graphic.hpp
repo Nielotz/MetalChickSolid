@@ -142,6 +142,8 @@ public:
 
     void load_enemy_texture(Enemy& enemy, std::string& path);
     
+    void remove_enemy_from_map(Enemy& enemy);
+
     // Move into arena class.
     void load_arena_enemy_texture(Enemy& enemy, std::string& path);
 
