@@ -97,7 +97,7 @@ namespace PATH
 		}
 	}
 
-	namespace tutorial
+	namespace TUTORIAL
 	{
 		namespace TEXTURES
 		{

@@ -63,6 +63,10 @@ Graphic::Graphic(Hero& hero)
 	set_views();
 
 	load_UIs();
+
+	std::string tut_path = PATH::TUTORIAL::TEXTURES::TUT;
+
+	tutorial.load_tutorial_texture(tut_path);
 }
 
 void Graphic::load_level(Map& map)
@@ -159,6 +163,12 @@ void Graphic::load_UIs()
 	);
 }
 
+void Graphic::load_tutorial()
+{
+	const std::string& path = PATH::TUTORIAL::TEXTURES::TUT;
+	tutorial.load_tutorial_texture(path);
+}
+
 void Graphic::set_hero_position(Position& position)
 {
 	hero_looking_direction = Direction::BOTTOM;
@@ -231,6 +241,12 @@ void Graphic::draw_UI()
 	ui.draw(*(window.get()), display_ui_type);
 }
 
+void Graphic::draw_tutorial()
+{
+	tutorial.draw(*(window.get()));
+}
+
+void Graphic::update()
 void Graphic::draw_arena_background()
 {
 	window->setView(main_view);
