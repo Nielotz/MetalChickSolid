@@ -43,6 +43,15 @@ void Graphic::update_hero_step()
 	}
 }
 
+Enemy* Graphic::check_click_intersect_enemy(sf::Vector2i& mouse_click_pos)
+{
+	typedef std::pair<Enemy* const, std::pair<sf::Sprite, sf::Texture>> lel;
+	for (lel& pair_enemy_with_sprite_texture : map_enemy_sprites_with_texture)
+		if (pair_enemy_with_sprite_texture.second.first.getGlobalBounds().contains(sf::Vector2f{ mouse_click_pos }))
+			pair_enemy_with_sprite_texture.first;
+	return nullptr;
+}
+
 Graphic::Graphic(Hero& hero)
 	:MOVE_STEP_FRAME_TIME(1. / (MOVE_STEPS * hero.move_speed))
 {
@@ -77,12 +86,12 @@ void Graphic::load_level(Map& map)
 	this->map.sprite.setPosition(0, 0); // To be read from map_data.
 }
 
-void Graphic::load_entity_texture(Entity& entity, std::string& path)
+void Graphic::load_enemy_texture(Enemy& enemy, std::string& path)
 {
-	entity_sprites_with_texture.insert({ entity.id, { sf::Sprite(), sf::Texture()} });
+	map_enemy_sprites_with_texture.insert({ &enemy, { sf::Sprite(), sf::Texture()} });
 
-	sf::Sprite& sprite = entity_sprites_with_texture.at(entity.id).first;
-	sf::Texture& texture = entity_sprites_with_texture.at(entity.id).second;
+	sf::Sprite& sprite = map_enemy_sprites_with_texture.at(&enemy).first;
+	sf::Texture& texture = map_enemy_sprites_with_texture.at(&enemy).second;
 
 	if (!texture.loadFromFile(path))
 		throw std::runtime_error("Cannot load " + path);
@@ -97,12 +106,12 @@ void Graphic::load_tut_texture(const std::string& path)
 	//na razie siê poddajê ale jeszcze do tego wrócê
 }
 
-void Graphic::load_arena_entity_texture(Entity& entity, std::string& path)
+void Graphic::load_arena_enemy_texture(Enemy& enemy, std::string& path)
 {
-	arena_entity_sprites_with_texture.insert({ entity.id, { sf::Sprite(), sf::Texture()} });
+	arena_enemy_sprites_with_texture.insert({ &enemy, { sf::Sprite(), sf::Texture()} });
 
-	sf::Sprite& sprite = arena_entity_sprites_with_texture.at(entity.id).first;
-	sf::Texture& texture = arena_entity_sprites_with_texture.at(entity.id).second;
+	sf::Sprite& sprite = arena_enemy_sprites_with_texture.at(&enemy).first;
+	sf::Texture& texture = arena_enemy_sprites_with_texture.at(&enemy).second;
 
 	if (!texture.loadFromFile(path))
 		throw std::runtime_error("Cannot load " + path);
@@ -112,8 +121,7 @@ void Graphic::load_arena_entity_texture(Entity& entity, std::string& path)
 	sprite.setTexture(texture);
 }
 
-void Graphic::load_hero_textures(Hero& entity,
-	const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures)
+void Graphic::load_hero_textures(const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures)
 {
 	typedef std::pair<sf::Sprite, sf::Texture> sprite_texture_pair;
 	typedef std::vector<sprite_texture_pair> sprite_texture_vector_of_pairs;
@@ -177,13 +185,14 @@ void Graphic::set_hero_position(Position& position)
 	hero_sprite.setPosition(position_to_display_position(position, hero_sprite));
 }
 
-void Graphic::draw_entities()
+void Graphic::draw_enemies()
 {
 	window->setView(main_view);
 
-	for (std::pair<const uint64_t, std::pair<sf::Sprite, sf::Texture>>& pair_id_data : entity_sprites_with_texture)
+	for (std::pair<Enemy* const, std::pair<sf::Sprite, sf::Texture>>& pair_id_data : map_enemy_sprites_with_texture)
 		if (true)
 			window->draw(pair_id_data.second.first);
+	
 }
 
 void Graphic::draw_hero()
@@ -201,34 +210,34 @@ void Graphic::draw_hero()
 	window->draw(hero_sprite);
 }
 
-void Graphic::set_entity_position(Entity& entity, Position& position)
+void Graphic::set_enemy_position(Enemy& enemy, Position& position)
 {
-	sf::Sprite& entity_sprite = entity_sprites_with_texture.at(entity.id).first;
+	sf::Sprite& entity_sprite = map_enemy_sprites_with_texture.at(&enemy).first;
 
 	entity_sprite.setPosition(position_to_display_position(position, entity_sprite));
 }
 
-void Graphic::set_arena_entity_position(Entity& entity, Position& position)
+void Graphic::set_arena_enemy_position(Enemy& enemy, Position& position)
 {
-	sf::Sprite& entity_sprite = arena_entity_sprites_with_texture.at(entity.id).first;
+	sf::Sprite& entity_sprite = arena_enemy_sprites_with_texture.at(&enemy).first;
 
 	entity_sprite.setPosition(position_to_display_position(position, entity_sprite));
 }
 
-void Graphic::set_entity_size(Entity& entity, uint8_t height)
+void Graphic::set_enemy_size(Enemy& enemy, uint8_t height)
 {
-	sf::Texture& entity_texture = entity_sprites_with_texture.at(entity.id).second;
-	sf::Sprite& entity_sprite = entity_sprites_with_texture.at(entity.id).first;
+	sf::Texture& entity_texture = map_enemy_sprites_with_texture.at(&enemy).second;
+	sf::Sprite& entity_sprite = map_enemy_sprites_with_texture.at(&enemy).first;
 
 	float scale = float(CONSTS::TILE_SIZE * height) / float(entity_texture.getSize().y);
 
 	entity_sprite.setScale(sf::Vector2f{ scale, scale });
 }
 
-void Graphic::set_arena_entity_size(Entity& entity, uint8_t height)
+void Graphic::set_arena_enemy_size(Enemy& enemy, uint8_t height)
 {
-	sf::Texture& entity_texture = arena_entity_sprites_with_texture.at(entity.id).second;
-	sf::Sprite& entity_sprite = arena_entity_sprites_with_texture.at(entity.id).first;
+	sf::Texture& entity_texture = arena_enemy_sprites_with_texture.at(&enemy).second;
+	sf::Sprite& entity_sprite = arena_enemy_sprites_with_texture.at(&enemy).first;
 
 	float scale = float(CONSTS::TILE_SIZE * height) / float(entity_texture.getSize().y);
 
@@ -279,7 +288,7 @@ void Graphic::update_walk_screen()
 	draw_UI();
 
 	draw_map();
-	draw_entities();
+	draw_enemies();
 	draw_hero();
 }
 
@@ -289,15 +298,15 @@ void Graphic::update_arena_screen()
 
 	draw_arena_background();
 	draw_UI();
-	draw_entities_on_fight_arena();
+	draw_enemies_on_fight_arena();
 }
 
-void Graphic::draw_entities_on_fight_arena()
+void Graphic::draw_enemies_on_fight_arena()
 {
 	window->setView(main_view);
 
 	for (auto& enemy : entities_on_arena)
-		window->draw(arena_entity_sprites_with_texture.at(enemy->id).first);
+		window->draw(arena_enemy_sprites_with_texture.at(enemy).first);
 
 	// window->draw
 }

@@ -4,6 +4,7 @@
 #include "../headers/control.hpp"
 #include "../headers/game.hpp"
 
+#include <iostream>
 
 bool Control::parse_move_events(sf::Event& event, Graphic& graphic, Game& game)
 {
@@ -51,12 +52,17 @@ bool Control::parse_move_events(sf::Event& event, Graphic& graphic, Game& game)
 	return parsed;
 }
 
-Enemy* Control::parse_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, Game& game)
+Enemy* Control::check_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, Game& game)
 {
-	if (event.type == sf::Event::KeyPressed)
-		if (event.key.code == sf::Keyboard::F)
-			return new Enemy();
-	return nullptr;
+	Enemy* clicked_enemy = nullptr;
+	if (event.type == sf::Event::MouseButtonPressed)
+		if (event.mouseButton.button == sf::Mouse::Left)
+		{
+			auto mouse_click_pos = sf::Mouse::getPosition(*graphic.window.get());
+			clicked_enemy = graphic.check_click_intersect_enemy(mouse_click_pos);
+			
+		}
+	return clicked_enemy;
 }
 
 void Control::parse_exit_events(sf::Event& event, Graphic& graphic, Game& game)
@@ -90,7 +96,7 @@ void Control::parse_walk_events(Graphic& graphic, Game& game)
 		if (parse_move_events(event, graphic, game))
 			continue;
 
-		Enemy* enemy = parse_mouse_on_enemy_click(event, graphic, game);
+		Enemy* enemy = check_mouse_on_enemy_click(event, graphic, game);
 		if (enemy != nullptr)
 			game.start_fight(*enemy);
 

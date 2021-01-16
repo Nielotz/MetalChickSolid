@@ -67,10 +67,10 @@ class Graphic
     Hero* hero;
 
     // id: <sprite, texture>
-    std::unordered_map<uint64_t, std::pair<sf::Sprite, sf::Texture>> entity_sprites_with_texture;
+    std::unordered_map<Enemy*, std::pair<sf::Sprite, sf::Texture>> map_enemy_sprites_with_texture;
 
     // Move into arena class.
-    std::unordered_map<uint64_t, std::pair<sf::Sprite, sf::Texture>> arena_entity_sprites_with_texture;
+    std::unordered_map<Enemy*, std::pair<sf::Sprite, sf::Texture>> arena_enemy_sprites_with_texture;
 
     // Move into arena class.
     std::vector<Enemy*> entities_on_arena;
@@ -106,13 +106,15 @@ class Graphic
     void update_arena_screen();
 
     // Move into seperate fight arena class.
-    void draw_entities_on_fight_arena();
+    void draw_enemies_on_fight_arena();
 
 public:
     Direction hero_looking_direction = Direction::BOTTOM;
 
 	bool is_hero_moving = false;
     
+    Enemy* check_click_intersect_enemy(sf::Vector2i& mouse_click_pos);
+
 	// Hero hero;
 	std::unique_ptr<sf::RenderWindow> window;
 
@@ -138,13 +140,12 @@ public:
     // 
     void load_level(Map& map);
 
-    void load_entity_texture(Entity& entity, std::string& path);
+    void load_enemy_texture(Enemy& enemy, std::string& path);
     
     // Move into arena class.
-    void load_arena_entity_texture(Entity& entity, std::string& path);
+    void load_arena_enemy_texture(Enemy& enemy, std::string& path);
 
-    void load_hero_textures(Hero& entity,
-        const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
+    void load_hero_textures(const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
     );
 
     // Take texture from CONSTS::
@@ -154,17 +155,17 @@ public:
 
     void set_hero_position(Position& position);
 
-    void set_entity_position(Entity& entity, Position& position);
+    void set_enemy_position(Enemy& enemy, Position& position);
 
-    void set_arena_entity_position(Entity& entity, Position& position);
+    void set_arena_enemy_position(Enemy& enemy, Position& position);
 
     // Height in tiles, width automaticly adjusts.
-    void set_entity_size(Entity& entity, uint8_t height);
+    void set_enemy_size(Enemy& enemy, uint8_t height);
 
-    void set_arena_entity_size(Entity& entity, uint8_t height);
+    void set_arena_enemy_size(Enemy& enemy, uint8_t height);
 
-    // Draw entities at theirs positions.
-    void draw_entities();
+    // Draw enemies at theirs positions.
+    void draw_enemies();
 
     // Draw hero at its position.
     void draw_hero();

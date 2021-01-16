@@ -24,24 +24,25 @@ void Game::game_loop()
 		texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
 	else if (enemy.name == "xd")
 		texture_path = "xd";
-	graphic.load_entity_texture(enemy, texture_path);
+	graphic.load_enemy_texture(enemy, texture_path);
 
 
 	// Bear
 	texture_path = PATH::ENTITY_TEXTURES::BEAR::ARENA;
-	graphic.load_arena_entity_texture(enemy, texture_path);
-	graphic.set_arena_entity_position(enemy, (Position&)Position(10, 6));
-	graphic.set_arena_entity_size(enemy, 4);
+	graphic.load_arena_enemy_texture(enemy, texture_path);
+	graphic.set_arena_enemy_position(enemy, (Position&)Position(10, 6));
+	//graphic.set_arena_enemy_size(enemy, 4);
 
 
 	// Change to arena map.
 	texture_path = PATH::ARENA::TEXTURES::FORREST;
 	graphic.load_arena_background(texture_path);
 
-	graphic.set_entity_position(enemy, enemy.position);
+	graphic.set_enemy_position(enemy, enemy.position);
 
-	graphic.set_entity_size(enemy, 2);
+	graphic.set_enemy_size(enemy, 2);
 	///////////////////////////////////////////////////
+	
 	//start_fight(enemy);
 
 	while (graphic.window->isOpen())
@@ -105,7 +106,7 @@ void Game::load_map()
 
 	graphic.load_level(map);
 
-	graphic.load_hero_textures(profile.hero, PATH::HERO::TEXTURES::warrior);
+	graphic.load_hero_textures(PATH::HERO::TEXTURES::warrior);
 
 
 	graphic.set_hero_position(profile.hero.position);
@@ -158,11 +159,11 @@ void Game::move_hero(const Direction& direction)
 void Game::start_fight(Enemy& enemy)
 {
 	graphic.display_arena(enemy);
+
 	graphic.update();
 	graphic.window->display();
 
-	int x = 2;
-	// fight.loop();
+	arena.fight(profile.hero, enemy);
 }
 
 bool Game::can_hero_move(const Direction& direction)
