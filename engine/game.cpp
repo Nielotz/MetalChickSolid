@@ -42,7 +42,7 @@ void Game::game_loop()
 
 	graphic.set_entity_size(enemy, 2);
 	///////////////////////////////////////////////////
-	start_fight(enemy);
+	//start_fight(enemy);
 
 	while (graphic.window->isOpen())
 	{
