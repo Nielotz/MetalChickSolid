@@ -62,7 +62,11 @@ Graphic::Graphic(Hero& hero)
 
 	set_views();
 
-	load_ui();
+	load_UIs();
+
+	std::string tut_path = PATH::TUTORIAL::TEXTURES::TUT;
+
+	tutorial.load_tutorial_texture(tut_path);
 }
 
 void Graphic::load_level(Map& map)
@@ -79,6 +83,26 @@ void Graphic::load_entity_texture(Entity& entity, std::string& path)
 
 	sf::Sprite& sprite = entity_sprites_with_texture.at(entity.id).first;
 	sf::Texture& texture = entity_sprites_with_texture.at(entity.id).second;
+
+	if (!texture.loadFromFile(path))
+		throw std::runtime_error("Cannot load " + path);
+
+	texture.setSmooth(true);
+
+	sprite.setTexture(texture);
+}
+
+void Graphic::load_tut_texture(const std::string& path)
+{
+	//na razie siê poddajê ale jeszcze do tego wrócê
+}
+
+void Graphic::load_arena_entity_texture(Entity& entity, std::string& path)
+{
+	arena_entity_sprites_with_texture.insert({ entity.id, { sf::Sprite(), sf::Texture()} });
+
+	sf::Sprite& sprite = arena_entity_sprites_with_texture.at(entity.id).first;
+	sf::Texture& texture = arena_entity_sprites_with_texture.at(entity.id).second;
 
 	if (!texture.loadFromFile(path))
 		throw std::runtime_error("Cannot load " + path);
@@ -131,10 +155,18 @@ void Graphic::load_hero_textures(Hero& entity,
 	}
 }
 
-void Graphic::load_ui()
+void Graphic::load_UIs()
 {
-	const std::string& path = PATH::UI::TEXTURES::WALK_UI_RIGHT_PANEL;
-	ui.load_textures(path);
+	ui.load_panels_textures(
+		(const std::string&)PATH::PANEL::TEXTURES::WALK_UI_RIGHT_PANEL,
+		(const std::string&)PATH::PANEL::TEXTURES::ARENA_UI_RIGHT_PANEL
+	);
+}
+
+void Graphic::load_tutorial()
+{
+	const std::string& path = PATH::TUTORIAL::TEXTURES::TUT;
+	tutorial.load_tutorial_texture(path);
 }
 
 void Graphic::set_hero_position(Position& position)
@@ -147,6 +179,8 @@ void Graphic::set_hero_position(Position& position)
 
 void Graphic::draw_entities()
 {
+	window->setView(main_view);
+
 	for (std::pair<const uint64_t, std::pair<sf::Sprite, sf::Texture>>& pair_id_data : entity_sprites_with_texture)
 		if (true)
 			window->draw(pair_id_data.second.first);
@@ -163,12 +197,20 @@ void Graphic::draw_hero()
 	sf::Sprite& hero_sprite = animation_frames[hero_animation_frame].first;
 	update_hero_texture_position();
 
+	window->setView(main_view);
 	window->draw(hero_sprite);
 }
 
 void Graphic::set_entity_position(Entity& entity, Position& position)
 {
 	sf::Sprite& entity_sprite = entity_sprites_with_texture.at(entity.id).first;
+
+	entity_sprite.setPosition(position_to_display_position(position, entity_sprite));
+}
+
+void Graphic::set_arena_entity_position(Entity& entity, Position& position)
+{
+	sf::Sprite& entity_sprite = arena_entity_sprites_with_texture.at(entity.id).first;
 
 	entity_sprite.setPosition(position_to_display_position(position, entity_sprite));
 }
@@ -183,24 +225,89 @@ void Graphic::set_entity_size(Entity& entity, uint8_t height)
 	entity_sprite.setScale(sf::Vector2f{ scale, scale });
 }
 
-void Graphic::draw_ui()
+void Graphic::set_arena_entity_size(Entity& entity, uint8_t height)
 {
+	sf::Texture& entity_texture = arena_entity_sprites_with_texture.at(entity.id).second;
+	sf::Sprite& entity_sprite = arena_entity_sprites_with_texture.at(entity.id).first;
+
+	float scale = float(CONSTS::TILE_SIZE * height) / float(entity_texture.getSize().y);
+
+	entity_sprite.setScale(sf::Vector2f{ scale, scale });
+}
+
+void Graphic::draw_UI()
+{
+	window->setView(side_panel_view);
 	ui.draw(*(window.get()), display_ui_type);
+}
+
+void Graphic::draw_tutorial()
+{
+	tutorial.draw(*(window.get()));
+}
+
+void Graphic::draw_arena_background()
+{
+	window->setView(main_view);
+	window->draw(arena_sprite_texture_pair.first);
+}
+
+void Graphic::load_arena_background(std::string& path)
+{
+	sf::Sprite& sprite = arena_sprite_texture_pair.first;
+	sf::Texture& texture = arena_sprite_texture_pair.second;
+
+	if (!texture.loadFromFile(path))
+		throw std::runtime_error("Cannot load " + path);
+
+	texture.setSmooth(true);
+
+	sprite.setTexture(texture);
+	
+	float scale = std::min<float>(
+		(float)((float)main_view.getSize().x / texture.getSize().x),
+		(float)((float)main_view.getSize().y / texture.getSize().y));
+
+	sprite.setScale(sf::Vector2f{ scale, scale });
+	sprite.setPosition(0, 0);
+}
+
+void Graphic::update_walk_screen()
+{
+	update_hero_on_map();
+
+	draw_UI();
+
+	draw_map();
+	draw_entities();
+	draw_hero();
+}
+
+void Graphic::update_arena_screen()
+{
+	window->clear(sf::Color::Red);
+
+	draw_arena_background();
+	draw_UI();
+	draw_entities_on_fight_arena();
+}
+
+void Graphic::draw_entities_on_fight_arena()
+{
+	window->setView(main_view);
+
+	for (auto& enemy : entities_on_arena)
+		window->draw(arena_entity_sprites_with_texture.at(enemy->id).first);
+
+	// window->draw
 }
 
 void Graphic::update()
 {
-	update_hero();
-
-	window->clear(sf::Color::Red);
-
-	window->setView(side_panel_view);
-	draw_ui();
-
-	window->setView(main_view);
-	draw_map();
-	draw_entities();
-	draw_hero();
+	if (display_screen_type == DISPLAY_SCREEN_TYPE::WALK)
+		update_walk_screen();
+	else // ARENA
+		update_arena_screen();
 }
 
 void Graphic::set_views()
@@ -361,10 +468,11 @@ void Graphic::move_hero(const Direction& direction)
 
 void Graphic::draw_map()
 {
+	window->setView(main_view);
 	window->draw(map.sprite);
 }
 
-void Graphic::update_hero()
+void Graphic::update_hero_on_map()
 {
 	if (is_hero_moving)
 	{
@@ -373,6 +481,20 @@ void Graphic::update_hero()
 
 		update_view();
 	}
+}
+
+void Graphic::display_arena(Enemy& enemy)
+{
+	display_ui_type = UI_TYPE::FIGHT;
+	display_screen_type = DISPLAY_SCREEN_TYPE::ARENA;
+
+	entities_on_arena.clear();
+	entities_on_arena.push_back(&enemy);
+}
+
+void Graphic::display_map()
+{
+	display_screen_type = DISPLAY_SCREEN_TYPE::WALK;
 }
 
 sf::Vector2f Graphic::position_to_display_position(Position& position, sf::Sprite& entity_sprite)

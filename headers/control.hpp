@@ -13,7 +13,7 @@ class Control
 
     // Parse mouse clicks.
     // Return reference to attacked entity.
-    Entity& parse_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, Game& game);
+    Enemy* parse_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, Game& game);
 
     // May close application!
     void parse_exit_events(sf::Event& event, Graphic& graphic, Game& game);

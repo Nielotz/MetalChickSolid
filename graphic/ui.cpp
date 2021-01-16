@@ -4,29 +4,24 @@
 #include "../headers/ui.hpp"
 #include "../headers/consts.hpp"
 
-
-void UI::load_textures(const std::string& right_panel)
+void UI::load_panels_textures(const std::string& walk, const std::string& arena)
 {
-	walk_UI.load_right_panel_texture(right_panel);
+	walk_UI.load_right_panel_texture(walk);
+	arena_UI.load_right_panel_texture(arena);
 }
 
 void UI::draw(sf::RenderWindow& window, UI_TYPE& UI_type)
 {
 	if (UI_type == UI_TYPE::WALK)
 		walk_UI.draw(window);
+	else
+		arena_UI.draw(window);
 }
 
-WalkUI::WalkUI()
+void UIBase::load_right_panel_texture(const std::string& path)
 {
-	typedef std::pair<UI_TYPE, std::pair<sf::Sprite, sf::Texture>> sth_i_dont_care;
-
-	ui_sprite_with_texture.insert(sth_i_dont_care(UI_TYPE::WALK, {}));
-}
-
-void WalkUI::load_right_panel_texture(const std::string& path)
-{
-	sf::Sprite& sprite = ui_sprite_with_texture.at(UI_TYPE::WALK).first;
-	sf::Texture& texture = ui_sprite_with_texture.at(UI_TYPE::WALK).second;
+	sf::Sprite& sprite = ui_sprite_with_texture.first;
+	sf::Texture& texture = ui_sprite_with_texture.second;
 
 	if (!texture.loadFromFile(path))
 		throw std::runtime_error("Cannot load " + path);
@@ -40,18 +35,14 @@ void WalkUI::load_right_panel_texture(const std::string& path)
 	sprite.setScale(sf::Vector2f{ scale, scale });
 }
 
-void WalkUI::set_position(float x, float y)
+void UIBase::set_position(float x, float y)
 {
-	sf::Sprite& sprite = ui_sprite_with_texture.at(UI_TYPE::WALK).first;
+	sf::Sprite& sprite = ui_sprite_with_texture.first;
 
 	sprite.setPosition(x, y);
 }
 
-
-void WalkUI::draw(sf::RenderWindow& window)
+void UIBase::draw(sf::RenderWindow& window)
 {
-	sf::Sprite& sprite = ui_sprite_with_texture.at(UI_TYPE::WALK).first;
-
-	window.draw(sprite);
+	window.draw(ui_sprite_with_texture.first);
 }
-

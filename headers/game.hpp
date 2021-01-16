@@ -6,6 +6,7 @@
 #include "map.hpp"
 #include "arena.hpp"
 #include "enemy.hpp"
+#include "tuts.hpp"
 
 class Game
 {
@@ -22,9 +23,12 @@ public:
     void start();
     void stop();
     void exit();
+    void start_tutorial();
     void load_map();
 
     void move_hero(const Direction& direction);
+    void start_fight(Enemy& enemy);
+
 private:
     Profile profile;
     Graphic graphic;

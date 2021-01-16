@@ -43,8 +43,20 @@ bool Control::parse_move_events(sf::Event& event, Graphic& graphic, Game& game)
 	{
 		game.move_hero(Direction::BOTTOM);
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+	{
+		game.start_tutorial();
+	}
 	else parsed = false;
 	return parsed;
+}
+
+Enemy* Control::parse_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, Game& game)
+{
+	if (event.type == sf::Event::KeyPressed)
+		if (event.key.code == sf::Keyboard::F)
+			return new Enemy();
+	return nullptr;
 }
 
 void Control::parse_exit_events(sf::Event& event, Graphic& graphic, Game& game)
@@ -76,10 +88,11 @@ void Control::parse_walk_events(Graphic& graphic, Game& game)
 		parse_exit_events(event, graphic, game);
 
 		if (parse_move_events(event, graphic, game))
-			;
-		else
-		
-			;
+			continue;
+
+		Enemy* enemy = parse_mouse_on_enemy_click(event, graphic, game);
+		if (enemy != nullptr)
+			game.start_fight(*enemy);
 
 	}
 }

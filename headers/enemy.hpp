@@ -24,6 +24,7 @@ struct Enemy : Entity
     int32_t defence = 0;
     int32_t attack_time = 0;
     std::vector<std::pair<uint8_t, Item>> loot;
+    std::string name;
 
 
     // Have to be shhh.
@@ -33,6 +34,7 @@ struct Enemy : Entity
 
 struct Deer : Enemy
 {
+    std::string name = "Deer";
     uint32_t hp_max = 5;
     uint32_t stamina = 3;
     uint32_t agility = 2;
@@ -63,6 +65,7 @@ struct Bear : Enemy
 
 struct Goblin : Enemy
 {
+    std::string name = "Goblin";
     uint32_t hp_max = 15;
     uint32_t stamina = 2;
     uint32_t critical = 1;
@@ -79,6 +82,7 @@ struct Goblin : Enemy
 
 struct Troll : Enemy
 {
+    std::string name = "Troll";
     uint32_t hp_max = 20;
     uint32_t stamina = 2;
     uint32_t critical = 2;
@@ -95,6 +99,7 @@ struct Troll : Enemy
 
 struct Fox : Enemy
 {
+    std::string name = "Fox";
     uint32_t hp_max = 25;
     uint32_t stamina = 3;
     uint32_t strength = 1;
@@ -110,6 +115,7 @@ struct Fox : Enemy
 
 struct Dragon : Enemy
 {
+    std::string name = "Dragon";
     uint32_t hp_max = 35;
     uint32_t stamina = 3;
     uint32_t critical = 3;
