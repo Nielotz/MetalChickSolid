@@ -33,6 +33,19 @@ void Game::game_loop()
 	graphic.set_arena_enemy_position(enemy, (Position&)Position(10, 6));
 	//graphic.set_arena_enemy_size(enemy, 4);
 
+    //Nadanie statystyk przeciwnikowi i walka z nim
+    /*
+    enemy.attack_time = 20;
+    enemy.hp_max = 20;
+    enemy.hp = 20;
+    enemy.strength = 4;
+    enemy.agility = 4;
+    enemy.lvl = 1;
+    enemy.stamina = 30;
+    arena.fight(profile.hero, enemy);
+    */
+    ////
+
 
 	// Change to arena map.
 	texture_path = PATH::ARENA::TEXTURES::FORREST;
