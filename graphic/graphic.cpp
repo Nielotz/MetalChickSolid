@@ -46,9 +46,10 @@ void Graphic::update_hero_step()
 Enemy* Graphic::check_click_intersect_enemy(sf::Vector2i& mouse_click_pos)
 {
 	typedef std::pair<Enemy* const, std::pair<sf::Sprite, sf::Texture>> lel;
+
 	for (lel& pair_enemy_with_sprite_texture : map_enemy_sprites_with_texture)
 		if (pair_enemy_with_sprite_texture.second.first.getGlobalBounds().contains(sf::Vector2f{ mouse_click_pos }))
-			pair_enemy_with_sprite_texture.first;
+			return pair_enemy_with_sprite_texture.first;
 	return nullptr;
 }
 

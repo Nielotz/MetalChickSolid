@@ -60,7 +60,6 @@ Enemy* Control::check_mouse_on_enemy_click(sf::Event& event, Graphic& graphic, G
 		{
 			auto mouse_click_pos = sf::Mouse::getPosition(*graphic.window.get());
 			clicked_enemy = graphic.check_click_intersect_enemy(mouse_click_pos);
-			
 		}
 	return clicked_enemy;
 }
