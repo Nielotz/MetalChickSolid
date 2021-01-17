@@ -98,6 +98,7 @@ void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
     else
     {
         std::cout << "Pokonales przeciwnika!\n";
+        graphic.remove_enemy_from_map(enemy);
         enemy.status = 0;
     }
 }

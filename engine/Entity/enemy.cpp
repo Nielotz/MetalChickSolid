@@ -137,7 +137,7 @@ void Bear::update_stats(uint16_t lvl)
     stamina = int(base * 3);
     critical = int(base * 2);
     strength = int(base * 3);
-    attack_time = int(base * 5);
+    attack_time = int(base * 35);
     defence = int(base * 2);
 }
 
