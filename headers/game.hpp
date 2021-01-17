@@ -43,19 +43,18 @@ private:
 	};
 
 	// Name (have to contain class name), position, height.
-	std::vector<StrPositionHeight> maps_data[4] = {
+	const std::vector<StrPositionHeight> maps_data[4] = {
 		{ // Test map.
 
 		},{ // Start map.
 			{"Bear_1", {5,5}, 2},
 			{"Dragon_1", {7,5}, 2},
-			{"Dragon_1", {7,8}, 2},
+			{"Dragon_2", {7,8}, 2},
 
 		},{ // Forest map.
-			{"Bear_1", {5,5}, 2},
+			{"Bear_1", {5,10}, 2},
 			{"Dragon_1", {7,5}, 2},
-			{"Dragon_1", {3,5}, 4},
-			{"Dragon_1", {2,2}, 5}
+
 
 		},{ // Boss map.
 			{"Bear_1", {5,5}, 2},

@@ -17,13 +17,6 @@ Bear::Bear()
 
 Deer::Deer()
 {
-    name = "Deer";
-    hp_max = 5;
-    stamina = 3;
-    agility = 2;
-    strength = 1;
-    attack_time = 1;
-
     update_stats(lvl);
     {
         uint32_t base = lvl + lvl * .025;
@@ -43,14 +36,6 @@ Deer::Deer()
 Goblin::Goblin()
 {
     name = "Goblin";
-    hp_max = 15;
-    stamina = 2;
-    critical = 1;
-    strength = 1;
-    agility = 2;
-    attack_time = 2;
-    defence = 3;
-
     update_stats(lvl);
     {
         uint32_t base = lvl + lvl * .025;
@@ -70,13 +55,6 @@ Goblin::Goblin()
 Troll::Troll()
 {
     name = "Troll";
-    hp_max = 20;
-    stamina = 2;
-    critical = 2;
-    strength = 3;
-    agility = 1;
-    attack_time = 3;
-    defence = 2;
 
     update_stats(lvl);
     {
@@ -97,13 +75,6 @@ Troll::Troll()
 Fox::Fox()
 {
     name = "Fox";
-    hp_max = 25;
-    stamina = 3;
-    strength = 1;
-    agility = 5;
-    attack_time = 4;
-    defence = 4;
-
     update_stats(lvl);
     {
         uint32_t base = lvl + lvl * .025;
@@ -134,6 +105,11 @@ Dragon::Dragon()
     block = 2;
 }
 
+void Dragon::update_stats(uint16_t lvl)
+{
+}
+
+
 void Enemy::update_stats(uint16_t lvl)
 {
 }
@@ -142,8 +118,30 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(const Enemy&)
+Enemy::Enemy(Position position)
 {
+    this->position = position;
+}
+
+Enemy::Enemy(const Enemy& enemy)
+{
+    position.x = enemy.position.x;
+    position.y = enemy.position.y;
+    profession_type = enemy.profession_type;
+    lvl = enemy.lvl;
+    exp = enemy.exp;
+    hp = enemy.hp;
+    hp_max = enemy.hp_max;
+    mana = enemy.mana;
+    stamina = enemy.stamina;
+    strength = enemy.strength;
+    agility = enemy.agility;
+    intelect = enemy.intelect;
+    critical = enemy.critical;
+    critical_power = enemy.critical_power;
+    block = enemy.block;
+    defence = enemy.defence;
+    attack_time = enemy.attack_time;
 }
 
 void Bear::update_stats(uint16_t lvl)

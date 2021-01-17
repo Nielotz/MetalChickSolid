@@ -12,7 +12,7 @@
 struct Entity : Unique
 {
     std::string name;
-    Position position = { 0, 0 };
+    Position position = { -1, -1 };
     ProfessionType profession_type = ProfessionType::NONE;
 
     // Level related.

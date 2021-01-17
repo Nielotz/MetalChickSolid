@@ -69,9 +69,8 @@ void Game::load_map(uint16_t map_id)
 	else if (map_id == 2)
 		map_file = PATH::MAP::TEXTURES::FOREST;
 	else if (map_id == 3)
-	    map_file = PATH::MAP::TEXTURES::BOSS;
+		map_file = PATH::MAP::TEXTURES::BOSS;
 
-	uint8_t mob_height; // Set in if;
 	std::string killed_mobs; // List of killed mobs from file.
 
 	for (const StrPositionHeight& data : maps_data[map_id])
@@ -82,46 +81,56 @@ void Game::load_map(uint16_t map_id)
 			if (data.name.find("Bear") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
-				enemies.push_back(Bear());
+				Enemy &enemy = *(new Enemy());
+				enemy.update_stats(profile.hero.lvl);
+				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Deer") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::DEER::MAP;
-				enemies.push_back(Deer());
+				Enemy enemy;
+				enemy.update_stats(profile.hero.lvl);
+				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Goblin") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::GOBLIN::MAP;
-				enemies.push_back(Goblin());
+				Enemy enemy;
+				enemy.update_stats(profile.hero.lvl);
+				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Troll") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::TROLL::MAP;
-				enemies.push_back(Troll());
+				Enemy enemy;
+				enemy.update_stats(profile.hero.lvl);
+				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Fox") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::FOX::MAP;
-				enemies.push_back(Fox());
+				Enemy enemy;
+				enemy.update_stats(profile.hero.lvl);
+				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Dragon") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::DRAGON::MAP;
-				enemies.push_back(Dragon());
+				Enemy enemy;
+				enemy.update_stats(profile.hero.lvl);
+				enemies.push_back(enemy);
 			}
+			else
+				throw std::runtime_error("Invalid enemy.");
+
 			enemies[enemies.size() - 1].name = data.name;
-			//enemies[enemies.size() - 1].update_stats(profile.hero.lvl - 1);
 
-			graphic.load_enemy_texture(enemies[enemies.size() - 1], texture_path);
 			enemies[enemies.size() - 1].position = data.pos;
+			graphic.load_enemy_texture(enemies[enemies.size() - 1], texture_path);
 			graphic.set_enemy_position(enemies[enemies.size() - 1], data.pos); // x, y
-			graphic.set_enemy_size(enemies[enemies.size() - 1], 2);
+			graphic.set_enemy_size(enemies[enemies.size() - 1], data.height);
 		}
-
 	}
-		
-
-
 
 	map.load_texture(map_file);
 	map.load_map_collisions(map_file);
@@ -137,9 +146,9 @@ void Game::load_map(uint16_t map_id)
 
 void Game::start_tutorial()
 {
-    while (!control.check_mouse_left_button_clicked(graphic))
-    {
-        control.parse_walk_events(graphic, *this);
+	while (!control.check_mouse_left_button_clicked(graphic))
+	{
+		control.parse_walk_events(graphic, *this);
 
 		graphic.draw_tutorial();
 		graphic.window->display();
@@ -180,7 +189,7 @@ void Game::perform_fight(Enemy& enemy)
 {
 	auto hero_pos = profile.hero.position;
 	auto enemy_pos = enemy.position;
-	if (abs(hero_pos.x - enemy_pos.x) < 3 || abs(hero_pos.y - enemy_pos.y) < 3)
+	if (abs(hero_pos.x - enemy_pos.x) < 3 && abs(hero_pos.y - enemy_pos.y) < 3)
 	{
 		std::string path;
 		Position enemy_position(11, 3);

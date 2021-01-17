@@ -101,7 +101,6 @@ Graphic::Graphic(Hero& hero)
 	set_arena_hero_size(8);
 	
 	load_hero_textures(PATH::HERO::TEXTURES::warrior);
-	load_hero_textures(PATH::HERO::TEXTURES::warrior);
 
 	load_arena_background((std::string&)PATH::ARENA::TEXTURES::FORREST);
 
@@ -121,6 +120,7 @@ void Graphic::load_level(Map& map)
 void Graphic::load_enemy_texture(Enemy& enemy, std::string& path)
 {
 	map_enemy_sprites_with_texture.insert({ &enemy, { sf::Sprite(), sf::Texture()} });
+	map_enemy_sprites_with_texture.insert({ new Enemy(), { sf::Sprite(), sf::Texture()} });
 
 	sf::Sprite& sprite = map_enemy_sprites_with_texture.at(&enemy).first;
 	sf::Texture& texture = map_enemy_sprites_with_texture.at(&enemy).second;
@@ -488,7 +488,7 @@ void Graphic::update_view()
 	if (distance_to_bottom_wall < CONSTS::MIN_PLAYER_DISTANCE_TO_BORDER)
 		move_view(Direction::TOP);
 
-	std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
+	// std::cout << distance_to_left_wall << " " << distance_to_right_wall << " " << distance_to_top_wall << " " << distance_to_bottom_wall << " " << std::endl;
 	// std::cout << hero->position.x << " " << hero->position.y << std::endl;
 }
 
