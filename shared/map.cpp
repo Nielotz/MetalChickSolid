@@ -67,6 +67,8 @@ void Map::load_map_collisions(string& path)
 
 void Map::save_load_dead_enemies()
 {
+    //F for all fallen animals during battle [*]
+
     std::string path = "textures\\mobs\\dead_enemies.txt";
     if (dead_enemies.empty())
     {
