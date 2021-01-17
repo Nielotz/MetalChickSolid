@@ -15,13 +15,13 @@
 
 enum class ARENA_BUTTON : uint8_t
 {
-    NONE,
-    ATTACK,
-    MAGIC,
-    QUICK_HEAL,
-    DEFENCE,
-    RUN_AWAY,
-    SAVE_FIGHT
+	NONE,
+	ATTACK,
+	MAGIC,
+	QUICK_HEAL,
+	DEFENCE,
+	RUN_AWAY,
+	SAVE_FIGHT
 };
 
 enum class DISPLAY_SCREEN_TYPE : uint8_t

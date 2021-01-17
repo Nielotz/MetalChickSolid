@@ -30,6 +30,43 @@ public:
     void perform_fight(Enemy& enemy);
 
 private:
+
+	struct StrPositionHeight
+	{
+		const std::string name;
+		const Position pos;
+		const uint8_t height;
+
+		StrPositionHeight(const std::string name, const Position pos, const uint8_t height)
+			:name(name), pos(pos), height(height)
+		{}
+	};
+
+	// Name (have to contain class name), position, height.
+	std::vector<StrPositionHeight> maps_data[4] = {
+		{ // Test map.
+
+		},{ // Start map.
+			{"Bear_1", {5,5}, 2},
+			{"Dragon_1", {7,5}, 2},
+			{"Dragon_1", {7,8}, 2},
+
+		},{ // Forest map.
+			{"Bear_1", {5,5}, 2},
+			{"Dragon_1", {7,5}, 2},
+			{"Dragon_1", {3,5}, 4},
+			{"Dragon_1", {2,2}, 5}
+
+		},{ // Boss map.
+			{"Bear_1", {5,5}, 2},
+			{"Dragon_1", {7,5}, 2},
+			{"Dragon_1", {7,5}, 2},
+			{"Dragon_1", {7,5}, 2}
+
+		},
+
+	};
+
     Profile profile;
     Graphic graphic;
     Control control;

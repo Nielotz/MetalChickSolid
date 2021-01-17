@@ -68,21 +68,55 @@ void Game::load_map(uint16_t map_id)
 	{
 		map_file = PATH::MAP::TEXTURES::START;
 
-		std::string name;
-		if (name.find("Bear_1") == std::string::npos)
+		uint8_t mob_height; // Set in if;
+		std::string killed_mobs; // List of killed mobs from file.
+
+		for (const StrPositionHeight& data : maps_data[map_id])
 		{
-			enemies.push_back(Bear()); // Type
-			enemies[enemies.size() - 1].name = "Bear_1";
-			//enemies[enemies.size() - 1].update_stats(profile.hero.lvl - 1);
+			if (killed_mobs.find(data.name) == std::string::npos)
+			{
+				std::string texture_path;
+				if (data.name.find("Bear") != std::string::npos)
+				{
+					texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
+					enemies.push_back(Bear());
+				}
+				else if (data.name.find("Deer") != std::string::npos)
+				{
+					texture_path = PATH::ENTITY_TEXTURES::DEER::MAP;
+					enemies.push_back(Deer());
+				}
+				else if (data.name.find("Goblin") != std::string::npos)
+				{
+					texture_path = PATH::ENTITY_TEXTURES::GOBLIN::MAP;
+					enemies.push_back(Goblin());
+				}
+				else if (data.name.find("Troll") != std::string::npos)
+				{
+					texture_path = PATH::ENTITY_TEXTURES::TROLL::MAP;
+					enemies.push_back(Troll());
+				}
+				else if (data.name.find("Fox") != std::string::npos)
+				{
+					texture_path = PATH::ENTITY_TEXTURES::FOX::MAP;
+					enemies.push_back(Fox());
+				}
+				else if (data.name.find("Dragon") != std::string::npos)
+				{
+					texture_path = PATH::ENTITY_TEXTURES::DRAGON::MAP;
+					enemies.push_back(Dragon());
+				}
+				enemies[enemies.size() - 1].name = data.name;
+				//enemies[enemies.size() - 1].update_stats(profile.hero.lvl - 1);
 
-			graphic.load_enemy_texture(enemies[enemies.size() - 1], (std::string&)PATH::ENTITY_TEXTURES::BEAR::MAP);
+				graphic.load_enemy_texture(enemies[enemies.size() - 1], texture_path);
+				enemies[enemies.size() - 1].position = data.pos;
+				graphic.set_enemy_position(enemies[enemies.size() - 1], data.pos); // x, y
+				graphic.set_enemy_size(enemies[enemies.size() - 1], 2);
+			}
 
-			Position enemy_position(5, 5);
-			enemies[enemies.size() - 1].position = enemy_position;
-			graphic.set_enemy_position(enemies[enemies.size() - 1], enemy_position); // x, y
-			graphic.set_enemy_size(enemies[enemies.size() - 1], 2);
 		}
-
+		
 
 	}
 	else if (map_id == 2)
