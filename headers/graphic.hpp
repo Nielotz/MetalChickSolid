@@ -134,6 +134,7 @@ class Graphic
 	void draw_hero_on_fight_arena();
 
 public:
+	void remove_enemies_from_map();
 	Direction hero_looking_direction = Direction::BOTTOM;
 
 	bool is_hero_moving = false;

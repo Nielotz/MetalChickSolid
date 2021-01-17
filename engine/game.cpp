@@ -72,6 +72,9 @@ void Game::load_map(uint16_t map_id)
 		map_file = PATH::MAP::TEXTURES::BOSS;
 
 	std::string killed_mobs; // List of killed mobs from file.
+	
+	enemies.clear();
+	graphic.remove_enemies_from_map();
 
 	for (const StrPositionHeight& data : maps_data[map_id])
 	{

@@ -138,6 +138,11 @@ void Graphic::remove_enemy_from_map(Enemy& enemy)
 	map_enemy_sprites_with_texture.erase(&enemy);
 }
 
+void Graphic::remove_enemies_from_map()
+{
+	map_enemy_sprites_with_texture.clear();
+}
+
 void Graphic::load_tut_texture(const std::string& path)
 {
 	//na razie si� poddaj� ale jeszcze do tego wr�c�
