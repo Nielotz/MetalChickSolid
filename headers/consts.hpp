@@ -20,79 +20,82 @@ namespace PATH
             typedef std::unordered_map<Direction, strings_vector> strings_to_directions_map;
             typedef std::pair<Direction, std::vector<std::string>> strings_to_direction_pair;
 
-            const static strings_to_directions_map warrior = {
-                strings_to_direction_pair {
-                    Direction::LEFT, strings_vector {
-                    "textures\\mobs\\hero\\left_1_3.tga",
-                    "textures\\mobs\\hero\\left_2.tga",
-                    "textures\\mobs\\hero\\left_1_3.tga",
-                    "textures\\mobs\\hero\\left_4.tga",
-                    }
-                },
-            strings_to_direction_pair {
-                Direction::RIGHT, strings_vector {
-                    "textures\\mobs\\hero\\right_1_3.tga",
-                    "textures\\mobs\\hero\\right_2.tga",
-                    "textures\\mobs\\hero\\right_1_3.tga",
-                    "textures\\mobs\\hero\\right_4.tga",
-                    },
-                },
-            strings_to_direction_pair {
-                Direction::BOTTOM, strings_vector{
-                    "textures\\mobs\\hero\\front_1_3.tga",
-                    "textures\\mobs\\hero\\front_2.tga",
-                    "textures\\mobs\\hero\\front_1_3.tga",
-                    "textures\\mobs\\hero\\front_4.tga",
-                    },
-                },
-            strings_to_direction_pair {
-                Direction::TOP, strings_vector{
-                    "textures\\mobs\\hero\\back_1_3.tga",
-                    "textures\\mobs\\hero\\back_2.tga",
-                    "textures\\mobs\\hero\\back_1_3.tga",
-                    "textures\\mobs\\hero\\back_4.tga",
-                    }
-                }
-            };
-        }
-    };
+			const static std::string WARRIOR_ARENA = "textures\\arena\\warrior_arena.tga";
 
-    namespace ENTITY_TEXTURES
-    {
-        namespace BEAR
-        {
-            const static std::string MAP = "textures\\mobs\\mobsmobs\\bear_map.tga";
-            const static std::string ARENA = "textures\\mobs\\mobsmobs\\bear_map.tga";
 
-        }
-        namespace DEER
-        {
-            const static std::string MAP = "textures\\mobs\\mobsmobs\\deer_map.tga";
-            const static std::string ARENA = "textures\\mobs\\mobsmobs\\deer_map.tga";
+			const static strings_to_directions_map warrior = {
+				strings_to_direction_pair {
+					Direction::LEFT, strings_vector {
+					"textures\\mobs\\hero\\left_1_3.tga",
+					"textures\\mobs\\hero\\left_2.tga",
+					"textures\\mobs\\hero\\left_1_3.tga",
+					"textures\\mobs\\hero\\left_4.tga",
+					}
+				},
+			strings_to_direction_pair {
+				Direction::RIGHT, strings_vector {
+					"textures\\mobs\\hero\\right_1_3.tga",
+					"textures\\mobs\\hero\\right_2.tga",
+					"textures\\mobs\\hero\\right_1_3.tga",
+					"textures\\mobs\\hero\\right_4.tga",
+					},
+				},
+			strings_to_direction_pair {
+				Direction::BOTTOM, strings_vector{
+					"textures\\mobs\\hero\\front_1_3.tga",
+					"textures\\mobs\\hero\\front_2.tga",
+					"textures\\mobs\\hero\\front_1_3.tga",
+					"textures\\mobs\\hero\\front_4.tga",
+					},
+				},
+			strings_to_direction_pair {
+				Direction::TOP, strings_vector{
+					"textures\\mobs\\hero\\back_1_3.tga",
+					"textures\\mobs\\hero\\back_2.tga",
+					"textures\\mobs\\hero\\back_1_3.tga",
+					"textures\\mobs\\hero\\back_4.tga",
+					}
+				}
+			};
+		}
+	};
 
-        }
-        namespace TROLL
-        {
-            const static std::string MAP = "textures\\mobs\\mobsmobs\\troll_map.tga";
-            const static std::string ARENA = "textures\\mobs\\mobsmobs\\troll_map.tga";
+	namespace ENTITY_TEXTURES
+	{
+		namespace BEAR
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\bear_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\bear_arena.tga";
 
-        }
-        namespace GOBLIN
-        {
-            const static std::string MAP = "textures\\mobs\\mobsmobs\\goblin_map.tga";
-            const static std::string ARENA = "textures\\mobs\\mobsmobs\\goblin_map.tga";
+		}
+		namespace DEER
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\deer_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\deer_arena.tga";
 
-        }
-        namespace FOX
-        {
-            const static std::string MAP = "textures\\mobs\\mobsmobs\\fox_map.tga";
-            const static std::string ARENA = "textures\\mobs\\mobsmobs\\fox_map.tga";
+		}
+		namespace TROLL
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\troll_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\troll_arena.tga";
 
-        }
-        namespace DRAGON
-        {
-            const static std::string MAP = "textures\\mobs\\mobsmobs\\dragon_map.tga";
-            const static std::string ARENA = "textures\\mobs\\mobsmobs\\dragon_map.tga";
+		}
+		namespace GOBLIN
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\goblin_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\goblin_arena.tga";
+
+		}
+		namespace FOX
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\fox_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\fox_arena.tga";
+
+		}
+		namespace DRAGON
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\dragon_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\dragon_arena.tga";
 
         }
     }

@@ -6,7 +6,6 @@
 
 Map::Map(std::string& path_to_data_file)
 {
-    load_map_data(path_to_data_file);
 }
 
 void Map::load_texture(const char* path)

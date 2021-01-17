@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+ï»¿#include <SFML/Graphics.hpp>
 
 #include <iostream>
 
@@ -50,7 +50,7 @@ Enemy* Graphic::check_click_intersect_enemy(sf::Vector2i& mouse_click_pos)
 	for (lel& pair_enemy_with_sprite_texture : map_enemy_sprites_with_texture)
 		if (pair_enemy_with_sprite_texture.second.first.getGlobalBounds().contains(sf::Vector2f{ mouse_click_pos }))
 			return pair_enemy_with_sprite_texture.first;
-	return nullptr;
+		return nullptr;
 }
 
 ARENA_BUTTON Graphic::check_arena_button_clicked(sf::Vector2i& mouse_click_pos)
@@ -93,6 +93,18 @@ Graphic::Graphic(Hero& hero)
 
 	load_UIs();
 
+	// Set hero in arena.
+	std::string texture_path = PATH::HERO::TEXTURES::WARRIOR_ARENA;
+
+	load_arena_hero_texture(texture_path);
+	set_arena_hero_position((Position&)Position(3, 6));
+	set_arena_hero_size(8);
+	
+	load_hero_textures(PATH::HERO::TEXTURES::warrior);
+	load_hero_textures(PATH::HERO::TEXTURES::warrior);
+
+	load_arena_background((std::string&)PATH::ARENA::TEXTURES::FORREST);
+
 	std::string tut_path = PATH::TUTORIAL::TEXTURES::TUT;
 
 	tutorial.load_tutorial_texture(tut_path);
@@ -128,8 +140,24 @@ void Graphic::remove_enemy_from_map(Enemy& enemy)
 
 void Graphic::load_tut_texture(const std::string& path)
 {
-	//na razie siê poddajê ale jeszcze do tego wrócê
+	//na razie siï¿½ poddajï¿½ ale jeszcze do tego wrï¿½cï¿½
 }
+
+void Graphic::load_arena_hero_texture(std::string& path)
+{
+	arena_hero_sprite_with_texture = { sf::Sprite(), sf::Texture()};
+
+	sf::Sprite& sprite = arena_hero_sprite_with_texture.first;
+	sf::Texture& texture = arena_hero_sprite_with_texture.second;
+
+	if (!texture.loadFromFile(path))
+		throw std::runtime_error("Cannot load " + path);
+
+	texture.setSmooth(true);
+
+	sprite.setTexture(texture);
+}
+
 
 void Graphic::load_arena_enemy_texture(Enemy& enemy, std::string& path)
 {
@@ -235,7 +263,7 @@ void Graphic::draw_hero()
 	window->draw(hero_sprite);
 }
 
-void Graphic::set_enemy_position(Enemy& enemy, Position& position)
+void Graphic::set_enemy_position(Enemy& enemy, Position position)
 {
 	sf::Sprite& entity_sprite = map_enemy_sprites_with_texture.at(&enemy).first;
 
@@ -245,6 +273,13 @@ void Graphic::set_enemy_position(Enemy& enemy, Position& position)
 void Graphic::set_arena_enemy_position(Enemy& enemy, Position& position)
 {
 	sf::Sprite& entity_sprite = arena_enemy_sprites_with_texture.at(&enemy).first;
+
+	entity_sprite.setPosition(position_to_display_position(position, entity_sprite));
+}
+
+void Graphic::set_arena_hero_position(Position& position)
+{
+	sf::Sprite& entity_sprite = arena_hero_sprite_with_texture.first;
 
 	entity_sprite.setPosition(position_to_display_position(position, entity_sprite));
 }
@@ -263,6 +298,16 @@ void Graphic::set_arena_enemy_size(Enemy& enemy, uint8_t height)
 {
 	sf::Texture& entity_texture = arena_enemy_sprites_with_texture.at(&enemy).second;
 	sf::Sprite& entity_sprite = arena_enemy_sprites_with_texture.at(&enemy).first;
+
+	float scale = float(CONSTS::TILE_SIZE * height) / float(entity_texture.getSize().y);
+
+	entity_sprite.setScale(sf::Vector2f{ scale, scale });
+}
+
+void Graphic::set_arena_hero_size(uint8_t height)
+{
+	sf::Texture& entity_texture = arena_hero_sprite_with_texture.second;
+	sf::Sprite& entity_sprite = arena_hero_sprite_with_texture.first;
 
 	float scale = float(CONSTS::TILE_SIZE * height) / float(entity_texture.getSize().y);
 
@@ -324,6 +369,7 @@ void Graphic::update_arena_screen()
 	draw_arena_background();
 	draw_UI();
 	draw_enemies_on_fight_arena();
+	draw_hero_on_fight_arena();
 }
 
 void Graphic::draw_enemies_on_fight_arena()
@@ -332,8 +378,12 @@ void Graphic::draw_enemies_on_fight_arena()
 
 	for (auto& enemy : entities_on_arena)
 		window->draw(arena_enemy_sprites_with_texture.at(enemy).first);
+}
 
-	// window->draw
+void Graphic::draw_hero_on_fight_arena()
+{
+	window->setView(main_view);
+	window->draw(arena_hero_sprite_with_texture.first);
 }
 
 void Graphic::update()

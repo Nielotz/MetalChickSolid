@@ -175,7 +175,7 @@ int32_t Arena::losu()
 ARENA_BUTTON Arena::wait_for_button(Graphic& graphic)
 {
     ARENA_BUTTON znak_gui = ARENA_BUTTON::NONE;
-    while (znak_gui != ARENA_BUTTON::NONE)
+    while (znak_gui == ARENA_BUTTON::NONE)
     {
         znak_gui = Control().check_arena_button_clicked(graphic);
         graphic.update();
