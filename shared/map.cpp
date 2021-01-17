@@ -6,7 +6,6 @@
 
 Map::Map(std::string& path_to_data_file)
 {
-    load_map_data(path_to_data_file);
 }
 
 void Map::load_texture(const char* path)
@@ -55,10 +54,43 @@ void Map::load_map_collisions(string& path)
         true_path = "textures\\maps\\start_map.txt";
     else if (true_path == PATH::MAP::TEXTURES::FOREST)
         true_path = "textures\\maps\\forest_map.txt";
+    else if (true_path == PATH::MAP::TEXTURES::BOSS)
+        true_path = "textures\\maps\\boss_map.txt";
     std::ifstream infile(true_path);
     std::string line;
+    collisions.clear();
     while (std::getline(infile, line)) {
         collisions.push_back(line);
+    }
+
+}
+
+void Map::save_load_dead_enemies()
+{
+    //F for all fallen animals during battle [*]
+
+    std::string path = "textures\\mobs\\dead_enemies.txt";
+    if (dead_enemies.empty())
+    {
+        std::ifstream infile(path);
+        std::string line;
+        while (std::getline(infile, line)) {
+            dead_enemies.push_back(line);
+        }
+        if (dead_enemies.empty()) {
+            dead_enemies.push_back(" ");
+            dead_enemies.push_back(" ");
+            dead_enemies.push_back(" ");
+        }
+    }
+    else {
+        std::ofstream save_file;
+        save_file.open(path);
+        save_file << dead_enemies[0] << "\n";
+        save_file << dead_enemies[1] << "\n";
+        save_file << dead_enemies[2] << "\n";
+        save_file.close();
+        std::cout << "enemies saved.\n";
     }
 
 }

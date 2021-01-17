@@ -20,7 +20,7 @@ struct Hero : Entity
     int8_t thread_status[10];
 
     ///On which map is player?
-    uint16_t map = 0;
+    uint16_t map_id = 0;
 
     Hero() = default;
 

@@ -1,0 +1,3 @@
+  Deer_2
+  Bear_1
+  Dragon_1
