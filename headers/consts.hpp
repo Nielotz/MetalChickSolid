@@ -20,6 +20,9 @@ namespace PATH
             typedef std::unordered_map<Direction, strings_vector> strings_to_directions_map;
             typedef std::pair<Direction, std::vector<std::string>> strings_to_direction_pair;
 
+			const static std::string WARRIOR_ARENA = "textures\\arena\\warrior_arena.tga";
+
+
 			const static strings_to_directions_map warrior = {
 				strings_to_direction_pair {
 					Direction::LEFT, strings_vector {
@@ -104,6 +107,7 @@ namespace PATH
 			const static std::string TEST = "textures\\maps\\test_map.tga";
 			const static std::string START = "textures\\maps\\start_map.tga";
 			const static std::string FOREST = "textures\\maps\\forest_map.tga";
+			const static std::string BOSS = "textures\\maps\\test_map.tga";
 
 		}
 	}

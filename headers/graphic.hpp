@@ -93,6 +93,8 @@ class Graphic
 	// Move into arena class.
 	std::unordered_map<Enemy*, std::pair<sf::Sprite, sf::Texture>> arena_enemy_sprites_with_texture;
 
+	std::pair<sf::Sprite, sf::Texture> arena_hero_sprite_with_texture;
+
 	// Move into arena class.
 	std::vector<Enemy*> entities_on_arena;
 
@@ -128,6 +130,8 @@ class Graphic
 
 	// Move into seperate fight arena class.
 	void draw_enemies_on_fight_arena();
+
+	void draw_hero_on_fight_arena();
 
 public:
 	Direction hero_looking_direction = Direction::BOTTOM;
@@ -170,7 +174,7 @@ public:
 	// Move into arena class.
 	void load_arena_enemy_texture(Enemy& enemy, std::string& path);
 
-	void load_arena_hero_texture(Enemy& enemy, std::string& path);
+	void load_arena_hero_texture(std::string& path);
 
 	void load_hero_textures(const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
 	);
@@ -186,10 +190,15 @@ public:
 
 	void set_arena_enemy_position(Enemy& enemy, Position& position);
 
+	void set_arena_hero_position(Position& position);
+
 	// Height in tiles, width automaticly adjusts.
 	void set_enemy_size(Enemy& enemy, uint8_t height);
 
 	void set_arena_enemy_size(Enemy& enemy, uint8_t height);
+
+	void set_arena_hero_size(uint8_t height);
+
 
 	// Draw enemies at theirs positions.
 	void draw_enemies();

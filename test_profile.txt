@@ -2,7 +2,7 @@ nick: Dumb
 profession: 1
 lvl: 1
 exp: 0
-hp: 18
+hp: 16
 current_map: 1
 poz_x: 4
 poz_y: 12
