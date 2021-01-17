@@ -4,7 +4,7 @@
 
 #include "../headers/arena.hpp"
 
-void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
+void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic, Map& map)
 {
     enemy.hp = enemy.hp_max;
     if (enemy.stamina < 4)
@@ -15,13 +15,11 @@ void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
     //Obra¿enia = (strength lub intelect) + (obra¿enia broni) - (Obrona przeciwnika)
     int32_t enemyMaxStamina = enemy.stamina;
     int32_t heroMaxStamina = 20 * hero.lvl + 3 * hero.agility;
+    bool run_away = false;
     srand(((int32_t)time(NULL)));
     std::cout << "\nWalczysz z " << enemy.name;
     std::cout << "\nStaty Hero:\nhp: " << hero.hp << "/" << hero.hp_max << "\nStamina: " << hero.stamina << "/" << heroMaxStamina << "\nAT:" << heroAT << " S:" << hero.strength << " A:" << hero.agility << " lvl:" << hero.lvl << "\n";
     std::cout << "\nStaty Enema:\nhp: " << enemy.hp << "/" << enemy.hp_max << "\nStamina: " << enemy.stamina << "/" << enemyMaxStamina << "\nAT:" << enemyAT << " S:" << enemy.strength << " A:" << enemy.agility << " lvl:" << enemy.lvl << "\n";
-    //temp - do usuniêcia przy implementacji w grafike
-    char znak;
-    ////////
     while (hero.hp > 0 && enemy.hp > 0)
     {
         if (enemy.stamina < 0)
@@ -86,6 +84,7 @@ void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
                 std::cout << "Uciekasz z pola walki...\n";
                 enemy.hp = enemy.hp_max;
                 enemy.stamina = enemyMaxStamina;
+                run_away = true;
                 break;
             }
             heroAT += hero.attack_time;
@@ -94,12 +93,28 @@ void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
     }
     std::cout << "Koniec walki\n";
     if (hero.hp <= 0)
+    {
         std::cout << "Haha you died\n";
+        if (hero.hp < 0)
+            hero.hp = 0;
+        if (hero.stamina < 0)
+            hero.stamina = 0;
+    }
     else
     {
-        std::cout << "Pokonales przeciwnika!\n";
-        graphic.remove_enemy_from_map(enemy);
-        enemy.status = 0;
+        if (!run_away)
+        {
+            std::cout << "Pokonales przeciwnika!\n";
+            std::cout << "Zdobywasz kolejny lvl!\n";
+            hero.lvl++;
+            graphic.remove_enemy_from_map(enemy);
+            map.dead_enemies[hero.map_id - 1] += (" " + enemy.name);
+            enemy.status = 0;
+            if (hero.hp < 0)
+                hero.hp = 0;
+            if (hero.stamina < 0)
+                hero.stamina = 0;
+        }
     }
 }
 

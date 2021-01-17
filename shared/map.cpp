@@ -65,6 +65,34 @@ void Map::load_map_collisions(string& path)
 
 }
 
+void Map::save_load_dead_enemies()
+{
+    std::string path = "textures\\mobs\\dead_enemies.txt";
+    if (dead_enemies.empty())
+    {
+        std::ifstream infile(path);
+        std::string line;
+        while (std::getline(infile, line)) {
+            dead_enemies.push_back(line);
+        }
+        if (dead_enemies.empty()) {
+            dead_enemies.push_back(" ");
+            dead_enemies.push_back(" ");
+            dead_enemies.push_back(" ");
+        }
+    }
+    else {
+        std::ofstream save_file;
+        save_file.open(path);
+        save_file << dead_enemies[0] << "\n";
+        save_file << dead_enemies[1] << "\n";
+        save_file << dead_enemies[2] << "\n";
+        save_file.close();
+        std::cout << "enemies saved.\n";
+    }
+
+}
+
 void Map::load_texture(string& path)
 {
     if (!texture.loadFromFile(path))

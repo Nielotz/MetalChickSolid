@@ -31,40 +31,40 @@ public:
 
 private:
 
-	struct StrPositionHeight
-	{
-		const std::string name;
-		const Position pos;
-		const uint8_t height;
+    struct StrPositionHeight
+    {
+        const std::string name;
+        const Position pos;
+        const uint8_t height;
 
-		StrPositionHeight(const std::string name, const Position pos, const uint8_t height)
-			:name(name), pos(pos), height(height)
-		{}
-	};
+        StrPositionHeight(const std::string name, const Position pos, const uint8_t height)
+            :name(name), pos(pos), height(height)
+        {}
+    };
 
-	// Name (have to contain class name), position, height.
-	const std::vector<StrPositionHeight> maps_data[4] = {
-		{ // Test map.
+    // Name (have to contain class name), position, height.
+    const std::vector<StrPositionHeight> maps_data[4] = {
+        { // Test map.
 
-		},{ // Start map.
-			{"Bear_1", {5,5}, 2},
-			{"Dragon_1", {7,5}, 2},
-			{"Dragon_2", {7,8}, 2},
+        },{ // Start map.
+            {"Bear_1", {5,5}, 2},
+            {"Dragon_1", {7,5}, 2},
+            {"Dragon_2", {7,8}, 2},
 
-		},{ // Forest map.
-			{"Bear_1", {5,10}, 2},
-			{"Dragon_1", {7,5}, 2},
+        },{ // Forest map.
+            {"Bear_1", {5,10}, 2},
+            {"Dragon_1", {7,5}, 2},
 
 
-		},{ // Boss map.
-			{"Bear_1", {5,5}, 2},
-			{"Dragon_1", {7,5}, 2},
-			{"Dragon_1", {7,5}, 2},
-			{"Dragon_1", {7,5}, 2}
+        },{ // Boss map.
+            {"Bear_1", {5,5}, 2},
+            {"Dragon_1", {7,5}, 2},
+            {"Dragon_1", {7,5}, 2},
+            {"Dragon_1", {7,5}, 2}
 
-		},
+        },
 
-	};
+    };
 
     Profile profile;
     Graphic graphic;
@@ -76,5 +76,4 @@ private:
 
     bool can_hero_move(const Direction& direction);
     void choose_profile(Profile& profile);
-
 };

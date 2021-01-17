@@ -20,6 +20,7 @@ void Game::game_loop()
         graphic.update();
         graphic.window->display();
     }
+    map.save_load_dead_enemies();//save enemies xd
     profile.save();
 }
 
@@ -54,6 +55,7 @@ void Game::choose_profile(Profile& profile)
     profile.path = "test_profile.txt";
 }
 
+
 void Game::exit()
 {
     graphic.window->close();
@@ -70,62 +72,62 @@ void Game::load_map(uint16_t map_id)
         map_file = PATH::MAP::TEXTURES::FOREST;
     else if (map_id == 3)
         map_file = PATH::MAP::TEXTURES::BOSS;
+    map.save_load_dead_enemies();
+    std::string killed_mobs = map.dead_enemies[map_id - 1]; // List of killed mobs from file.
 
-	std::string killed_mobs; // List of killed mobs from file.
-	
-	enemies.clear();
+    enemies.clear();
     enemies.reserve(50);
-	graphic.remove_enemies_from_map();
+    graphic.remove_enemies_from_map();
 
-	for (const StrPositionHeight& data : maps_data[map_id])
-	{
-		if (killed_mobs.find(data.name) == std::string::npos)
-		{
-			std::string texture_path;
-			if (data.name.find("Bear") != std::string::npos)
-			{
-				texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
-				Bear enemy;
-				enemy.update_stats(profile.hero.lvl);
-				enemies.push_back(enemy);
-			}
-			else if (data.name.find("Deer") != std::string::npos)
-			{
-				texture_path = PATH::ENTITY_TEXTURES::DEER::MAP;
-				Deer enemy;
-				enemy.update_stats(profile.hero.lvl);
-				enemies.push_back(enemy);
-			}
-			else if (data.name.find("Goblin") != std::string::npos)
-			{
-				texture_path = PATH::ENTITY_TEXTURES::GOBLIN::MAP;
-				Goblin enemy;
-				enemy.update_stats(profile.hero.lvl);
-				enemies.push_back(enemy);
-			}
-			else if (data.name.find("Troll") != std::string::npos)
-			{
-				texture_path = PATH::ENTITY_TEXTURES::TROLL::MAP;
-				Troll enemy;
-				enemy.update_stats(profile.hero.lvl);
-				enemies.push_back(enemy);
-			}
-			else if (data.name.find("Fox") != std::string::npos)
-			{
-				texture_path = PATH::ENTITY_TEXTURES::FOX::MAP;
-				Fox enemy;
-				enemy.update_stats(profile.hero.lvl);
-				enemies.push_back(enemy);
-			}
-			else if (data.name.find("Dragon") != std::string::npos)
-			{
-				texture_path = PATH::ENTITY_TEXTURES::DRAGON::MAP;
-				Dragon enemy;
-				enemy.update_stats(profile.hero.lvl);
-				enemies.push_back(enemy);
-			}
-			else
-				throw std::runtime_error("Invalid enemy.");
+    for (const StrPositionHeight& data : maps_data[map_id])
+    {
+        if (killed_mobs.find(data.name) == std::string::npos)
+        {
+            std::string texture_path;
+            if (data.name.find("Bear") != std::string::npos)
+            {
+                texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
+                Bear enemy;
+                enemy.update_stats(profile.hero.lvl);
+                enemies.push_back(enemy);
+            }
+            else if (data.name.find("Deer") != std::string::npos)
+            {
+                texture_path = PATH::ENTITY_TEXTURES::DEER::MAP;
+                Deer enemy;
+                enemy.update_stats(profile.hero.lvl);
+                enemies.push_back(enemy);
+            }
+            else if (data.name.find("Goblin") != std::string::npos)
+            {
+                texture_path = PATH::ENTITY_TEXTURES::GOBLIN::MAP;
+                Goblin enemy;
+                enemy.update_stats(profile.hero.lvl);
+                enemies.push_back(enemy);
+            }
+            else if (data.name.find("Troll") != std::string::npos)
+            {
+                texture_path = PATH::ENTITY_TEXTURES::TROLL::MAP;
+                Troll enemy;
+                enemy.update_stats(profile.hero.lvl);
+                enemies.push_back(enemy);
+            }
+            else if (data.name.find("Fox") != std::string::npos)
+            {
+                texture_path = PATH::ENTITY_TEXTURES::FOX::MAP;
+                Fox enemy;
+                enemy.update_stats(profile.hero.lvl);
+                enemies.push_back(enemy);
+            }
+            else if (data.name.find("Dragon") != std::string::npos)
+            {
+                texture_path = PATH::ENTITY_TEXTURES::DRAGON::MAP;
+                Dragon enemy;
+                enemy.update_stats(profile.hero.lvl);
+                enemies.push_back(enemy);
+            }
+            else
+                throw std::runtime_error("Invalid enemy.");
 
             enemies[enemies.size() - 1].name = data.name;
 
@@ -227,7 +229,7 @@ void Game::perform_fight(Enemy& enemy)
         graphic.update();
         graphic.window->display();
 
-        arena.fight(profile.hero, enemy, graphic);
+        arena.fight(profile.hero, enemy, graphic, map);
         while (!control.check_mouse_left_button_clicked(graphic))
         {
             graphic.update();
