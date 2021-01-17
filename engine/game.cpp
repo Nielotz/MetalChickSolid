@@ -81,42 +81,42 @@ void Game::load_map(uint16_t map_id)
 			if (data.name.find("Bear") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
-				Enemy &enemy = *(new Enemy());
+				Bear enemy;
 				enemy.update_stats(profile.hero.lvl);
 				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Deer") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::DEER::MAP;
-				Enemy enemy;
+				Deer enemy;
 				enemy.update_stats(profile.hero.lvl);
 				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Goblin") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::GOBLIN::MAP;
-				Enemy enemy;
+				Goblin enemy;
 				enemy.update_stats(profile.hero.lvl);
 				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Troll") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::TROLL::MAP;
-				Enemy enemy;
+				Troll enemy;
 				enemy.update_stats(profile.hero.lvl);
 				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Fox") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::FOX::MAP;
-				Enemy enemy;
+				Fox enemy;
 				enemy.update_stats(profile.hero.lvl);
 				enemies.push_back(enemy);
 			}
 			else if (data.name.find("Dragon") != std::string::npos)
 			{
 				texture_path = PATH::ENTITY_TEXTURES::DRAGON::MAP;
-				Enemy enemy;
+				Dragon enemy;
 				enemy.update_stats(profile.hero.lvl);
 				enemies.push_back(enemy);
 			}
