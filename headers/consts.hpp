@@ -97,55 +97,54 @@ namespace PATH
 			const static std::string MAP = "textures\\mobs\\mobsmobs\\dragon_map.tga";
 			const static std::string ARENA = "textures\\mobs\\mobsmobs\\dragon_arena.tga";
 
-		}
-	}
+        }
+    }
 
-	namespace MAP
-	{
-		namespace TEXTURES
-		{
-			const static std::string TEST = "textures\\maps\\test_map.tga";
-			const static std::string START = "textures\\maps\\start_map.tga";
-			const static std::string FOREST = "textures\\maps\\forest_map.tga";
-			const static std::string BOSS = "textures\\maps\\test_map.tga";
+    namespace MAP
+    {
+        namespace TEXTURES
+        {
+            const static std::string TEST = "textures\\maps\\test_map.tga";
+            const static std::string START = "textures\\maps\\start_map.tga";
+            const static std::string FOREST = "textures\\maps\\forest_map.tga";
+            const static std::string BOSS = "textures\\maps\\boss_map.tga";
+        }
+    }
 
-		}
-	}
+    namespace ARENA
+    {
+        namespace TEXTURES
+        {
+            const static std::string FORREST = "textures\\arena\\forrest.tga";
 
-	namespace ARENA
-	{
-		namespace TEXTURES
-		{
-			const static std::string FORREST = "textures\\arena\\forrest.tga";
+        }
+    }
 
-		}
-	}
+    namespace PANEL
+    {
+        namespace TEXTURES
+        {
+            const static std::string WALK_UI_RIGHT_PANEL = "textures\\ui\\UI_map.tga";
+            const static std::string ARENA_UI_RIGHT_PANEL = "textures\\ui\\UI_arena.tga";
 
-	namespace PANEL
-	{
-		namespace TEXTURES
-		{
-			const static std::string WALK_UI_RIGHT_PANEL = "textures\\ui\\UI_map.tga";
-			const static std::string ARENA_UI_RIGHT_PANEL = "textures\\ui\\UI_arena.tga";
+        }
+    }
 
-		}
-	}
-
-	namespace TUTORIAL
-	{
-		namespace TEXTURES
-		{
-			const static std::string TUT = "textures\\maps\\tut.tga";
-		}
-	}
+    namespace TUTORIAL
+    {
+        namespace TEXTURES
+        {
+            const static std::string TUT = "textures\\maps\\tut.tga";
+        }
+    }
 };
 
 struct CONSTS
 {
-	const static sf::Vector2u BASE_SCREEN_SIZE;
-	const static sf::Vector2u GAME_SCREEN_RATIO;
-	const static sf::Vector2u SCREEN_SIZE;
-	const static sf::Vector2u GAME_WINDOW_SIZE;
+    const static sf::Vector2u BASE_SCREEN_SIZE;
+    const static sf::Vector2u GAME_SCREEN_RATIO;
+    const static sf::Vector2u SCREEN_SIZE;
+    const static sf::Vector2u GAME_WINDOW_SIZE;
 
     // Scales everything to appear same on every screen.
     const static long double SCALE;
