@@ -68,8 +68,8 @@ void Game::load_map(uint16_t map_id)
 		map_file = PATH::MAP::TEXTURES::START;
 	else if (map_id == 2)
 		map_file = PATH::MAP::TEXTURES::FOREST;
-	// else if (map_id == 3)
-	  //  map_file = PATH::MAP::TEXTURES::BOSS;
+	else if (map_id == 3)
+	    map_file = PATH::MAP::TEXTURES::BOSS;
 
 	uint8_t mob_height; // Set in if;
 	std::string killed_mobs; // List of killed mobs from file.
@@ -137,9 +137,9 @@ void Game::load_map(uint16_t map_id)
 
 void Game::start_tutorial()
 {
-	while (graphic.window->isOpen())
-	{
-		control.parse_walk_events(graphic, *this);
+    while (!control.check_mouse_left_button_clicked(graphic))
+    {
+        control.parse_walk_events(graphic, *this);
 
 		graphic.draw_tutorial();
 		graphic.window->display();
