@@ -120,7 +120,6 @@ void Graphic::load_level(Map& map)
 void Graphic::load_enemy_texture(Enemy& enemy, std::string& path)
 {
 	map_enemy_sprites_with_texture.insert({ &enemy, { sf::Sprite(), sf::Texture()} });
-	map_enemy_sprites_with_texture.insert({ new Enemy(), { sf::Sprite(), sf::Texture()} });
 
 	sf::Sprite& sprite = map_enemy_sprites_with_texture.at(&enemy).first;
 	sf::Texture& texture = map_enemy_sprites_with_texture.at(&enemy).second;
