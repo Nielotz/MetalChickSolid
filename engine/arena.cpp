@@ -6,6 +6,9 @@
 
 void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
 {
+    enemy.hp = enemy.hp_max;
+    if (enemy.stamina < 4)
+        enemy.stamina = 4;
     int32_t tura = 1;
     int32_t heroAT = hero.attack_time;
     int32_t enemyAT = enemy.attack_time;
@@ -13,6 +16,7 @@ void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
     int32_t enemyMaxStamina = enemy.stamina;
     int32_t heroMaxStamina = 20 * hero.lvl + 3 * hero.agility;
     srand(((int32_t)time(NULL)));
+    std::cout << "\nWalczysz z " << enemy.name;
     std::cout << "\nStaty Hero:\nhp: " << hero.hp << "/" << hero.hp_max << "\nStamina: " << hero.stamina << "/" << heroMaxStamina << "\nAT:" << heroAT << " S:" << hero.strength << " A:" << hero.agility << " lvl:" << hero.lvl << "\n";
     std::cout << "\nStaty Enema:\nhp: " << enemy.hp << "/" << enemy.hp_max << "\nStamina: " << enemy.stamina << "/" << enemyMaxStamina << "\nAT:" << enemyAT << " S:" << enemy.strength << " A:" << enemy.agility << " lvl:" << enemy.lvl << "\n";
     //temp - do usuniêcia przy implementacji w grafike
@@ -31,19 +35,21 @@ void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
         {   //enem podejmuje akcje
             if ((hero.hp - (enemy.strength - (hero.agility + hero.strength) / 100)) <= 0)
             {
-                std::cout << "Przeciwnik cie atakuje\n";
-                attack(hero, enemy, 2);
+                if (enemy.stamina > 0)
+                {
+                    std::cout << "Przeciwnik cie atakuje\n";
+                    attack(hero, enemy, 2);
+                }
+                else
+                {
+                    std::cout << "Przeciwnik ma za ma³o staminy na atak.";
+                    enemy_defence(enemy, enemyMaxStamina);
+                }
+
             }
             else if (enemy.hp < (enemy.hp_max * 0.15) || enemy.stamina < (enemyMaxStamina * 0.2))
             {
-                std::cout << "Przeciwnik sie broni\n";
-                enemy.stamina += (int32_t)(enemyMaxStamina * 0.25);
-                enemy.hp += (int32_t)(enemy.hp_max * 0.25);
-                std::cout << "Przeciwnik odzyskuje " << (int32_t)(enemyMaxStamina * 0.25) << " staminy i " << (int32_t)(enemy.hp_max * 0.25) << " hp\n";
-                if (enemy.hp > enemy.hp_max)
-                    enemy.hp = enemy.hp_max;
-                if (enemy.stamina > enemyMaxStamina)
-                    enemy.stamina = enemyMaxStamina;
+                enemy_defence(enemy, enemyMaxStamina);
             }
             else
             {
@@ -54,10 +60,8 @@ void Arena::fight(Hero& hero, Enemy& enemy, Graphic& graphic)
         }
         else
         {   //hero podejmuje akcje
-            std::cout << "Jaka akcje chcesz podjac? z-atak,x-obrona,c-ucieczka\n";
-            //std::cin >> znak;
+            std::cout << "Jaka akcje chcesz podjac?\n";
             ARENA_BUTTON znak_gui = wait_for_button(graphic);
-            //std::cout << "wybrales " << znak << std::endl;
             if (znak_gui == ARENA_BUTTON::ATTACK)
             {
                 if (hero.stamina > 0)
@@ -165,6 +169,18 @@ void Arena::hero_defence(Hero& hero, int32_t stamina)
         hero.hp = hero.hp_max;
     if (hero.stamina > stamina)
         hero.stamina = stamina;
+}
+
+void Arena::enemy_defence(Enemy& enemy, int32_t stamina)
+{
+    std::cout << "Przeciwnik sie broni\n";
+    enemy.stamina += (int32_t)(stamina * 0.25);
+    //enemy.hp += (int32_t)(enemy.hp_max * 0.05);
+    std::cout << "Przeciwnik odzyskuje " << (int32_t)(stamina * 0.25) << " staminy i " << (int32_t)(enemy.hp_max * 0.25) << " hp\n";
+    if (enemy.hp > enemy.hp_max)
+        enemy.hp = enemy.hp_max;
+    if (enemy.stamina > stamina)
+        enemy.stamina = stamina;
 }
 
 int32_t Arena::losu()

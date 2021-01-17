@@ -21,6 +21,7 @@ public:
 private:
     void attack(Hero& hero, Enemy& enemy, int32_t who_attack);
     void hero_defence(Hero& hero, int32_t stamina);
+    void enemy_defence(Enemy& enemy, int32_t stamina);
     int32_t losu();
     ARENA_BUTTON wait_for_button(Graphic& graphic);
 };

@@ -58,6 +58,7 @@ void Map::load_map_collisions(string& path)
         true_path = "textures\\maps\\boss_map.txt";
     std::ifstream infile(true_path);
     std::string line;
+    collisions.clear();
     while (std::getline(infile, line)) {
         collisions.push_back(line);
     }

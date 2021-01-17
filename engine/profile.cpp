@@ -9,8 +9,6 @@
 //All keywords that appear in the file:
 //nick, profession, lvl, exp, hp, current_map, poz_x, poz_y, eq_item_1...20, thread_1...10, enemy_status_1...10,
 
-
-/// Not done yet.
 void Profile::load()
 {
     if (path.empty())
