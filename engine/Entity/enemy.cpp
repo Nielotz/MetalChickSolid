@@ -84,11 +84,11 @@ Dragon::Dragon()
 {
     name = "Dragon";
     hp_max = 35;
-    stamina = 3;
+    stamina = 4;
     critical = 3;
     strength = 5;
     agility = 3;
-    attack_time = 5;
+    attack_time = 37;
     defence = 5;
     critical_power = 2;
     block = 2;
