@@ -99,9 +99,6 @@ void Dragon::update_stats(uint16_t lvl)
 }
 
 
-void Enemy::update_stats(uint16_t lvl)
-{
-}
 
 Enemy::Enemy()
 {
@@ -133,7 +130,7 @@ Enemy::Enemy(const Enemy& enemy)
     attack_time = enemy.attack_time;
 }
 
-void Bear::update_stats(uint16_t lvl)
+void Enemy::update_stats(uint16_t lvl)
 {
     double base = lvl + lvl * .025;
     hp_max = int(base * 6);

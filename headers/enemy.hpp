@@ -20,7 +20,7 @@ struct Enemy : Entity
     std::vector<std::pair<uint8_t, Item>> loot;
     std::string name;
 
-    virtual void update_stats(uint16_t lvl);
+    void update_stats(uint16_t lvl);
 
     // Have to be shhh.
     Enemy();
@@ -31,35 +31,35 @@ struct Enemy : Entity
 struct Deer : Enemy
 {
     Deer();
-    void update_stats(uint16_t lvl) override;
+    void update_stats(uint16_t lvl);
 };
 
 struct Bear : Enemy
 {
     Bear();
-    void update_stats(uint16_t lvl) override;
+    void update_stats(uint16_t lvl);
 };
 
 struct Goblin : Enemy
 {
     Goblin();
-    void update_stats(uint16_t lvl) override;
+    void update_stats(uint16_t lvl);
 };
 
 struct Troll : Enemy
 {
     Troll();
-    void update_stats(uint16_t lvl) override;
+    void update_stats(uint16_t lvl);
 };
 
 struct Fox : Enemy
 {
     Fox();
-    void update_stats(uint16_t lvl) override;
+    void update_stats(uint16_t lvl);
 };
 
 struct Dragon : Enemy
 {
     Dragon();
-    void update_stats(uint16_t lvl) override;
+    void update_stats(uint16_t lvl);
 };
