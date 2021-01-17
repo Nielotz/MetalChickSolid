@@ -34,17 +34,7 @@ struct Enemy : Entity
 
 struct Deer : Enemy
 {
-    std::string name = "Deer";
-    uint32_t hp_max = 5;
-    uint32_t stamina = 3;
-    uint32_t agility = 2;
-    uint32_t strength = 1;
-    uint32_t attack_time = 1;
-    typedef std::pair<uint8_t, Item> chance_item;
-    std::vector<chance_item> loot = {
-      chance_item{50, Meat()},
-      chance_item{20, FancyMeat()}
-    };
+    Deer();
 };
 
 struct Bear : Enemy
@@ -54,64 +44,20 @@ struct Bear : Enemy
 
 struct Goblin : Enemy
 {
-    std::string name = "Goblin";
-    uint32_t hp_max = 15;
-    uint32_t stamina = 2;
-    uint32_t critical = 1;
-    uint32_t strength = 1;
-    uint32_t agility = 2;
-    uint32_t attack_time = 2;
-    int32_t defence = 3;
-    typedef std::pair<uint8_t, Item> chance_item;
-    std::vector<chance_item> loot = {
-      chance_item{20, BasicArmor()},
-      chance_item{40, FancyArmor()}
-    };
+    Goblin();
 };
 
 struct Troll : Enemy
 {
-    std::string name = "Troll";
-    uint32_t hp_max = 20;
-    uint32_t stamina = 2;
-    uint32_t critical = 2;
-    uint32_t strength = 3;
-    uint32_t agility = 1;
-    uint32_t attack_time = 3;
-    int32_t defence = 2;
-    typedef std::pair<uint8_t, Item> chance_item;
-    std::vector<chance_item> loot = {
-      chance_item{20, BasicSword()},
-      chance_item{40, FancySword()}
-    };
+    Troll();
 };
 
 struct Fox : Enemy
 {
-    std::string name = "Fox";
-    uint32_t hp_max = 25;
-    uint32_t stamina = 3;
-    uint32_t strength = 1;
-    uint32_t agility = 5;
-    uint32_t attack_time = 4;
-    int32_t defence = 4;
-    typedef std::pair<uint8_t, Item> chance_item;
-    std::vector<chance_item> loot = {
-      chance_item{20, BasicShield()},
-      chance_item{40, FancyShield()}
-    };
+    Fox();
 };
 
 struct Dragon : Enemy
 {
-    std::string name = "Dragon";
-    uint32_t hp_max = 35;
-    uint32_t stamina = 3;
-    uint32_t critical = 3;
-    uint32_t strength = 5;
-    uint32_t agility = 3;
-    uint32_t attack_time = 5;
-    int32_t defence = 5;
-    int32_t critical_power = 2;
-    int32_t block = 2;
+    Dragon();
 };

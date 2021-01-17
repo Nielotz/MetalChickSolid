@@ -129,7 +129,7 @@ void Game::load_map()
 
 void Game::start_tutorial()
 {
-    while (graphic.window->isOpen())
+    while (!control.check_mouse_left_button_clicked(graphic))
     {
         control.parse_walk_events(graphic, *this);
 
