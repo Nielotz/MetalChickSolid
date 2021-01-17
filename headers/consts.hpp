@@ -65,6 +65,36 @@ namespace PATH
 			const static std::string ARENA = "textures\\mobs\\mobsmobs\\bear_map.tga";
 
 		}
+		namespace DEER
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\deer_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\deer_map.tga";
+
+		}
+		namespace TROLL
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\troll_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\troll_map.tga";
+
+		}
+		namespace GOBLIN
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\goblin_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\goblin_map.tga";
+
+		}
+		namespace FOX
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\fox_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\fox_map.tga";
+
+		}
+		namespace DRAGON
+		{
+			const static std::string MAP = "textures\\mobs\\mobsmobs\\dragon_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\dragon_map.tga";
+
+		}
 	}
 
 	namespace MAP
