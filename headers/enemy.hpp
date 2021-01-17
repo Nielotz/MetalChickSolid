@@ -12,20 +12,15 @@ struct Enemy : Entity
     ///Status (dead, alive)
     int8_t status;
     int32_t hp = 0; // current hp
-    int32_t hp_max = 0; // max avalible hp
-    int32_t mana = 0;
     int32_t stamina = 0;
     int32_t strength = 0;
     int32_t agility = 0;
-    int32_t intelect = 0;
-    int32_t critical = 0;
-    int32_t critical_power = 0;
-    int32_t block = 0;
     int32_t defence = 0;
     int32_t attack_time = 0;
     std::vector<std::pair<uint8_t, Item>> loot;
     std::string name;
 
+    void update_stats(uint16_t lvl);
 
     // Have to be shhh.
     Enemy();
@@ -35,29 +30,35 @@ struct Enemy : Entity
 struct Deer : Enemy
 {
     Deer();
+    void update_stats(uint16_t lvl);
 };
 
 struct Bear : Enemy
 {
     Bear();
+    void update_stats(uint16_t lvl);
 };
 
 struct Goblin : Enemy
 {
     Goblin();
+    void update_stats(uint16_t lvl);
 };
 
 struct Troll : Enemy
 {
     Troll();
+    void update_stats(uint16_t lvl);
 };
 
 struct Fox : Enemy
 {
     Fox();
+    void update_stats(uint16_t lvl);
 };
 
 struct Dragon : Enemy
 {
     Dragon();
+    void update_stats(uint16_t lvl);
 };
