@@ -24,7 +24,7 @@ public:
     void stop();
     void exit();
     void start_tutorial();
-    void load_map();
+    void load_map(uint16_t map_id);
 
     void move_hero(const Direction& direction);
     void perform_fight(Enemy& enemy);

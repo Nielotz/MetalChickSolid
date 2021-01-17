@@ -54,7 +54,7 @@ void Profile::load()
         else if (keyword == "hp:")
             input >> hero.hp;
         else if (keyword == "current_map:")
-            input >> hero.map;
+            input >> hero.map_id;
         else if (keyword == "poz_x:")
             input >> hero.position.x;
         else if (keyword == "poz_y:")
@@ -107,7 +107,7 @@ void Profile::save()
     save_file << "lvl: " << hero.lvl << "\n";
     save_file << "exp: " << hero.exp << "\n";
     save_file << "hp: " << hero.hp << "\n";
-    save_file << "current_map: " << hero.map << "\n";
+    save_file << "current_map: " << hero.map_id << "\n";
     save_file << "poz_x: " << hero.position.x << "\n";
     save_file << "poz_y: " << hero.position.y << "\n";
     for (int i = 0; i < 20; i++) {

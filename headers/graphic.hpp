@@ -170,6 +170,8 @@ public:
 	// Move into arena class.
 	void load_arena_enemy_texture(Enemy& enemy, std::string& path);
 
+	void load_arena_hero_texture(Enemy& enemy, std::string& path);
+
 	void load_hero_textures(const std::unordered_map<Direction, std::vector<std::string>> paths_to_hero_textures
 	);
 
@@ -180,7 +182,7 @@ public:
 
 	void set_hero_position(Position& position);
 
-	void set_enemy_position(Enemy& enemy, Position& position);
+	void set_enemy_position(Enemy& enemy, Position position);
 
 	void set_arena_enemy_position(Enemy& enemy, Position& position);
 

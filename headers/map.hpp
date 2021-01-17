@@ -12,18 +12,6 @@
 using std::vector;
 using std::string;
 
-struct MapData
-{
-    // Includes doors, teleport points, etc.
-    std::vector<Entity> entries;
-
-    // Enemies.
-    std::vector<Entity> entities;
-
-    std::vector <vector<char>> walls;
-
-};
-
 struct Map
 {
     sf::Texture texture;
@@ -34,8 +22,6 @@ struct Map
 
     Map(std::string& path_to_data_file);
     Map() = default;
-
-    MapData* data;
 
     // Load the map (textures, physical map) from the files.
     void load_texture(string& path);

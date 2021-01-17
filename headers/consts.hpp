@@ -62,37 +62,37 @@ namespace PATH
 		namespace BEAR
 		{
 			const static std::string MAP = "textures\\mobs\\mobsmobs\\bear_map.tga";
-			const static std::string ARENA = "textures\\mobs\\mobsmobs\\bear_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\bear_arena.tga";
 
 		}
 		namespace DEER
 		{
 			const static std::string MAP = "textures\\mobs\\mobsmobs\\deer_map.tga";
-			const static std::string ARENA = "textures\\mobs\\mobsmobs\\deer_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\deer_arena.tga";
 
 		}
 		namespace TROLL
 		{
 			const static std::string MAP = "textures\\mobs\\mobsmobs\\troll_map.tga";
-			const static std::string ARENA = "textures\\mobs\\mobsmobs\\troll_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\troll_arena.tga";
 
 		}
 		namespace GOBLIN
 		{
 			const static std::string MAP = "textures\\mobs\\mobsmobs\\goblin_map.tga";
-			const static std::string ARENA = "textures\\mobs\\mobsmobs\\goblin_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\goblin_arena.tga";
 
 		}
 		namespace FOX
 		{
 			const static std::string MAP = "textures\\mobs\\mobsmobs\\fox_map.tga";
-			const static std::string ARENA = "textures\\mobs\\mobsmobs\\fox_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\fox_arena.tga";
 
 		}
 		namespace DRAGON
 		{
 			const static std::string MAP = "textures\\mobs\\mobsmobs\\dragon_map.tga";
-			const static std::string ARENA = "textures\\mobs\\mobsmobs\\dragon_map.tga";
+			const static std::string ARENA = "textures\\mobs\\mobsmobs\\dragon_arena.tga";
 
 		}
 	}

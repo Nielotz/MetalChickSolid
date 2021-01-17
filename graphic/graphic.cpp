@@ -50,7 +50,7 @@ Enemy* Graphic::check_click_intersect_enemy(sf::Vector2i& mouse_click_pos)
 	for (lel& pair_enemy_with_sprite_texture : map_enemy_sprites_with_texture)
 		if (pair_enemy_with_sprite_texture.second.first.getGlobalBounds().contains(sf::Vector2f{ mouse_click_pos }))
 			return pair_enemy_with_sprite_texture.first;
-	return nullptr;
+		return nullptr;
 }
 
 ARENA_BUTTON Graphic::check_arena_button_clicked(sf::Vector2i& mouse_click_pos)
@@ -92,6 +92,11 @@ Graphic::Graphic(Hero& hero)
 	set_views();
 
 	load_UIs();
+
+	load_hero_textures(PATH::HERO::TEXTURES::warrior);
+	load_hero_textures(PATH::HERO::TEXTURES::warrior);
+
+	load_arena_background((std::string&)PATH::ARENA::TEXTURES::FORREST);
 
 	std::string tut_path = PATH::TUTORIAL::TEXTURES::TUT;
 
@@ -235,7 +240,7 @@ void Graphic::draw_hero()
 	window->draw(hero_sprite);
 }
 
-void Graphic::set_enemy_position(Enemy& enemy, Position& position)
+void Graphic::set_enemy_position(Enemy& enemy, Position position)
 {
 	sf::Sprite& entity_sprite = map_enemy_sprites_with_texture.at(&enemy).first;
 
