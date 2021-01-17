@@ -55,6 +55,8 @@ void Map::load_map_collisions(string& path)
         true_path = "textures\\maps\\start_map.txt";
     else if (true_path == PATH::MAP::TEXTURES::FOREST)
         true_path = "textures\\maps\\forest_map.txt";
+    else if (true_path == PATH::MAP::TEXTURES::BOSS)
+        true_path = "textures\\maps\\boss_map.txt";
     std::ifstream infile(true_path);
     std::string line;
     while (std::getline(infile, line)) {

@@ -13,17 +13,17 @@ void Game::game_loop()
 {
     load_map();
 
-	// TEMPLATE OF ADDNING AN ENEMY.
-	Bear enemy; // Create enemy.
-	enemies.push_back(enemy);
+    // TEMPLATE OF ADDNING AN ENEMY.
+    Bear enemy; // Create enemy.
+    enemies.push_back(enemy);
 
-	enemy.position = Position(profile.hero.position.x, profile.hero.position.y + 2); // Set enem
-	std::string texture_path;
-	if (enemy.name == "Bear")
-		texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
-	else if (enemy.name == "xd")
-		texture_path = "xd";
-	graphic.load_enemy_texture(enemy, texture_path);
+    enemy.position = Position(profile.hero.position.x, profile.hero.position.y + 2); // Set enem
+    std::string texture_path;
+    if (enemy.name == "Bear")
+        texture_path = PATH::ENTITY_TEXTURES::BEAR::MAP;
+    else if (enemy.name == "xd")
+        texture_path = "xd";
+    graphic.load_enemy_texture(enemy, texture_path);
 
 
     // Bear
@@ -112,6 +112,8 @@ void Game::load_map()
         map_file = PATH::MAP::TEXTURES::START;
     else if (profile.hero.map == 2)
         map_file = PATH::MAP::TEXTURES::FOREST;
+    else if (profile.hero.map == 3)
+        map_file = PATH::MAP::TEXTURES::BOSS;
 
     map.load_texture(map_file);
     map.load_map_collisions(map_file);
@@ -170,8 +172,8 @@ void Game::move_hero(const Direction& direction)
 
 void Game::perform_fight(Enemy& enemy)
 {
-	auto hero_pos = profile.hero.position;
-	auto enemy_pos = enemy.position;
+    auto hero_pos = profile.hero.position;
+    auto enemy_pos = enemy.position;
     if (abs(hero_pos.x - enemy_pos.x) < 3 || abs(hero_pos.y - enemy_pos.y) < 3)
     {
         graphic.display_arena(enemy);
