@@ -13,3 +13,12 @@ Written in C++ basicaly in 2 week (╯°□°）╯︵ ┻━┻.
   sfml-system-d.lib; sfml-window-d.lib; sfml-graphics-d.lib; sfml-audio-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)<br>
 <br>
 #### Set c++ version to latest: Project -> Properties -> General -> c++ standard: /std:c++latest
+
+# Gameplay:
+## Maps
+<img src="gameplay/map1.jpg" width="29%"><img src="gameplay/map2.jpg" width="29%"><img src="gameplay/map3.jpg" width="29%">
+## Walking
+<img src="gameplay/walking.gif" width="49%">
+
+## Fight
+<img src="gameplay/fight_bear.jpg" width="49%"><img src="gameplay/fight_dragonjpg.jpg" width="49%">
